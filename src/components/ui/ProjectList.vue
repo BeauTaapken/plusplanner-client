@@ -1,10 +1,15 @@
 <template>
-    $END$
+    <div class="project-list">
+        <ProjectListItem></ProjectListItem>
+        <ProjectListItem></ProjectListItem>
+    </div>
 </template>
 
 <script>
+    import ProjectListItem from "./ProjectListItem";
     export default {
-        name: "ProjectList"
+        name: "ProjectList",
+        components: {ProjectListItem}
     }
 </script>
 

@@ -1,5 +1,5 @@
 <template>
-    $END$
+    <div>De planning</div>
 </template>
 
 <script>

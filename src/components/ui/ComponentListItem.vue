@@ -1,10 +1,14 @@
 <template>
-    $END$
+    <ComponentListItemContent>
+
+    </ComponentListItemContent>
 </template>
 
 <script>
+    import ComponentListItemContent from "./ComponentListItemContent";
     export default {
-        name: "ComponentListItem"
+        name: "ComponentListItem",
+        components: {ComponentListItemContent}
     }
 </script>
 
