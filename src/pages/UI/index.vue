@@ -15,3 +15,10 @@
         }
     }
 </script>
+
+<style lang="scss">
+    .home {
+        height: 100%;
+        display: flex;
+    }
+</style>

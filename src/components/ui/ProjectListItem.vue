@@ -1,8 +1,10 @@
 <template>
-    <li>Project 1</li>
-    <ProjectContent>
+    <div>
+        <li>Project 1</li>
+        <ProjectContent>
 
-    </ProjectContent>
+        </ProjectContent>
+    </div>
 </template>
 
 <script>
