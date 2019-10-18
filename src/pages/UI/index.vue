@@ -1,17 +1,17 @@
 <template>
     <div class="home">
-        <ProjectList></ProjectList>
+        <ProjectRoot></ProjectRoot>
     </div>
 </template>
 
 <script>
     // @ is an alias to /src
-    import ProjectList from "../../components/ui/ProjectList";
+    import ProjectRoot from "../../components/ui/ProjectRoot";
 
     export default {
         name: 'home',
         components: {
-            ProjectList
-        }
+            ProjectRoot
+        },
     }
 </script>
