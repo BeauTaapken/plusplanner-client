@@ -1,0 +1,44 @@
+{
+  "project1": {
+    "projectname": "P1",
+    "description": "This is my first project",
+    "components": {
+      "component1": {
+        "componentname": "Front End",
+        "componentitems": {
+          "item1": "UI Schetsen",
+          "item2": "Onderzoeksrapportage"
+        }
+      },
+      "component2": {
+        "componentname": "Back End",
+        "componentitems": {
+          "item1": "Class Diagram",
+          "item2": "C4-Model",
+          "item3": "Database Structure"
+        }
+      }
+    }
+  },
+  "project2": {
+    "projectname": "P2",
+    "description": "This is my second project",
+    "components": {
+      "component1": {
+        "componentname": "API Server",
+        "componentitems": {
+          "item1": "Basic API Setup",
+          "item2": "DAL Layer"
+        }
+      },
+      "component2": {
+        "componentname": "Back End",
+        "componentitems": {
+          "item1": "Login Component",
+          "item2": "DAL Component",
+          "item3": "Logic Component"
+        }
+      }
+    }
+  }
+}
