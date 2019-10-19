@@ -52,7 +52,6 @@
         overflow: hidden;
         height: auto;
         padding: 5%;
-        border-bottom: 1px solid #1E2124;
         -webkit-user-select: none;
         -moz-user-select: none;
         -ms-user-select: none;

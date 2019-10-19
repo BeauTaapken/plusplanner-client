@@ -1,12 +1,31 @@
 <template>
     <div class="component-content">
-        <div class="content">Content</div>
+        <div class="content" v-text="this.usedData"></div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "ComponentListItemContent"
+        name: "ComponentListItemContent",
+        data: function () {
+            return {
+                usedData: null
+            }
+        },
+        created() {
+            this.load();
+        },
+        updated() {
+            this.load();
+        },
+        methods: {
+            load: function() {
+                let json = this.$parent.projectData ;
+
+                let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
+                this.usedData = res[0];
+            }
+        }
     }
 </script>
 

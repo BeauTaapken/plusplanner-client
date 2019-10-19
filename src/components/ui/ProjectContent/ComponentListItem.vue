@@ -1,6 +1,10 @@
 <template>
     <li>
-        <h3>{{ itemName }}</h3>
+        <router-link style="color: white; text-decoration: none" :to="{ name: 'content', params: {projectName: this.$route.params.projectName, contentName: itemName } }">
+            <div class="nav-item">
+                {{ itemName }}
+            </div>
+        </router-link>
     </li>
 </template>
 
@@ -20,10 +24,14 @@
         display: block;
     }
 
-    li h3 {
+    .nav-item{
         padding: 5%;
         margin: 0;
         font-size: 15px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
 
     li:hover {

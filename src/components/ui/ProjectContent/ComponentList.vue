@@ -29,6 +29,10 @@
         text-align: center;
         border-bottom: 1px solid #1E2124;
         border-top: 1px solid #1E2124;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
     }
     ul{
         margin: 0;
