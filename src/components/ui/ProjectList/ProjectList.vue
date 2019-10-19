@@ -1,16 +1,13 @@
 <template>
-    <div class="container">
         <div class="project-list">
             <ul>
                 <ProjectListItem
-                v-for="data in this.$parent.projectData"
-                v-bind:key="data.projectname"
+                v-for="data in this.$parent.projectData.projects"
+                v-bind:key="data.projectid"
                 v-bind:project-name="data.projectname"
                 />
-
             </ul>
         </div>
-    </div>
 </template>
 
 <script>

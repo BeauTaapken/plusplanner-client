@@ -1,19 +1,40 @@
 <template>
     <div class="project-nav">
         <div class="project-header" role="button">
-            <h1>{{ projectName }}</h1>
+            <h1>{{ this.$route.params.projectName }}</h1>
             <i class="fas fa-angle-down"></i>
         </div>
-        <ComponentList></ComponentList>
+        <ComponentList
+        v-for="data in usedData.components"
+        v-bind:key="data.componentname"
+        v-bind:component-name="data.componentname"
+        v-bind:component-item="data.componentitems"
+        />
     </div>
 </template>
 
 <script>
     import ComponentList from "./ComponentList";
     export default {
-        components: {ComponentList},
-        props: {
-            projectName: String
+        components: { ComponentList},
+        data: function () {
+            return {
+                usedData: null
+            }
+        },
+        created() {
+            this.load();
+        },
+        updated() {
+            this.load();
+        },
+        methods: {
+            load: function() {
+                let json = this.$parent.projectData ;
+
+                let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
+                this.usedData = res[0];
+            }
         }
     }
 </script>

@@ -1,12 +1,15 @@
 <template>
     <li>
-        <h3>UI Schetsen</h3>
+        <h3>{{ itemName }}</h3>
     </li>
 </template>
 
 <script>
     export default {
-        name: "ComponentListItem"
+        name: "ComponentListItem",
+        props: {
+            itemName: String
+        },
     }
 </script>
 
@@ -20,6 +23,7 @@
     li h3 {
         padding: 5%;
         margin: 0;
+        font-size: 15px;
     }
 
     li:hover {

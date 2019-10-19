@@ -1,13 +1,13 @@
 <template>
-    <div>
         <li>
             <div class="box" @click="setActive">
+                <router-link style="color: white; text-decoration: none" :key="projectName" :to="{ name: 'project', params: {projectName: projectName } }">
                 <div class="content">
-                    {{ projectName }}
+                        {{ projectName }}
                 </div>
+                </router-link>
             </div>
         </li>
-    </div>
 </template>
 
 <script>
@@ -46,13 +46,11 @@ li {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
 }
-
 .box {
     transition: all 1s ease;
     background-color: #2E3136;
