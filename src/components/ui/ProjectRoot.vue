@@ -2,6 +2,7 @@
     <div>
         <ProjectList></ProjectList>
         <router-view></router-view>
+        <router-view name="content"/>
     </div>
 </template>
 
