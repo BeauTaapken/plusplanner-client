@@ -2,9 +2,8 @@
   "projects": [
     {
       "projectid": 1,
-      "projectname": "P1",
+      "projectname": "Exploding Programmers",
       "description": "This is my first project",
-      "type": "ProjectContent",
       "components": [
         {
           "componentname": "API Server",
@@ -25,9 +24,22 @@
     },
     {
       "projectid": 2,
-      "projectname": "P2",
+      "projectname": "Rework Destiny",
       "description": "This is my second project",
-      "type": "ProjectContent",
+      "components": [
+        {
+          "componentname": "Documentation",
+          "componentitems": {
+            "item1": "C4-Model",
+            "item2": "Analysedocument"
+          }
+        }
+      ]
+    },
+    {
+      "projectid": 3,
+      "projectname": "PlusPlanner",
+      "description": "This is my third project",
       "components": [
         {
           "componentname": "Documentation",
