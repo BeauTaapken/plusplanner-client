@@ -3,7 +3,9 @@
             <div class="box" @click="setActive">
                 <router-link style="color: white; text-decoration: none" :key="projectName" :to="{ name: 'project', params: {projectName: projectName } }">
                 <div class="content">
+                    <div class="contentText" @click="setActive">
                         {{ projectName }}
+                    </div>
                 </div>
                 </router-link>
             </div>
@@ -19,10 +21,13 @@
         methods: {
             setActive: function(event) {
                 let allBoxes = document.getElementsByClassName("content");
+                let allTextBoxes = document.getElementsByClassName("contentText");
                 for (let e = 0; e < allBoxes.length; e++) {
                     allBoxes[e].classList.remove("selected");
+                    allTextBoxes[e].classList.remove("selected");
                 }
                 event.target.classList.add("selected");
+                event.target.parentElement.classList.add("selected");
             }
         }
     }
@@ -51,6 +56,16 @@ li {
     -ms-user-select: none;
     user-select: none;
 }
+
+.contentText {
+    transition: all 1s ease;
+    font-family: monospace;
+    font-size: 20px;
+    width: 1ch;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
 .box {
     transition: all 1s ease;
     background-color: #2E3136;
