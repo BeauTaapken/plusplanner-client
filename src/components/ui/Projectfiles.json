@@ -13,14 +13,29 @@
               "planning": [
                 {
                   "tablename": "This Sprint",
-                  "item 1": {
-                    "name": "Document opzet",
-                    "end-date": "25-08-2020"
-                  },
-                  "item 2": {
-                    "name": "C1 maken",
-                    "end-date": "30-08-2020"
-                  }
+                  "items": [
+                    {
+                      "name": "Document opzet",
+                      "endDate": "25-08-2020"
+                    },
+                    {
+                      "name": "C1 maken",
+                      "endDate": "30-08-2020"
+                    }
+                  ]
+                },
+                {
+                  "tablename": "Progress",
+                  "items": [
+                    {
+                      "name": "C2-Model",
+                      "endDate": "25-08-2020"
+                    },
+                    {
+                      "name": "C3-Model",
+                      "endDate": "30-08-2020"
+                    }
+                  ]
                 }
               ]
             },
@@ -29,14 +44,29 @@
               "planning": [
                 {
                   "tablename": "This Sprint",
-                  "item 1": {
-                    "name": "Document opzet",
-                    "end-date": "25-08-2020"
-                  },
-                  "item 2": {
-                    "name": "MOSCOW",
-                    "end-date": "30-08-2020"
-                  }
+                  "items": [
+                    {
+                      "name": "Document opzet",
+                      "endDate": "25-08-2020"
+                    },
+                    {
+                      "name": "MOSCOW",
+                      "endDate": "30-08-2020"
+                    }
+                  ]
+                },
+                {
+                  "tablename": "Progress",
+                  "items": [
+                    {
+                      "name": "Inleiding",
+                      "endDate": "25-08-2020"
+                    },
+                    {
+                      "name": "UI Schetsen",
+                      "endDate": "30-08-2020"
+                    }
+                  ]
                 }
               ]
             }
@@ -44,40 +74,35 @@
         },
         {
           "componentname": "Database",
-          "componentitems": {
-            "item1": {
-              "itemname": "ER Model",
+          "componentitems": [
+            {
+              "itemname": "Klassendiagram",
               "planning": [
                 {
                   "tablename": "This Sprint",
-                  "item 1": {
-                    "name": "Document opzet",
-                    "end-date": "25-08-2020"
-                  },
-                  "item 2": {
-                    "name": "ER-Model maken",
-                    "end-date": "30-08-2020"
-                  }
-                }
-              ]
-            },
-            "item2": {
-              "itemname": "Realisatie",
-              "planning": [
+                  "items": [
+                    {
+                      "name": "Document opzet",
+                      "endDate": "25-08-2020"
+                    }
+                  ]
+                },
                 {
-                  "tablename": "This Sprint",
-                  "item 1": {
-                    "name": "Online zetten database",
-                    "end-date": "25-08-2020"
-                  },
-                  "item 2": {
-                    "name": "ER-Model implementeren",
-                    "end-date": "30-08-2020"
-                  }
+                  "tablename": "Progress",
+                  "items": [
+                    {
+                      "name": "Klassendiagram",
+                      "endDate": "25-08-2020"
+                    },
+                    {
+                      "name": "Database online opzetten",
+                      "endDate": "30-08-2020"
+                    }
+                  ]
                 }
               ]
             }
-          }
+          ]
         }
       ]
     },
@@ -88,24 +113,94 @@
       "components": [
         {
           "componentname": "Documentation",
-          "componentitems": {
-            "item1": "C4-Model",
-            "item2": "Analysedocument"
-          }
-        }
-      ]
-    },
-    {
-      "projectid": 3,
-      "projectname": "PlusPlanner",
-      "description": "This is my third project",
-      "components": [
+          "componentitems": [
+            {
+              "itemname": "Analysedocument",
+              "planning": [
+                {
+                  "tablename": "This Sprint",
+                  "items": [
+                    {
+                      "name": "Document opzet",
+                      "endDate": "25-08-2020"
+                    }
+                  ]
+                },
+                {
+                  "tablename": "Progress",
+                  "items": [
+                    {
+                      "name": "MoSCoW Analyse",
+                      "endDate": "25-08-2020"
+                    },
+                    {
+                      "name": "UI Schetsen",
+                      "endDate": "30-08-2020"
+                    },
+                    {
+                      "name": "Use Cases",
+                      "endDate": "31-08-2020"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "itemname": "Ontwerpdocument",
+              "planning": [
+                {
+                  "tablename": "This Sprint",
+                  "items": [
+                    {
+                      "name": "Document opzet",
+                      "endDate": "25-08-2020"
+                    },
+                    {
+                      "name": "Databaseontwerp",
+                      "endDate": "30-08-2020"
+                    }
+                  ]
+                },
+                {
+                  "tablename": "Progress",
+                  "items": [
+                    {
+                      "name": "Klassendiagram",
+                      "endDate": "26-08-2020"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
         {
-          "componentname": "Documentation",
-          "componentitems": {
-            "item1": "C4-Model",
-            "item2": "Analysedocument"
-          }
+          "componentname": "Database",
+          "componentitems": [
+            {
+              "itemname": "Realisatie",
+              "planning": [
+                {
+                  "tablename": "This Sprint",
+                  "items": [
+                    {
+                      "name": "Online zetten database",
+                      "endDate": "25-08-2020"
+                    },
+                    {
+                      "name": "Database realiseren vanaf klassendiagram",
+                      "endDate": "30-08-2020"
+                    }
+                  ]
+                },
+                {
+                  "tablename": "Progress",
+                  "items": [
+                  ]
+                }
+              ]
+            }
+          ]
         }
       ]
     }

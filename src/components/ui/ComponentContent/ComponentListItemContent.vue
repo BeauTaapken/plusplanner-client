@@ -1,19 +1,19 @@
 <template>
     <div class="component-content">
-        <div class="top-header" v-text="this.$route.params.contentName"></div>
-        <PlaningItem
+        <div class="text-header" v-text="this.$route.params.contentName"></div>
+        <PlanningCollection
             v-for="item in usedData"
-            v-bind:key="item.itemname"
+            v-bind:key="item.tablename"
             v-bind:items="item.planning"
             />
     </div>
 </template>
 
 <script>
-    import PlaningItem from "./PlaningItem";
+    import PlanningCollection from "./PlanningCollection";
     export default {
         name: "ComponentListItemContent",
-        components: {PlaningItem},
+        components: {PlanningCollection},
         beforeRouteLeave(to, from, next) {
             this.$destroy();
             next();
@@ -31,7 +31,7 @@
         },
         methods: {
             load: function() {
-                let json = this.$parent.projectData ;
+                let json = this.$parent.projectData;
 
                 let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
                 let t = res[0]["components"].filter(d => d.componentname === this.$route.params.componentName);
@@ -50,8 +50,8 @@
         background-color: #36393E;
     }
 
-    .top-header {
-        border-bottom: #1E2124 1px solid;
+    .text-header {
         padding: 1%;
+        border-bottom: #1E2124 1px solid;
     }
 </style>
