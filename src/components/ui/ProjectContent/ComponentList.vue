@@ -5,17 +5,17 @@
         </div>
         <ComponentListItem
         v-for="item in componentItem"
-        v-bind:key="item"
-        v-bind:item-name="item"
+        v-bind:key="item.itemname"
+        v-bind:item-name="item.itemname"
+        v-bind:component-name="componentName"
         />
-
     </div>
 </template>
 
 <script>
     import ComponentListItem from "./ComponentListItem";
     export default {
-        name: "TestComp",
+        name: "ComponentList",
         components: {ComponentListItem},
         props: {
             componentName: String,

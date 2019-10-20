@@ -16,7 +16,7 @@ export default new Router({
       props: { default: true, sidebar: false }
     },
     {
-      path: '/project/:projectName/:contentName',
+      path: '/project/:projectName/:componentName/:contentName',
       name: 'content',
       components: {
         default: ProjectContent,

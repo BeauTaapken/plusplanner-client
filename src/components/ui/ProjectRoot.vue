@@ -2,7 +2,7 @@
     <div>
         <ProjectList></ProjectList>
         <router-view></router-view>
-        <router-view name="content"/>
+        <router-view :key="this.$route.fullPath" name="content"/>
     </div>
 </template>
 

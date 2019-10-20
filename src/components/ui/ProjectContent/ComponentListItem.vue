@@ -1,6 +1,6 @@
 <template>
     <li>
-        <router-link style="color: white; text-decoration: none" :to="{ name: 'content', params: {projectName: this.$route.params.projectName, contentName: itemName } }">
+        <router-link style="color: white; text-decoration: none" :key="itemName" :to="{ name: 'content', params: {projectName: this.$route.params.projectName, componentName: componentName, contentName: itemName } }">
             <div class="nav-item">
                 {{ itemName }}
             </div>
@@ -12,6 +12,7 @@
     export default {
         name: "ComponentListItem",
         props: {
+            componentName: String,
             itemName: String
         },
     }
