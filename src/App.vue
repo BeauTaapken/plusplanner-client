@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view/>
+      <ProjectRoot></ProjectRoot>
   </div>
 </template>
 
@@ -12,4 +12,17 @@
     font-size: 16px;
     font-family: "Roboto";
   }
+</style>
+
+<script>
+    import ProjectRoot from "./components/ui/ProjectRoot";
+    export default {
+        components: {ProjectRoot}
+    }
+</script>
+
+<style>
+    body {
+        background-color: #36393E;
+    }
 </style>
