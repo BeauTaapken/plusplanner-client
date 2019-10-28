@@ -10,9 +10,9 @@
   html, body
   {
     height: 100%;
-    background: $brand-color;
     font-size: 16px;
     font-family: "Roboto";
+    background-color: #36393E;
   }
 </style>
 
@@ -28,9 +28,3 @@
         }
     }
 </script>
-
-<style>
-    body {
-        background-color: #36393E;
-    }
-</style>
