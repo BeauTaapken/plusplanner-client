@@ -12,7 +12,7 @@
               "itemname": "SAD-Document",
               "planning": [
                 {
-                  "subpartid": "id.example",
+                  "subpartid": 1,
                   "subpartname": "Jetty Server Setup",
                   "description": "descrip.example",
                   "state": "This Sprint",
@@ -22,10 +22,50 @@
                   ]
                 },
                 {
-                  "subpartid": "id.example",
+                  "subpartid": 2,
                   "subpartname": "JAX-RS Research",
                   "description": "descrip.example",
+                  "state": "Done",
+                  "enddate": "date.example",
+                  "users": [
+                    "userid.example"
+                  ]
+                },
+                {
+                  "subpartid": 3,
+                  "subpartname": "JAX-RS Setup",
+                  "description": "descrip.example",
                   "state": "Backlog",
+                  "enddate": "date.example",
+                  "users": [
+                    "userid.example"
+                  ]
+                },
+                {
+                  "subpartid": 4,
+                  "subpartname": "Research documenten",
+                  "description": "descrip.example",
+                  "state": "On Hold",
+                  "enddate": "date.example",
+                  "users": [
+                    "userid.example"
+                  ]
+                },
+                {
+                  "subpartid": 5,
+                  "subpartname": "UI",
+                  "description": "descrip.example",
+                  "state": "Review",
+                  "enddate": "date.example",
+                  "users": [
+                    "userid.example"
+                  ]
+                },
+                {
+                  "subpartid": 6,
+                  "subpartname": "Resources",
+                  "description": "descrip.example",
+                  "state": "Working on",
                   "enddate": "date.example",
                   "users": [
                     "userid.example"
