@@ -27,18 +27,34 @@
         methods: {
             targetDrop: function() {
                 let componentItems = document.getElementsByClassName('component-item');
-                var resultComponent;
-                for(let i = 0; i < componentItems.length; i++)
+                let resultComponent;
+                findComponent: for(let i = 0; i < componentItems.length; i++)
                 {
                     for(let j = 0; j < componentItems[i].getElementsByTagName('h2').length; i++)
                     {
                         if(componentItems[i].getElementsByTagName('h2')[j].innerHTML === this.componentName)
                         {
                             resultComponent = componentItems[i];
+                            break findComponent;
                         }
                     }
                 }
-                alert(resultComponent);
+
+                let icon = resultComponent.getElementsByClassName('drop-icon')[0];
+                let content = resultComponent.getElementsByClassName('drop-content')[0];
+                if(icon.getElementsByTagName('i')[0].classList.contains('fa-angle-left'))
+                {
+                    icon.getElementsByTagName('i')[0].classList.remove('fa-angle-left');
+                    icon.getElementsByTagName('i')[0].classList.add('fa-angle-down');
+                    content.style.display = 'inline';
+                }
+                else
+                {
+                    icon.getElementsByTagName('i')[0].classList.add('fa-angle-left');
+                    icon.getElementsByTagName('i')[0].classList.remove('fa-angle-down');
+                    content.style.display = 'none';
+                }
+
             }
         }
     }
