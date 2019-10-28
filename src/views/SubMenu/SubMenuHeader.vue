@@ -5,7 +5,7 @@
             <h2 class="drop-icon"> <i class="fas fa-angle-left"></i> </h2>
         </div>
         <ul class="drop-content">
-            <ComponentListItem
+            <SubMenuItem
             v-for="item in componentItem"
             v-bind:key="item.itemname"
             v-bind:item-name="item.itemname"
@@ -16,10 +16,10 @@
 </template>
 
 <script>
-    import ComponentListItem from "./ComponentListItem";
+    import SubMenuItem from "./SubMenuItem";
     export default {
-        name: "ComponentList",
-        components: {ComponentListItem},
+        name: "SubMenuHeader",
+        components: {SubMenuItem},
         props: {
             componentName: String,
             componentItem: Array

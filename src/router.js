@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import ProjectContent from "./components/ui/ProjectContent/ProjectContent";
-import ComponentListItemContent from "./components/ui/ComponentContent/ComponentListItemContent";
+import SubMenu from "./views/SubMenu/SubMenu";
+import BoardCollection from "./views/Board/BoardCollection";
 
 Vue.use(Router)
 
@@ -12,15 +12,15 @@ export default new Router({
     {
       path: '/project/:projectName',
       name: 'project',
-      component: ProjectContent,
+      component: SubMenu,
       props: { default: true, sidebar: false }
     },
     {
       path: '/project/:projectName/:componentName/:contentName',
       name: 'content',
       components: {
-        default: ProjectContent,
-        content: ComponentListItemContent
+        default: SubMenu,
+        content: BoardCollection
       }
     }
   ]

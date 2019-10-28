@@ -12,8 +12,8 @@
 </style>
 
 <script>
-    import ProjectList from "./components/ui/ProjectList/ProjectList";
-    import json from "./components/ui/Projectfiles";
+    import ProjectList from "./views/ProjectList/ProjectList";
+    import json from "./components/Projectfiles";
     export default {
         components: {ProjectList},
         data(){

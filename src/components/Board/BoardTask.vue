@@ -6,7 +6,7 @@
 
 <script>
     export default {
-        name: "PlanningItemContent",
+        name: "BoardTask",
         props: {
             endDate: String,
             name: String
