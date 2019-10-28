@@ -60,6 +60,7 @@
             },
             checkDrop: function() {
                 let componentItems = document.getElementsByClassName('component-item');
+                if(this.$route.params.componentName === null || this.$route.params.componentName === undefined) return;
                 let resultComponent;
                 findComponent: for(let i = 0; i < componentItems.length; i++)
                 {
