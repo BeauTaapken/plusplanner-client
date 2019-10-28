@@ -4,8 +4,8 @@
         <ul>
             <PlanningItemContent
                 v-for="item in items"
-                v-bind:key="item.name"
-                v-bind:name="item.name"
+                v-bind:key="item.subpartid"
+                v-bind:name="item.subpartname"
                 v-bind:end-date="item.endDate"
         />
         </ul>
@@ -20,7 +20,7 @@
         components: {PlanningItemContent},
         props: {
             tableName: String,
-            items: Object
+            items: Array
         }
     }
 </script>

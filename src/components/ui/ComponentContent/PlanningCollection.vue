@@ -1,22 +1,40 @@
 <template>
     <div>
         <PlanningItem
-            v-for="item in items"
-            v-bind:key="item.tablename"
-            v-bind:table-name="item.tablename"
-            v-bind:items="item.items"
-            />
+            v-for="table in tableNames"
+            v-bind:key="table"
+            v-bind:table-name="table"
+            v-bind:items="findTableData(table)"
+        />
     </div>
 </template>
 
 <script>
+
     import PlanningItem from "./PlanningItem";
     export default {
         name: "PlanningCollection",
         components: {PlanningItem},
-        props: {
-            items: Object
+        data() {
+            return {
+                tableNames: ['Backlog', 'This Sprint', 'Working on', 'Review', 'Done', 'On Hold'],
+            }
         },
+        methods: {
+            findTableData: function(tablename) {
+                let allData = this.$parent.usedData;
+                let dataArray = [];
+                for(let i = 0; i < allData[0]['planning'].length; i++)
+                {
+                    if(allData[0]['planning'][i]['state'] === tablename)
+                    {
+                        dataArray.push(allData[0]['planning'][i]);
+                    }
+                }
+                return dataArray;
+            }
+        }
+
     }
 </script>
 
