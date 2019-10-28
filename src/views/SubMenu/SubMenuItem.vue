@@ -10,7 +10,7 @@
 
 <script>
     export default {
-        name: "ComponentListItem",
+        name: "SubMenuItem",
         props: {
             componentName: String,
             itemName: String
