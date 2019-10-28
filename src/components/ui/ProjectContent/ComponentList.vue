@@ -24,6 +24,9 @@
             componentName: String,
             componentItem: Array
         },
+        mounted() {
+            this.checkDrop();
+        },
         methods: {
             targetDrop: function() {
                 let componentItems = document.getElementsByClassName('component-item');
@@ -54,7 +57,27 @@
                     icon.getElementsByTagName('i')[0].classList.remove('fa-angle-down');
                     content.style.display = 'none';
                 }
+            },
+            checkDrop: function() {
+                let componentItems = document.getElementsByClassName('component-item');
+                let resultComponent;
+                findComponent: for(let i = 0; i < componentItems.length; i++)
+                {
+                    for(let j = 0; j < componentItems[i].getElementsByTagName('h2').length; i++)
+                    {
+                        if(componentItems[i].getElementsByTagName('h2')[j].innerHTML === this.$route.params.componentName)
+                        {
+                            resultComponent = componentItems[i];
+                            break findComponent;
+                        }
+                    }
+                }
 
+                let icon = resultComponent.getElementsByClassName('drop-icon')[0];
+                icon.getElementsByTagName('i')[0].classList.remove('fa-angle-left');
+                icon.getElementsByTagName('i')[0].classList.add('fa-angle-down');
+                let content = resultComponent.getElementsByClassName('drop-content')[0];
+                content.style.display = "inline";
             }
         }
     }
