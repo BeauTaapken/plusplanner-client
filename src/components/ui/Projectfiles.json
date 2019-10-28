@@ -6,66 +6,29 @@
       "description": "This is my first project",
       "components": [
         {
-          "componentname": "Documentation",
+          "componentname": "REST API MS",
           "componentitems": [
             {
-              "itemname": "C4-Model",
+              "itemname": "SAD-Document",
               "planning": [
                 {
-                  "tablename": "This Sprint",
-                  "items": [
-                    {
-                      "name": "Document opzet",
-                      "endDate": "25-08-2020"
-                    },
-                    {
-                      "name": "C1 maken",
-                      "endDate": "30-08-2020"
-                    }
+                  "subpartid": "id.example",
+                  "subpartname": "Jetty Server Setup",
+                  "description": "descrip.example",
+                  "state": "This Sprint",
+                  "enddate": "date.example",
+                  "users": [
+                    "userid.example"
                   ]
                 },
                 {
-                  "tablename": "Progress",
-                  "items": [
-                    {
-                      "name": "C2-Model",
-                      "endDate": "25-08-2020"
-                    },
-                    {
-                      "name": "C3-Model",
-                      "endDate": "30-08-2020"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "itemname": "Analysedocument",
-              "planning": [
-                {
-                  "tablename": "This Sprint",
-                  "items": [
-                    {
-                      "name": "Document opzet",
-                      "endDate": "25-08-2020"
-                    },
-                    {
-                      "name": "MOSCOW",
-                      "endDate": "30-08-2020"
-                    }
-                  ]
-                },
-                {
-                  "tablename": "Progress",
-                  "items": [
-                    {
-                      "name": "Inleiding",
-                      "endDate": "25-08-2020"
-                    },
-                    {
-                      "name": "UI Schetsen",
-                      "endDate": "30-08-2020"
-                    }
+                  "subpartid": "id.example",
+                  "subpartname": "JAX-RS Research",
+                  "description": "descrip.example",
+                  "state": "Backlog",
+                  "enddate": "date.example",
+                  "users": [
+                    "userid.example"
                   ]
                 }
               ]
@@ -73,7 +36,7 @@
           ]
         },
         {
-          "componentname": "Database",
+          "componentname": "Websocket MS",
           "componentitems": [
             {
               "itemname": "Klassendiagram",
