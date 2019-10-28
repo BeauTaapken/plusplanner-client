@@ -21,7 +21,7 @@
 <style scoped>
     li {
         list-style-type: none;
-        text-align: center;
+        text-align: left;
         display: block;
     }
 
