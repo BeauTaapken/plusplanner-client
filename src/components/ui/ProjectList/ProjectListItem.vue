@@ -18,6 +18,9 @@
         props: {
             projectName: String
         },
+        mounted() {
+            this.checkActive();
+        },
         methods: {
             setActive: function(event) {
                 let allBoxes = document.getElementsByClassName("content");
@@ -28,7 +31,15 @@
                 }
                 event.target.classList.add("selected");
                 event.target.parentElement.classList.add("selected");
+            },
+            checkActive: function() {
+                if(this.projectName === this.$route.params.projectName)
+                {
+                    document.getElementsByClassName('contentText')[0].classList.add("selected");
+                    document.getElementsByClassName('content')[0].classList.add("selected");
+                }
             }
+
         }
     }
 </script>
