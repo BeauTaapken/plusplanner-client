@@ -1,27 +1,28 @@
 <template>
     <div class="component-content">
         <div class="text-header" v-text="this.$route.params.contentName"></div>
-        <PlanningCollection
-            v-for="item in usedData"
-            v-bind:key="item.tablename"
-            v-bind:items="item.planning"
+        <BoardTable
+            v-for="table in tableNames"
+            v-bind:key="table"
+            v-bind:table-name="table"
+            v-bind:items="findTableData(table)"
             />
     </div>
 </template>
 
 <script>
-    import PlanningCollection from "./PlanningCollection";
+    import BoardTable from "../../components/Board/BoardTable.vue"
     export default {
-        name: "ComponentListItemContent",
-        components: {PlanningCollection},
+        name: "BoardCollection",
+        components: { BoardTable },
         beforeRouteLeave(to, from, next) {
-            this.$destroy();
             next();
         },
         data: function () {
             return {
-                usedData: null
-            }
+                usedData: null,
+                tableNames: ['Backlog', 'This Sprint', 'Working on', 'Review', 'Done', 'On Hold'],
+                }
         },
         created() {
             this.load();
@@ -36,6 +37,18 @@
                 let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
                 let t = res[0]["components"].filter(d => d.componentname === this.$route.params.componentName);
                 this.usedData = t[0]['componentitems'].filter(i => i.itemname === this.$route.params.contentName);
+            },
+            findTableData: function(tablename) {
+                let selectedPartData = this.usedData;
+                let dataArray = [];
+                for(let i = 0; i < selectedPartData[0]['planning'].length; i++)
+                {
+                    if(selectedPartData[0]['planning'][i]['state'] === tablename)
+                    {
+                        dataArray.push(selectedPartData[0]['planning'][i]);
+                    }
+                }
+                return dataArray;
             }
         }
     }

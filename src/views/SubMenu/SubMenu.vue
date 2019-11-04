@@ -4,19 +4,30 @@
             <h1>{{ this.$route.params.projectName }}</h1>
             <i class="fas fa-angle-down"></i>
         </div>
-        <ComponentList
-        v-for="data in usedData.components"
-        v-bind:key="data.componentname"
-        v-bind:component-name="data.componentname"
-        v-bind:component-item="data.componentitems"
+        <SubMenuHeader
+                v-for="data in this.usedData.components"
+                v-bind:key="data.componentname"
+                v-bind:component-name="data.componentname"
+                v-bind:component-item="data.componentitems"
+                v-bind:component-type="'content'"
         />
+        <SubMenuHeader
+                v-for="data in this.usedData.chat"
+                v-bind:key="data.componentname"
+                v-bind:component-name="'Chat'"
+                v-bind:component-item="data.textchannels"
+                v-bind:component-type="'chat'"
+        />
+
+
     </div>
 </template>
 
 <script>
-    import ComponentList from "./ComponentList";
+    import SubMenuHeader from "./SubMenuHeader";
     export default {
-        components: { ComponentList},
+        name: "SubMenu",
+        components: { SubMenuHeader},
         data: function () {
             return {
                 usedData: null
@@ -30,8 +41,7 @@
         },
         methods: {
             load: function() {
-                let json = this.$parent.projectData ;
-
+                let json = this.$parent.projectData;
                 let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
                 this.usedData = res[0];
             }

@@ -3,6 +3,7 @@
       <ProjectList></ProjectList>
       <router-view></router-view>
       <router-view :key="this.$route.fullPath" name="content"/>
+      <router-view :key="this.$route.fullPath" name="chat"/>
   </div>
 </template>
 
@@ -17,8 +18,8 @@
 </style>
 
 <script>
-    import ProjectList from "./components/ui/ProjectList/ProjectList";
-    import json from "./components/ui/Projectfiles";
+    import ProjectList from "./views/ProjectList/ProjectList";
+    import json from "./components/Projectfiles";
     export default {
         components: {ProjectList},
         data(){

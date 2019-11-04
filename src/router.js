@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import ProjectContent from "./components/ui/ProjectContent/ProjectContent";
-import ComponentListItemContent from "./components/ui/ComponentContent/ComponentListItemContent";
+import SubMenu from "./views/SubMenu/SubMenu";
+import BoardCollection from "./views/Board/BoardCollection";
+import ChatCollection from "./views/Chat/ChatCollection";
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   mode: 'history',
@@ -12,15 +13,22 @@ export default new Router({
     {
       path: '/project/:projectName',
       name: 'project',
-      component: ProjectContent,
-      props: { default: true, sidebar: false }
+      component: SubMenu,
+    },
+    {
+      path: '/project/:projectName/:componentName/:contentName',
+      name: 'chat',
+      components: {
+        default: SubMenu,
+        content: ChatCollection
+      }
     },
     {
       path: '/project/:projectName/:componentName/:contentName',
       name: 'content',
       components: {
-        default: ProjectContent,
-        content: ComponentListItemContent
+        default: SubMenu,
+        content: BoardCollection
       }
     }
   ]

@@ -2,7 +2,7 @@
     <div class="table">
         <h1>{{ tableName }}</h1>
         <ul>
-            <PlanningItemContent
+            <BoardTask
                 v-for="item in items"
                 v-bind:key="item.subpartid"
                 v-bind:name="item.subpartname"
@@ -14,10 +14,10 @@
 </template>
 
 <script>
-    import PlanningItemContent from "./PlanningItemContent";
+    import BoardTask from "./BoardTask";
     export default {
-        name: "PlanningItem",
-        components: {PlanningItemContent},
+        name: "BoardTable",
+        components: {BoardTask},
         props: {
             tableName: String,
             items: Array
