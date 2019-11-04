@@ -1,4 +1,4 @@
-import { uuid } from './utils';
+import { uuid } from './utils'
 
 export default {
     name: 'workshop',
@@ -20,10 +20,10 @@ export default {
                 },
                 {
                     description: '',
-                    name: 'and third',
+                    name: 'and thrid',
                     id: uuid(),
                     userAssigned: null
-                },
+                }
             ]
         },
         {
@@ -34,65 +34,18 @@ export default {
                     name: 'first task',
                     id: uuid(),
                     userAssigned: null
-                },
-                {
-                    description: '',
-                    name: 'second task',
-                    id: uuid(),
-                    userAssigned: null
-                },
-                {
-                    description: '',
-                    name: 'and third',
-                    id: uuid(),
-                    userAssigned: null
-                },
+                }
             ]
         },
         {
-            name: 'working on',
+            name: 'done',
             tasks: [
                 {
                     description: '',
                     name: 'first task',
                     id: uuid(),
                     userAssigned: null
-                },
-                {
-                    description: '',
-                    name: 'second task',
-                    id: uuid(),
-                    userAssigned: null
-                },
-                {
-                    description: '',
-                    name: 'and third',
-                    id: uuid(),
-                    userAssigned: null
-                },
-            ]
-        },
-        {
-            name: 'test',
-            tasks: [
-                {
-                    description: '',
-                    name: 'first task',
-                    id: uuid(),
-                    userAssigned: null
-                },
-                {
-                    description: '',
-                    name: 'second task',
-                    id: uuid(),
-                    userAssigned: null
-                },
-                {
-                    description: '',
-                    name: 'and third',
-                    id: uuid(),
-                    userAssigned: null
-                },
+                }
             ]
         }
     ]
