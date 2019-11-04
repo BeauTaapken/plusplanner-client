@@ -1,6 +1,6 @@
 <template>
     <li>
-        <router-link style="color: white; text-decoration: none" :key="itemName" :to="{ name: 'content', params: {projectName: this.$route.params.projectName, componentName: componentName, contentName: itemName } }">
+        <router-link style="color: white; text-decoration: none" :key="itemName" :to="{ name: componentType, params: { projectName: this.$route.params.projectName, componentName: componentName, contentName: itemName } }">
             <div class="nav-item">
                 {{ itemName }}
             </div>
@@ -13,7 +13,8 @@
         name: "SubMenuItem",
         props: {
             componentName: String,
-            itemName: String
+            itemName: String,
+            componentType: String
         },
     }
 </script>

@@ -14,9 +14,8 @@
     import BoardTable from "../../components/Board/BoardTable.vue"
     export default {
         name: "BoardCollection",
-        components: { BoardTable},
+        components: { BoardTable },
         beforeRouteLeave(to, from, next) {
-            this.$destroy();
             next();
         },
         data: function () {

@@ -9,7 +9,16 @@
                 v-bind:key="data.componentname"
                 v-bind:component-name="data.componentname"
                 v-bind:component-item="data.componentitems"
+                v-bind:component-type="'content'"
         />
+        <SubMenuHeader
+                v-for="data in this.usedData.chat"
+                v-bind:key="data.componentname"
+                v-bind:component-name="'Chat'"
+                v-bind:component-item="data.textchannels"
+                v-bind:component-type="'chat'"
+        />
+
 
     </div>
 </template>

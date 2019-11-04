@@ -3,6 +3,7 @@
       <ProjectList></ProjectList>
       <router-view></router-view>
       <router-view :key="this.$route.fullPath" name="content"/>
+      <router-view :key="this.$route.fullPath" name="chat"/>
   </div>
 </template>
 

@@ -10,6 +10,7 @@
             v-bind:key="item.itemname"
             v-bind:item-name="item.itemname"
             v-bind:component-name="componentName"
+            v-bind:component-type="componentType"
             />
         </ul>
     </div>
@@ -22,7 +23,8 @@
         components: {SubMenuItem},
         props: {
             componentName: String,
-            componentItem: Array
+            componentItem: Array,
+            componentType: String
         },
         mounted() {
             this.checkDrop();
