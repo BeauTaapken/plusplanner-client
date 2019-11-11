@@ -61,6 +61,8 @@
         width: calc(83% + 2px);
         margin-left: -1px;
         background-color: #36393E;
+        overflow-x: scroll;
+        white-space: nowrap;
     }
 
     .text-header {

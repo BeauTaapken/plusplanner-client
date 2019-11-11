@@ -2,22 +2,28 @@
     <div class="table">
         <h1>{{ tableName }}</h1>
         <ul>
-            <BoardTask
-                v-for="item in items"
-                v-bind:key="item.subpartid"
-                v-bind:name="item.subpartname"
-                v-bind:end-date="item.endDate"
-        />
+            <draggable :list="item in items" group="items">
+                <BoardTask
+                    v-for="item in items"
+                    v-bind:key="item.subpartid"
+                    v-bind:name="item.subpartname"
+                    v-bind:end-date="item.endDate"
+                />
+            </draggable>
         </ul>
-
     </div>
 </template>
 
 <script>
     import BoardTask from "./BoardTask";
+    import draggable from 'vuedraggable';
+
     export default {
         name: "BoardTable",
-        components: {BoardTask},
+        components: {
+            BoardTask,
+            draggable
+        },
         props: {
             tableName: String,
             items: Array
@@ -27,14 +33,13 @@
 
 <style scoped>
     .table {
-        float: left;
+        display: inline-block;
         margin-top: 2%;
-        height: auto;
         width: 25%;
         background-color: darkgray;
         border-radius: 20px;
         margin-left: 2%;
-        overflow: hidden;
+        position: relative;
     }
 
     .table h1 {
