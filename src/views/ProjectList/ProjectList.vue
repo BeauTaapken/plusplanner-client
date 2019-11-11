@@ -1,5 +1,5 @@
 <template>
-        <div class="project-list">
+    <v-navigation-drawer class="project-list">
             <ul>
                 <ProjectListItem
                 v-for="data in this.$parent.projectData.projects"
@@ -7,7 +7,7 @@
                 v-bind:project-name="data.projectname"
                 />
             </ul>
-        </div>
+    </v-navigation-drawer>
 </template>
 
 <script>
