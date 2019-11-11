@@ -62,7 +62,6 @@
 
     >>>.theme--light.v-list {
         background-color: #2E3136;
-        border-bottom: #1E2124 1px solid;
     }
 
     .project-nav {
