@@ -38,9 +38,9 @@
 </script>
 
 <style scoped>
-
-    >>>.v-list-group {
+    >>>.v-list-group__header {
         border-bottom: #1E2124 1px solid;
+        border-top: #1E2124 1px solid;
     }
 
     >>>.v-list-item {

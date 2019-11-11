@@ -21,7 +21,6 @@
     >>>.v-list-item {
         margin: 0;
         padding: 0;
-        border-bottom: #1E2124 1px solid;
         display: block;
         width: 100%;
     }
