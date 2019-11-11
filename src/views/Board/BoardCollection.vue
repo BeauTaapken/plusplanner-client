@@ -1,12 +1,16 @@
 <template>
+    <div>
     <div class="component-content">
         <div class="text-header" v-text="this.$route.params.contentName"></div>
+        <v-row class="board-content">
         <BoardTable
             v-for="table in tableNames"
             v-bind:key="table"
             v-bind:table-name="table"
             v-bind:items="findTableData(table)"
             />
+        </v-row>
+    </div>
     </div>
 </template>
 
@@ -61,6 +65,10 @@
         width: calc(83% + 2px);
         margin-left: calc(17% - 2px);
         background-color: #36393E;
+    }
+
+    .board-content {
+        padding: 20px;
     }
 
     .text-header {

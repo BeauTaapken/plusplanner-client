@@ -1,7 +1,9 @@
 <template>
-        <li>
-            {{name}}
-        </li>
+        <v-card color="grey">
+            <v-card-actions>
+                <v-card-title>{{name}}</v-card-title>
+            </v-card-actions>
+        </v-card>
 </template>
 
 <script>
@@ -15,7 +17,6 @@
 </script>
 
 <style scoped>
-
     li {
         text-align: center;
         text-decoration: none;

@@ -1,16 +1,18 @@
 <template>
-    <div class="table">
-        <h1>{{ tableName }}</h1>
-        <ul>
-            <BoardTask
-                v-for="item in items"
-                v-bind:key="item.subpartid"
-                v-bind:name="item.subpartname"
-                v-bind:end-date="item.endDate"
-        />
-        </ul>
+    <v-col cols="4" class="board-column">
+        <v-card color="#2E3136" class="table" >
+            <v-card-actions>
+                <v-card-title>{{ tableName }}</v-card-title>
+            </v-card-actions>
 
-    </div>
+            <BoardTask
+                    v-for="item in items"
+                    v-bind:key="item.subpartid"
+                    v-bind:name="item.subpartname"
+                    v-bind:end-date="item.endDate"
+            />
+        </v-card>
+    </v-col>
 </template>
 
 <script>
@@ -26,23 +28,19 @@
 </script>
 
 <style scoped>
-    .table {
-        float: left;
-        margin-top: 2%;
-        height: auto;
-        width: 25%;
-        background-color: darkgray;
-        border-radius: 20px;
-        margin-left: 2%;
-        overflow: hidden;
+    >>>.v-card__title {
+        color: white;
     }
 
-    .table h1 {
-        text-align: center;
-        padding: 1%;
-        border-bottom: 1px solid white;
+    .board-container {
+        padding: 1px;
     }
-    ul {
-        padding: 0px;
+
+    .board-column {
+        text-align: center;
+    }
+    .table {
+        padding: 20px;
+        text-align: center;
     }
 </style>
