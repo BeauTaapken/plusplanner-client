@@ -17,18 +17,18 @@ export default new Router({
     },
     {
       path: '/project/:projectName/:componentName/:contentName',
-      name: 'chat',
-      components: {
-        default: SubMenu,
-        content: ChatCollection
-      }
-    },
-    {
-      path: '/project/:projectName/:componentName/:contentName',
       name: 'content',
       components: {
         default: SubMenu,
         content: BoardCollection
+      }
+    },
+    {
+      path: '/project/:projectName/:componentName/:contentName',
+      name: 'chat',
+      components: {
+        default: SubMenu,
+        content: ChatCollection
       }
     }
   ]
