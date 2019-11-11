@@ -1,11 +1,9 @@
 <template>
-    <v-list-item>
-        <router-link style="color: white; text-decoration: none" :key="itemName" :to="{ name: componentType, params: { projectName: this.$route.params.projectName, componentName: componentName, contentName: itemName } }">
-            <div class="nav-item">
+        <router-link style="color: white; text-decoration: none; display: block" :key="itemName" :to="{ name: componentType, params: { projectName: this.$route.params.projectName, componentName: componentName, contentName: itemName } }">
+            <v-list-item>
                 {{ itemName }}
-            </div>
+            </v-list-item>
         </router-link>
-    </v-list-item>
 </template>
 
 <script>
@@ -24,6 +22,15 @@
         margin: 0;
         padding: 0;
         border-bottom: #1E2124 1px solid;
+        display: block;
+        width: 100%;
+    }
+
+    >>>.theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled){
+        color: white !important;
+    }
+    .v-list-item:hover {
+        background-color: #282b2f !important;
     }
     li {
         list-style-type: none;
