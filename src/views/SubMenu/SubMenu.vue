@@ -1,9 +1,12 @@
 <template>
-    <div class="project-nav">
-        <div class="project-header" role="button">
-            <h1>{{ this.$route.params.projectName }}</h1>
-            <i class="fas fa-angle-down"></i>
-        </div>
+    <v-navigation-drawer fixed class="project-nav">
+        <v-list>
+                <v-list-group >
+                    <template v-slot:activator>
+                        <v-list-item-title class="project-header">{{ projectName }}</v-list-item-title>
+                    </template>
+                </v-list-group>
+        </v-list>
         <SubMenuHeader
                 v-for="data in this.usedData.components"
                 v-bind:key="data.componentname"
@@ -18,9 +21,7 @@
                 v-bind:component-item="data.textchannels"
                 v-bind:component-type="'chat'"
         />
-
-
-    </div>
+    </v-navigation-drawer>
 </template>
 
 <script>
@@ -30,7 +31,8 @@
         components: { SubMenuHeader},
         data: function () {
             return {
-                usedData: null
+                usedData: null,
+                projectName: this.$route.params.projectName
             }
         },
         created() {
@@ -41,7 +43,7 @@
         },
         methods: {
             load: function() {
-                let json = this.$parent.projectData;
+                let json = this.$parent.$parent.projectData;
                 let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
                 this.usedData = res[0];
             }
@@ -50,41 +52,29 @@
 </script>
 
 <style scoped>
+    >>>.v-list-group .v-list-item__title{
+        color: white;
+    }
+
+    >>>.v-list-group  .v-icon{
+        color: white;
+    }
+
+    >>>.theme--light.v-list {
+        background-color: #2E3136;
+        border-bottom: #1E2124 1px solid;
+    }
+
     .project-nav {
         background-color: #2E3136;
-        height: 100vh;
-        width: 13%;
-        float: left;
-        margin-left: -1px;
+        height: 100vh !important;
+        width: 13% !important;
+        float: left !important;
+        margin-left: calc(4% - 1px) !important;
     }
     .project-header {
-        transition: background-color 1s ease;
-        overflow: hidden;
-        height: auto;
-        padding: 5%;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-    .project-header h1 {
         font-size: 35px;
-        color: white;
-        width: 75%;
-        float: left;
-        margin-top: 5%;
-    }
-    .project-header i {
-        color: white;
-        width: 20%;
-        font-size: 35px;
-        float: left;
-        margin-top: 5%;
-        margin-left: 5%;
-        text-align: center;
-    }
-    .project-header:hover {
-        background-color: #282b2f;
-        cursor: pointer;
+        padding-top: 20px;
+        padding-bottom: 20px;
     }
 </style>

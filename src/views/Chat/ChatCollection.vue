@@ -1,12 +1,17 @@
 <template>
     <div class="component-content">
-        <div class="text-header" v-text="this.$route.params.contentName"></div>
+        <div class="text-header" v-text="this.contentName"></div>
     </div>
 </template>
 
 <script>
     export default {
-        name: "ChatCollection"
+        name: "ChatCollection",
+        data: function () {
+            return {
+                contentName: this.$route.params.contentName,
+            }
+        },
     }
 </script>
 

@@ -32,7 +32,7 @@
         },
         methods: {
             load: function() {
-                let json = this.$parent.projectData;
+                let json = this.$parent.$parent.projectData;
 
                 let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
                 let t = res[0]["components"].filter(d => d.componentname === this.$route.params.componentName);
@@ -59,7 +59,7 @@
         float: left;
         height: 100vh;
         width: calc(83% + 2px);
-        margin-left: -1px;
+        margin-left: calc(17% - 2px);
         background-color: #36393E;
     }
 

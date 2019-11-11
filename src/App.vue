@@ -1,9 +1,9 @@
 <template>
   <v-app>
     <ProjectList></ProjectList>
-    <router-view></router-view>
-    <router-view :key="this.$route.fullPath" name="content"/>
-    <router-view :key="this.$route.fullPath" name="chat"/>
+    <router-view :key="this.$route.fullPath"></router-view>
+    <router-view :key="this.$route.params.contentName" name="content"/>
+    <router-view :key="this.$route.params.contentName" name="chat"/>
   </v-app>
 </template>
 
@@ -22,7 +22,5 @@
 </script>
 
 <style>
-  body {
-    background-color: #36393E;
-  }
+
 </style>
