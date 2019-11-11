@@ -1,15 +1,21 @@
 <template>
     <v-col cols="4" class="board-column">
         <v-card color="#2E3136" class="table" >
+            <v-layout justify-center="true">
             <v-card-actions>
                 <v-card-title>{{ tableName }}</v-card-title>
             </v-card-actions>
+            </v-layout>
 
             <BoardTask
                     v-for="item in items"
                     v-bind:key="item.subpartid"
                     v-bind:name="item.subpartname"
                     v-bind:end-date="item.endDate"
+            />
+            <BoardTask
+            v-bind:key="'Plus'"
+            v-bind:name="'+'"
             />
         </v-card>
     </v-col>
@@ -30,6 +36,10 @@
 <style scoped>
     >>>.v-card__title {
         color: white;
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        user-select: none; /* Standard */
     }
 
     .board-container {
