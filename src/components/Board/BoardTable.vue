@@ -23,9 +23,14 @@
 
 <script>
     import BoardTask from "./BoardTask";
+    import draggable from 'vuedraggable';
+
     export default {
         name: "BoardTable",
-        components: {BoardTask},
+        components: {
+            BoardTask,
+            draggable
+        },
         props: {
             tableName: String,
             items: Array
