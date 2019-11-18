@@ -54,6 +54,7 @@
 <style scoped>
     >>>.v-list-group .v-list-item__title{
         color: white;
+        height: auto;
     }
 
     >>>.v-list-group  .v-icon{
