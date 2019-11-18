@@ -6,10 +6,10 @@
       "description": "This is my first project",
       "chat": [{
         "textchannels": [{
-            "itemname" : "# REST API Chat"
+            "itemname" : "REST API Chat"
         },
           {
-            "itemname" : "# MS Websocket Gateway"
+            "itemname" : "MS Websocket Gateway"
           }]
       }],
       "components": [
