@@ -65,6 +65,8 @@
         width: calc(83% + 2px);
         margin-left: calc(17% - 2px);
         background-color: #36393E;
+        overflow-x: scroll;
+        white-space: nowrap;
     }
 
     .board-content {

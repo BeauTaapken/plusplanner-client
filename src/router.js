@@ -33,3 +33,22 @@ export default new Router({
     }
   ]
 })
+
+// children: [
+//   {
+//     path: ':componentName/:contentName',
+//     name: 'chat',
+//     components: {
+//       default: SubMenu,
+//       content: ChatCollection
+//     }
+//   },
+//   {
+//     path: ':componentName/:contentName',
+//     name: 'content',
+//     components: {
+//       default: SubMenu,
+//       content: BoardCollection
+//     }
+//   },
+// ]
