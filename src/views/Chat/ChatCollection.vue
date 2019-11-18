@@ -20,7 +20,7 @@
         float: left;
         height: 100vh;
         width: calc(83% + 2px);
-        margin-left: -1px;
+        margin-left: calc(17% - 2px);
         background-color: #36393E;
     }
 
