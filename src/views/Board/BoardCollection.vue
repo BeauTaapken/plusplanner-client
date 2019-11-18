@@ -1,12 +1,16 @@
 <template>
+    <div>
     <div class="component-content">
         <div class="text-header" v-text="this.$route.params.contentName"></div>
+        <v-row class="board-content">
         <BoardTable
             v-for="table in tableNames"
             v-bind:key="table"
             v-bind:table-name="table"
             v-bind:items="findTableData(table)"
             />
+        </v-row>
+    </div>
     </div>
 </template>
 
@@ -14,9 +18,8 @@
     import BoardTable from "../../components/Board/BoardTable.vue"
     export default {
         name: "BoardCollection",
-        components: { BoardTable},
+        components: { BoardTable },
         beforeRouteLeave(to, from, next) {
-            this.$destroy();
             next();
         },
         data: function () {
@@ -33,7 +36,7 @@
         },
         methods: {
             load: function() {
-                let json = this.$parent.projectData;
+                let json = this.$parent.$parent.projectData;
 
                 let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
                 let t = res[0]["components"].filter(d => d.componentname === this.$route.params.componentName);
@@ -60,8 +63,12 @@
         float: left;
         height: 100vh;
         width: calc(83% + 2px);
-        margin-left: -1px;
+        margin-left: calc(17% - 2px);
         background-color: #36393E;
+    }
+
+    .board-content {
+        padding: 20px;
     }
 
     .text-header {

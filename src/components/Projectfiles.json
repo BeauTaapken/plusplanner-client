@@ -4,6 +4,14 @@
       "projectid": 1,
       "projectname": "Exploding Programmers",
       "description": "This is my first project",
+      "chat": [{
+        "textchannels": [{
+            "itemname" : "REST API Chat"
+        },
+          {
+            "itemname" : "MS Websocket Gateway"
+          }]
+      }],
       "components": [
         {
           "componentname": "REST API MS",

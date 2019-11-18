@@ -1,13 +1,13 @@
 <template>
-        <div class="project-list">
+    <v-navigation-drawer fixed height="100vh" width="4%" color="#1E2124" class="project-list">
             <ul>
                 <ProjectListItem
-                v-for="data in this.$parent.projectData.projects"
+                v-for="data in this.$parent.$parent.projectData.projects"
                 v-bind:key="data.projectid"
                 v-bind:project-name="data.projectname"
                 />
             </ul>
-        </div>
+    </v-navigation-drawer>
 </template>
 
 <script>
@@ -15,16 +15,14 @@
     export default {
         name: "ProjectList",
         components: {ProjectListItem},
+
     }
 </script>
 
 <style scoped>
 
     .project-list {
-        float: left;
-        width: 4%;
-        height: 100vh;
-        background-color: #1E2124;
+        float: left !important;
         padding: 0;
     }
 
