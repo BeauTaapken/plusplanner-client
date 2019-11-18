@@ -7,10 +7,9 @@
             </template>
             <SubMenuItem
                     v-for="item in componentItem"
-                    v-bind:key="item.itemname"
-                    v-bind:item-name="item.itemname"
+                    v-bind:key="item.partid"
+                    v-bind:item-name="item.partname"
                     v-bind:component-name="componentName"
-                    v-bind:component-type="componentType"
             />
         </v-list-group>
 

@@ -1,5 +1,5 @@
 <template>
-        <router-link style="color: white; text-decoration: none; display: block" :key="itemName" :to="{ name: componentType, params: { projectName: this.$route.params.projectName, componentName: componentName, contentName: itemName } }">
+        <router-link style="color: white; text-decoration: none; display: block" :key="itemName" :to="{ name: 'content', params: { projectName: this.$route.params.projectName, componentName: componentName, contentName: itemName } }">
             <v-list-item>
                 {{ itemName }}
             </v-list-item>

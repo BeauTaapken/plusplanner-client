@@ -11,24 +11,23 @@
                 v-for="data in this.usedData.components"
                 v-bind:key="data.componentname"
                 v-bind:component-name="data.componentname"
-                v-bind:component-item="data.componentitems"
-                v-bind:component-type="'content'"
+                v-bind:component-item="data.parts"
         />
-        <SubMenuHeader
-                v-for="data in this.usedData.chat"
-                v-bind:key="data.componentname"
-                v-bind:component-name="'Chat'"
-                v-bind:component-item="data.textchannels"
-                v-bind:component-type="'chat'"
+        <SubMenuChatHeader
+                v-for="data in this.usedData.chats"
+                v-bind:key="data.chatid"
+                v-bind:component-name="data.name"
+                v-bind:component-item="data.channels"
         />
     </v-navigation-drawer>
 </template>
 
 <script>
     import SubMenuHeader from "./SubMenuHeader";
+    import SubMenuChatHeader from "./SubMenuChatHeader";
     export default {
         name: "SubMenu",
-        components: { SubMenuHeader},
+        components: {SubMenuChatHeader, SubMenuHeader},
         data: function () {
             return {
                 usedData: null,
