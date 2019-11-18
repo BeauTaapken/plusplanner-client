@@ -6,13 +6,14 @@
                 <v-card-title>{{ tableName }}</v-card-title>
             </v-card-actions>
             </v-layout>
-
-            <BoardTask
-                    v-for="item in items"
-                    v-bind:key="item.subpartid"
-                    v-bind:name="item.subpartname"
-                    v-bind:end-date="item.endDate"
-            />
+            <draggable :list="item in items" group="items">
+                <BoardTask
+                        v-for="item in items"
+                        v-bind:key="item.subpartid"
+                        v-bind:name="item.subpartname"
+                        v-bind:end-date="item.endDate"
+                />
+            </draggable>
             <BoardTask
             v-bind:key="'Plus'"
             v-bind:name="'+'"
