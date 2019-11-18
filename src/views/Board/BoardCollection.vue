@@ -40,16 +40,16 @@
 
                 let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
                 let t = res[0]["components"].filter(d => d.componentname === this.$route.params.componentName);
-                this.usedData = t[0]['componentitems'].filter(i => i.itemname === this.$route.params.contentName);
+                this.usedData = t[0]['parts'].filter(i => i.partname === this.$route.params.contentName);
             },
             findTableData: function(tablename) {
                 let selectedPartData = this.usedData;
                 let dataArray = [];
-                for(let i = 0; i < selectedPartData[0]['planning'].length; i++)
+                for(let i = 0; i < selectedPartData[0]['subparts'].length; i++)
                 {
-                    if(selectedPartData[0]['planning'][i]['state'] === tablename)
+                    if(selectedPartData[0]['subparts'][i]['state'] === tablename)
                     {
-                        dataArray.push(selectedPartData[0]['planning'][i]);
+                        dataArray.push(selectedPartData[0]['subparts'][i]);
                     }
                 }
                 return dataArray;
