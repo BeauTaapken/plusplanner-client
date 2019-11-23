@@ -9,7 +9,7 @@
 
             <draggable :group="{ name: 'tables' }" v-model="itemArray">
                 <BoardTask
-                        v-for="item in itemArray"
+                        v-for="item in dataArray"
                         v-bind:key="item.subpartid"
                         v-bind:name="item.subpartname"
                         v-bind:end-date="item.endDate"
@@ -44,21 +44,23 @@
         },
         data() {
             return {
-                itemArray: this.items
+                itemArray: this.items,
+                dataArray: []
             }
         },
         watch: {
             itemArray: function () {
-                if(this.itemArray.length < 0) return;
+                this.dataArray = [];
                 for(let i = 0; i < this.itemArray.length; i++)
                 {
-                    // eslint-disable-next-line no-console
-                    console.log(this.itemArray[i]);
+                    let element = `{ "subpartid": "${this.itemArray[i]['subpartid']}", "subpartname": "${this.itemArray[i]['subpartname']}", "description": "${this.itemArray[i]['description']}", "state": "${this.tableName}", "enddate": "${this.itemArray[i]['enddate']}" }`;
+                    this.dataArray.push(JSON.parse(element));
                 }
             }
         },
         mounted() {
             this.itemArray = this.items;
+            this.dataArray = this.itemArray;
         }
     }
 </script>
