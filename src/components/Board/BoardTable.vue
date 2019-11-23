@@ -6,7 +6,8 @@
                     <v-card-title>{{ tableName }}</v-card-title>
                 </v-card-actions>
             </v-layout>
-            <draggable group="items" v-model="itemArray">
+
+            <draggable :group="{ name: 'tables' }" v-model="itemArray">
                 <BoardTask
                         v-for="item in itemArray"
                         v-bind:key="item.subpartid"
@@ -44,6 +45,16 @@
         data() {
             return {
                 itemArray: this.items
+            }
+        },
+        watch: {
+            itemArray: function () {
+                if(this.itemArray.length < 0) return;
+                for(let i = 0; i < this.itemArray.length; i++)
+                {
+                    // eslint-disable-next-line no-console
+                    console.log(this.itemArray[i]);
+                }
             }
         },
         mounted() {
