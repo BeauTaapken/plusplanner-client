@@ -1,23 +1,26 @@
 <template>
     <v-col cols="4" class="board-column">
-        <v-card color="#2E3136" class="table" >
+        <v-card color="#2E3136" class="table">
             <v-layout justify-center="true">
-            <v-card-actions>
-                <v-card-title>{{ tableName }}</v-card-title>
-            </v-card-actions>
+                <v-card-actions>
+                    <v-card-title>{{ tableName }}</v-card-title>
+                </v-card-actions>
             </v-layout>
-            <draggable :list="item in items" group="items">
+            <draggable group="items" v-model="itemArray">
                 <BoardTask
-                        v-for="item in items"
+                        v-for="item in itemArray"
                         v-bind:key="item.subpartid"
                         v-bind:name="item.subpartname"
                         v-bind:end-date="item.endDate"
                 />
             </draggable>
-            <BoardTask
-            v-bind:key="'Plus'"
-            v-bind:name="'+'"
+            <CreateTask class="plus-table"
+                        v-bind:key="'Plus'"
+                        v-bind:name="'+'"
+                        v-bind:table-name="tableName"
             />
+            <div ref="createTask">
+            </div>
         </v-card>
     </v-col>
 </template>
@@ -25,22 +28,32 @@
 <script>
     import BoardTask from "./BoardTask";
     import draggable from 'vuedraggable';
+    import CreateTask from "./CreateTask";
 
     export default {
         name: "BoardTable",
         components: {
+            CreateTask,
             BoardTask,
             draggable
         },
         props: {
             tableName: String,
             items: Array
+        },
+        data() {
+            return {
+                itemArray: this.items
+            }
+        },
+        mounted() {
+            this.itemArray = this.items;
         }
     }
 </script>
 
 <style scoped>
-    >>>.v-card__title {
+    >>> .v-card__title {
         color: white;
         -webkit-user-select: none; /* Safari */
         -moz-user-select: none; /* Firefox */
@@ -55,8 +68,17 @@
     .board-column {
         text-align: center;
     }
+
     .table {
         padding: 20px;
         text-align: center;
+    }
+
+    .plus-table:hover {
+        transition: background-color 1s ease !important;
+    }
+
+    .plus-table:hover {
+        background-color: #5e5e5e !important;
     }
 </style>
