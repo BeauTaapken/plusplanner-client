@@ -22,7 +22,6 @@ export default {
   },
   created() {
     apiService.getProjects()
-    // eslint-disable-next-line no-console
             .then(response => {
               this.projectData = response.data
               this.isLoaded = true;
