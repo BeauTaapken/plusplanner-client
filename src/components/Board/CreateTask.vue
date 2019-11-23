@@ -63,6 +63,7 @@
 </template>
 
 <script>
+
     export default {
         name: "CreateTask",
         props: {
@@ -88,6 +89,9 @@
                 let description = document.getElementById('taskdescription').value;
                 let partid = this.$parent.$parent.$parent.partId;
                 let json = `{ "subpartid": null, "subpartname": "${name}", "description": "${description}", "state": "${this.tableName}", "enddate": "${this.date}", "partid": "${partid}" }`;
+                // To Do
+                // This will need fixing when the websocket gateway is up
+                // When its up, create something with the apiService. DO NOT push it to itemArray but let the websocket send a message with the fully created subpart (WITH ID) to the client and handle it there.
                 this.$parent.$parent.itemArray.push(JSON.parse(json));
                 this.overlay = !this.overlay;
             }
