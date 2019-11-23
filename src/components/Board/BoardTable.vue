@@ -30,6 +30,7 @@
     import BoardTask from "./BoardTask";
     import draggable from 'vuedraggable';
     import CreateTask from "./CreateTask";
+    import apiService from "../../services/APIService";
 
     export default {
         name: "BoardTable",
@@ -53,7 +54,18 @@
                 this.dataArray = [];
                 for(let i = 0; i < this.itemArray.length; i++)
                 {
-                    let element = `{ "subpartid": "${this.itemArray[i]['subpartid']}", "subpartname": "${this.itemArray[i]['subpartname']}", "description": "${this.itemArray[i]['description']}", "state": "${this.tableName}", "enddate": "${this.itemArray[i]['enddate']}" }`;
+                    let element = null;
+                    if(this.itemArray[i]['subpartid'] != null)
+                    {
+                        element = `{"subpartid":${this.itemArray[i]['subpartid']},"description":"${this.itemArray[i]['description']}","subpartname":"${this.itemArray[i]['subpartname']}","enddate":"${this.itemArray[i]['enddate']}","state":"${this.tableName}","partid":${this.$parent.partId} }`;
+                        apiService.updateSubPart(JSON.parse(element));
+                    }
+                    else
+                    {
+                        element = `{"subpartid":${this.itemArray[i]['subpartid']},"description":"${this.itemArray[i]['description']}","subpartname":"${this.itemArray[i]['subpartname']}","enddate":"${this.itemArray[i]['enddate']}","state":"${this.tableName}","partid":${this.$parent.partId}}`;
+                        apiService.createSubPart(JSON.parse(element));
+                    }
+
                     this.dataArray.push(JSON.parse(element));
                 }
             }

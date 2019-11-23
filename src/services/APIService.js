@@ -1,7 +1,16 @@
 import axios from 'axios'
 
-const apiClient = axios.create({
+const projectAPIClient = axios.create({
     baseURL: 'http://localhost:8083',
+    withCredentials: false,
+    headers: {
+        Accept: 'application/json',
+        'Content-Type':  'application/json'
+    }
+});
+
+const subpartAPIClient = axios.create({
+    baseURL: 'http://localhost:8081',
     withCredentials: false,
     headers: {
         Accept: 'application/json',
@@ -11,6 +20,16 @@ const apiClient = axios.create({
 
 export default {
     getProjects(){
-        return apiClient.get('/project/read/1')
+        return projectAPIClient.get('/project/read/1')
     },
+
+    updateSubPart(object)
+    {
+        return subpartAPIClient.post('/subpart/update/' + encodeURI(JSON.stringify(object)));
+    },
+
+    createSubPart(object)
+    {
+        return subpartAPIClient.post('/subpart/create/' + encodeURI(JSON.stringify(object)));
+    }
 }

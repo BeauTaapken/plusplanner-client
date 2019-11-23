@@ -44,13 +44,13 @@
 
                         <v-row>
                             <v-col cols="6">
-                                <v-btn width="100%" color="#4f4f4f" @click="cancel">
+                                <v-btn width="100%" color="#3b3b3b" @click="cancel">
                                     Cancel
                                 </v-btn>
                             </v-col>
 
                             <v-col cols="6">
-                                <v-btn width="100%" color="#3b3b3b" @click="save">
+                                <v-btn width="100%" color="#4f4f4f" @click="save">
                                     Add
                                 </v-btn>
                             </v-col>
@@ -86,9 +86,10 @@
             save: function() {
                 let name = document.getElementById('taskname').value;
                 let description = document.getElementById('taskdescription').value;
-                let componentId = this.$parent.$parent.$parent.componentId;
-                let json = `{ "subpartname": "${name}", "description": "${description}", "state": "${this.tableName}", "enddate": "${this.date}", "partid": "${componentId}" }`;
+                let partid = this.$parent.$parent.$parent.partId;
+                let json = `{ "subpartid": null, "subpartname": "${name}", "description": "${description}", "state": "${this.tableName}", "enddate": "${this.date}", "partid": "${partid}" }`;
                 this.$parent.$parent.itemArray.push(JSON.parse(json));
+                this.overlay = !this.overlay;
             }
         },
     }

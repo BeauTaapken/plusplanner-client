@@ -27,7 +27,7 @@
             return {
                 usedData: null,
                 tableNames: ['Backlog', 'This Sprint', 'Working on', 'Review', 'Done', 'On Hold'],
-                componentId: null
+                partId: null,
             }
         },
         created() {
@@ -43,7 +43,7 @@
                 let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
                 let t = res[0]["components"].filter(d => d.componentname === this.$route.params.componentName);
                 this.usedData = t[0]['parts'].filter(i => i.partname === this.$route.params.contentName);
-                this.componentId = this.usedData[0]['partid'];
+                this.partId = this.usedData[0]['partid'];
             },
             findTableData: function(tablename) {
                 let selectedPartData = this.usedData;
