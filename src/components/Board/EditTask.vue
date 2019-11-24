@@ -1,10 +1,6 @@
 <template>
   <v-overlay :value="overlay">
-    <v-card
-      class="createTask"
-      draggable="true"
-      ondragstart="event.preventDefault(); event.stopPropagation();"
-    >
+    <v-card class="createTask">
       <v-form>
         <v-container>
           <v-card-title class="justify-center">Edit task</v-card-title>

@@ -12,6 +12,8 @@
           v-bind:description="description"
           v-bind:part-id="partId"
           v-bind:subpart-id="subpartId"
+          draggable="true"
+          ondragstart="event.preventDefault(); event.stopPropagation();"
         >
         </EditTask>
         <v-icon @click="editTask" class="edit-task">fas fa-edit</v-icon>
