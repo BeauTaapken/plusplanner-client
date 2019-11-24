@@ -25,6 +25,7 @@
 <script>
     import SubMenuHeader from "./SubMenuHeader";
     import SubMenuChatHeader from "./SubMenuChatHeader";
+
     export default {
         name: "SubMenu",
         components: {SubMenuChatHeader, SubMenuHeader},

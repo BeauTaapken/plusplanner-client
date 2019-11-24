@@ -12,7 +12,11 @@
                         v-for="item in dataArray"
                         v-bind:key="item.subpartid"
                         v-bind:name="item.subpartname"
-                        v-bind:end-date="item.endDate"
+                        v-bind:description="item.description"
+                        v-bind:end-date="item.enddate"
+                        v-bind:subpart-id="item.subpartid"
+                        v-bind:part-id="item.partid"
+                        v-bind:table-name="tableName"
                 />
             </draggable>
             <CreateTask class="plus-table"
@@ -20,7 +24,8 @@
                         v-bind:name="'+'"
                         v-bind:table-name="tableName"
             />
-            <div ref="createTask">
+            <div ref="editTask">
+
             </div>
         </v-card>
     </v-col>
