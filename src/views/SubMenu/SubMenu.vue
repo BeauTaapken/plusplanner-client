@@ -1,9 +1,11 @@
 <template>
-  <div class="project-nav">
+  <v-navigation-drawer fixed class="project-nav">
     <v-list>
       <v-list-group>
         <template v-slot:activator>
-          <v-list-item-title class="project-header">{{ projectName }}</v-list-item-title>
+          <v-list-item-title class="project-header">{{
+            projectName
+          }}</v-list-item-title>
         </template>
       </v-list-group>
     </v-list>
@@ -11,24 +13,24 @@
       v-for="data in this.usedData.components"
       v-bind:key="data.componentname"
       v-bind:component-name="data.componentname"
-      v-bind:component-item="data.componentitems"
-      v-bind:component-type="'content'"
+      v-bind:component-item="data.parts"
     />
-    <SubMenuHeader
-      v-for="data in this.usedData.chat"
-      v-bind:key="data.componentname"
-      v-bind:component-name="'Chat'"
-      v-bind:component-item="data.textchannels"
-      v-bind:component-type="'chat'"
+    <SubMenuChatHeader
+      v-for="data in this.usedData.chats"
+      v-bind:key="data.chatid"
+      v-bind:component-name="data.name"
+      v-bind:component-item="data.channels"
     />
-  </div>
+  </v-navigation-drawer>
 </template>
 
 <script>
 import SubMenuHeader from "./SubMenuHeader";
+import SubMenuChatHeader from "./SubMenuChatHeader";
+
 export default {
   name: "SubMenu",
-  components: { SubMenuHeader },
+  components: { SubMenuChatHeader, SubMenuHeader },
   data: function() {
     return {
       usedData: null,
@@ -43,7 +45,7 @@ export default {
   },
   methods: {
     load: function() {
-      let json = this.$parent.$parent.$parent.projectData;
+      let json = this.$parent.$parent.projectData;
       let res = json.projects.filter(
         d => d.projectname === this.$route.params.projectName
       );
@@ -53,11 +55,30 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+>>> .v-list-group .v-list-item__title {
+  color: white;
+  height: auto;
+}
+
+>>> .v-list-group .v-icon {
+  color: white;
+}
+
+>>> .theme--light.v-list {
+  background-color: #2e3136;
+}
+
 .project-nav {
-  background-color: #2c2f33;
+  background-color: #2e3136;
   height: 100vh !important;
-  position: relative;
-  display: inline-block;
+  width: 13% !important;
+  float: left !important;
+  margin-left: calc(4% - 1px) !important;
+}
+.project-header {
+  font-size: 35px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 </style>

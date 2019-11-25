@@ -1,18 +1,20 @@
 <template>
-  <div>
-    <v-list-group>
-      <template v-slot:activator>
-        <v-list-item-title>{{ componentName }}</v-list-item-title>
-      </template>
-      <SubMenuItem
-        v-for="item in componentItem"
-        v-bind:key="item.itemname"
-        v-bind:item-name="item.itemname"
-        v-bind:component-name="componentName"
-        v-bind:component-type="componentType"
-      />
-    </v-list-group>
-  </div>
+    <div>
+
+        <v-list-group >
+            <template v-slot:activator>
+                <v-list-item-title>{{ componentName }}</v-list-item-title>
+            </template>
+            <SubMenuItem
+                    v-for="item in componentItem"
+                    v-bind:key="item.partid"
+                    v-bind:item-name="item.partname"
+                    v-bind:component-name="componentName"
+            />
+        </v-list-group>
+
+
+    </div>
 </template>
 
 <script>
