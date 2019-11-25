@@ -58,7 +58,13 @@ export default {
     itemArray: function() {
       this.dataArray = [];
       for (let i = 0; i < this.itemArray.length; i++) {
-        let element = `{"subpartid":${this.itemArray[i]["subpartid"]},"description":"${this.itemArray[i]["description"]}","subpartname":"${this.itemArray[i]["subpartname"]}","enddate":"${this.itemArray[i]["enddate"]}","state":"${this.tableName}","partid":${this.$parent.partId} }`;
+        let element = `{"subpartid":${
+          this.itemArray[i]["subpartid"]
+        },"description":"${this.itemArray[i]["description"]}","subpartname":"${
+          this.itemArray[i]["subpartname"]
+        }","enddate":"${this.itemArray[i]["enddate"]}","state":"${
+          this.tableName
+        }","partid":${this.$parent.partId} }`;
         apiService.updateSubPart(JSON.parse(element));
 
         this.dataArray.push(JSON.parse(element));

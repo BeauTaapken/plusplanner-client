@@ -4,30 +4,12 @@
       <v-form>
         <v-container>
           <v-card-title class="justify-center">Edit task</v-card-title>
-          <v-text-field
-            id="taskname"
-            label="Task name"
-            filled
-            shaped
-            :value="name"
-          ></v-text-field>
+          <v-text-field id="taskname" label="Task name" filled shaped :value="name"></v-text-field>
 
-          <v-text-field
-            id="taskdescription"
-            label="Description"
-            filled
-            shaped
-            :value="description"
-          ></v-text-field>
+          <v-text-field id="taskdescription" label="Description" filled shaped :value="description"></v-text-field>
           <v-menu>
             <template v-slot:activator="{ on }">
-              <v-text-field
-                v-model="date"
-                label="End Date"
-                readonly
-                v-on="on"
-                :value="endDate"
-              ></v-text-field>
+              <v-text-field v-model="date" label="End Date" readonly v-on="on" :value="endDate"></v-text-field>
             </template>
             <v-date-picker
               v-model="date"
@@ -40,15 +22,11 @@
 
           <v-row>
             <v-col cols="6">
-              <v-btn width="100%" color="#3b3b3b" @click="cancel">
-                Cancel
-              </v-btn>
+              <v-btn width="100%" color="#3b3b3b" @click="cancel">Cancel</v-btn>
             </v-col>
 
             <v-col cols="6">
-              <v-btn width="100%" color="#4f4f4f" @click="save">
-                Save
-              </v-btn>
+              <v-btn width="100%" color="#4f4f4f" @click="save">Save</v-btn>
             </v-col>
           </v-row>
         </v-container>
