@@ -79,7 +79,8 @@
     }
 
     .board-content {
-        padding: 20px;
+        margin-left: 1%;
+        margin-right: 1%;
     }
 
     .text-header {
