@@ -25,16 +25,7 @@
       </v-list-item-action>
 
     </v-list-item>
-    
-    <!-- <v-list>
-      <v-list-group>
-        <template v-slot:activator>
-          <v-list-item-title class="project-header">{{
-            projectName
-          }}</v-list-item-title>
-        </template>
-      </v-list-group>
-    </v-list> -->
+  
     <SubMenuHeader
       v-for="data in this.usedData.components"
       v-bind:key="data.componentname"
