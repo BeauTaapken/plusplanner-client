@@ -7,6 +7,7 @@
         :permanent="primaryDrawer.permanent"
         app
         id="vnav"
+        style="width: 4%"
     >
         <v-layout column fill-height>
             <ProjectListItem
@@ -66,6 +67,7 @@
     }
 
     #add-button {
+        margin: auto;
         margin-bottom: 10px;
     }
 </style>

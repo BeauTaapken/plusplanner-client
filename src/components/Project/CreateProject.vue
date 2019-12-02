@@ -28,7 +28,7 @@
 
             <v-row>
               <v-col cols="6">
-                <v-btn width="100%" color="#3b3b3b" @click="this.overlay = !this.overlay">Cancel</v-btn>
+                <v-btn width="100%" color="#3b3b3b" @click="cancel">Cancel</v-btn>
               </v-col>
 
               <v-col cols="6">
@@ -79,8 +79,9 @@ export default {
         .catch(error => {
           window.console.log('There was an error creating the project:', error.response)
         });
-      
-      console.log(this.$parent.$parent)
+    },
+    cancel: function() {
+      this.overlay = !this.overlay;
     }
   }
 };
