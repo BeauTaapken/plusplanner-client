@@ -1,7 +1,7 @@
 <template>
     <li>
         <div @click="setActive" class="box">
-            <router-link :key="projectName" :to="{ name: 'project', params: {projectName: projectName } }"
+            <router-link :key="projectName" :to="{ name: 'submenu', params: {projectName: projectName } }"
                          style="color: white; text-decoration: none">
                 <div class="content">
                     <div @click="setActive" class="contentText">{{ projectName }}</div>

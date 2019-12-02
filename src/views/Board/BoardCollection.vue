@@ -39,7 +39,7 @@
         },
         methods: {
             load: function () {
-                let json = this.$parent.$parent.projectData;
+                let json = this.$parent.projectData;
                 let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
                 let t = res[0]["components"].filter(d => d.componentname === this.$route.params.componentName);
                 this.usedData = t[0]['parts'].filter(i => i.partname === this.$route.params.contentName);
