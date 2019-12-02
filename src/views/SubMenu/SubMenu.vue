@@ -73,10 +73,11 @@ export default {
 .project-nav {
   background-color: #2e3136;
   height: 100vh !important;
+  float: left !important;
   width: 250px;
 }
 .project-header {
-  font-size: 20px;
+  font-size: 25px;
   padding-top: 20px;
   padding-bottom: 20px;
 }
