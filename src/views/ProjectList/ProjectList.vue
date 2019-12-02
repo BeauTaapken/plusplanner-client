@@ -1,32 +1,71 @@
 <template>
-    <v-navigation-drawer fixed height="100vh" width="4%" color="#1E2124" class="project-list">
-            <ul>
-                <ProjectListItem
+    <v-navigation-drawer
+        v-model="primaryDrawer.model"
+        :clipped="primaryDrawer.clipped"
+        :floating="primaryDrawer.floating"
+        :mini-variant="primaryDrawer.mini"
+        :permanent="primaryDrawer.permanent"
+        app
+        id="vnav"
+    >
+        <v-layout column fill-height>
+            <ProjectListItem
                 v-for="data in this.$parent.$parent.projectData.projects"
                 v-bind:key="data.projectid"
                 v-bind:project-name="data.projectname"
-                />
-            </ul>
-    </v-navigation-drawer>
+            />
+
+            <v-spacer />
+
+            <CreateProject ref="createProject"/>
+            <div id="add-button" @click="createProject">
+                <v-btn class="mx-2" fab dark color="indigo">
+                <v-icon dark>mdi-plus</v-icon>
+                </v-btn>
+            </div>
+        </v-layout>
+
+  </v-navigation-drawer>
 </template>
 
 <script>
     import ProjectListItem from "./ProjectListItem";
+    import CreateProject from "@/components/Project/CreateProject";
+
     export default {
         name: "ProjectList",
-        components: {ProjectListItem},
-
+        components: { 
+            ProjectListItem,
+            CreateProject
+        },
+        data() {
+            return {
+                primaryDrawer: {
+                    model: null,
+                    type: "default (no property)",
+                    clipped: false,
+                    floating: true,
+                    mini: true,
+                    permanent: true
+                }
+            };
+        },
+        methods: {
+            createProject: function() {
+                this.$refs.createProject.overlay = true;
+            }
+        }
     }
 </script>
 
 <style scoped>
-
-    .project-list {
-        float: left !important;
-        padding: 0;
+    #vnav {
+        display: flex;
+        flex-direction: column;
+        background-color: #23272A;
     }
 
-    .project-list ul {
-        padding: 0;
+    #add-button {
+        margin-bottom: 10px;
     }
 </style>

@@ -19,17 +19,19 @@ const subpartAPIClient = axios.create({
 });
 
 export default {
-    getProjects(){
+    getProjects() {
         return projectAPIClient.get('/project/read/1')
     },
 
-    updateSubPart(object)
-    {
+    createProject(project) {
+        return projectAPIClient.post('/project/create/' + encodeURI(JSON.stringify(project)));
+    },
+
+    updateSubPart(object) {
         return subpartAPIClient.post('/subpart/update/' + encodeURI(JSON.stringify(object)));
     },
 
-    createSubPart(object)
-    {
+    createSubPart(object) {
         return subpartAPIClient.post('/subpart/create/' + encodeURI(JSON.stringify(object)));
     }
 }
