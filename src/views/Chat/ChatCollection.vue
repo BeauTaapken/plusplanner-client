@@ -6,9 +6,6 @@
                     <MessageContent>
 
                     </MessageContent>
-                    <ChatMessageInput>
-
-                    </ChatMessageInput>
                 </v-col>
                 <v-col cols="2" class="col-chat">
                     <ChatParticipants></ChatParticipants>
@@ -19,12 +16,11 @@
 
 <script>
 
-    import ChatMessageInput from "../../components/Chat/ChatMessageInput";
     import ChatParticipants from "../../components/Chat/ChatParticipants";
     import MessageContent from "../../components/Chat/MessageContent";
     export default {
         name: "ChatCollection",
-        components: {MessageContent, ChatParticipants, ChatMessageInput},
+        components: {MessageContent, ChatParticipants},
         data: function () {
             return {
                 contentName: this.$route.params.contentName,
