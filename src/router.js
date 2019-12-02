@@ -9,37 +9,43 @@ import BoardCollection from "./views/Board/BoardCollection";
 Vue.use(Router);
 
 export default new Router({
-  mode: 'history',
-  routes: [
-    {
-      path: '/project',
-      name: 'project',
-      component: ProjectRoot,
-      children: [
+    mode: 'history',
+    routes: [
         {
-          path: ':projectName',
-          name: 'submenu',
-          component: SubMenu,
-          children: [
-            {
-              path: ':componentName/:contentName',
-              name: 'board',
-              component: BoardCollection
-            },
-            {
-              path: ':componentName/:chat',
-              name: 'chat',
-              component: ChatCollection
-            }
-          ]
+            path: '/project',
+            name: 'project',
+            component: ProjectRoot,
+            children: [
+                {
+                    path: ':projectName',
+                    name: 'submenu',
+                    component: SubMenu,
+                    children: [
+                        {
+                            path: ':componentName/:contentName',
+                            name: 'board',
+                            components: {
+                                default: SubMenu,
+                                board: BoardCollection
+                            }
+                        },
+                        {
+                            path: ':componentName/:chat',
+                            name: 'chat',
+                            components: {
+                                default: SubMenu,
+                                chat: ChatCollection
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            path: '/login',
+            name: 'login',
+            component: Login
         }
-      ]
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
-    }
 
-  ]
+    ]
 })
