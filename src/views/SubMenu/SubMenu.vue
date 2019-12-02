@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer fixed class="project-nav">
+  <v-navigation-drawer fixed class="project-nav" color="#2e3136">
     <v-list>
       <v-list-group>
         <template v-slot:activator>
@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     load: function() {
-      let json = this.$parent.$parent.projectData;
+      let json = this.$parent.projectData;
       let res = json.projects.filter(
         d => d.projectname === this.$route.params.projectName
       );
