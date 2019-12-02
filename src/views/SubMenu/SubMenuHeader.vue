@@ -48,7 +48,7 @@
     }
     >>>.v-list-group .v-list-item__title {
         color: white;
-        font-size: 20px;
+        font-size: 18px;
     }
 
     >>>.v-list-item .v-icon {

@@ -7,7 +7,6 @@
         :permanent="primaryDrawer.permanent"
         app
         id="vnav"
-        style="width: 4%"
     >
         <v-layout column fill-height>
             <ProjectListItem

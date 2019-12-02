@@ -1,9 +1,13 @@
 <template>
   <v-app v-if="isLoaded">
     <ProjectList></ProjectList>
-    <router-view :key="this.$route.fullPath"></router-view>
-    <router-view :key="this.$route.params.contentName" name="content" />
-    <router-view :key="this.$route.params.contentName" name="chat" />
+
+    <v-content>
+      <router-view :key="this.$route.fullPath"></router-view>
+      <router-view :key="this.$route.params.contentName" name="content" />
+      <router-view :key="this.$route.params.contentName" name="chat" />
+    </v-content>
+
     <portal-target name="destination">
     </portal-target>
   </v-app>

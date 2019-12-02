@@ -1,5 +1,5 @@
 <template>
-    <div v-if="this.$parent.$parent.isLoaded">
+    <div v-if="this.$parent.$parent.$parent.isLoaded">
         <div class="component-content">
             <div class="text-header" v-text="this.$route.params.contentName"></div>
             <v-row class="board-content">
@@ -39,7 +39,7 @@
         },
         methods: {
             load: function () {
-                let json = this.$parent.$parent.projectData;
+                let json = this.$parent.$parent.$parent.projectData;
                 let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
                 let t = res[0]["components"].filter(d => d.componentname === this.$route.params.componentName);
                 this.usedData = t[0]['parts'].filter(i => i.partname === this.$route.params.contentName);
@@ -59,7 +59,7 @@
         beforeDestroy() {
             apiService.getProjects()
                 .then(response => {
-                    this.$parent.$parent.projectData = response.data;
+                    this.$parent.$parent.$parent.projectData = response.data;
                 })
                 // eslint-disable-next-line no-console
                 .catch(error => console.log("There was an error: " + error.response));
@@ -69,10 +69,7 @@
 
 <style scoped>
     .component-content {
-        float: left;
         height: 100vh;
-        width: calc(83% + 2px);
-        margin-left: calc(17% - 2px);
         background-color: #36393E;
         overflow-x: scroll;
         white-space: nowrap;
@@ -86,5 +83,6 @@
     .text-header {
         padding: 1%;
         border-bottom: #1E2124 1px solid;
+        font-size: 20px;
     }
 </style>

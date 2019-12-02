@@ -1,5 +1,5 @@
 <template>
-  <v-navigation-drawer fixed class="project-nav">
+  <div fixed class="project-nav">
     <v-list>
       <v-list-group>
         <template v-slot:activator>
@@ -21,7 +21,7 @@
       v-bind:component-name="data.name"
       v-bind:component-item="data.channels"
     />
-  </v-navigation-drawer>
+  </div>
 </template>
 
 <script>
@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     load: function() {
-      let json = this.$parent.$parent.projectData;
+      let json = this.$parent.$parent.$parent.projectData;
       let res = json.projects.filter(
         d => d.projectname === this.$route.params.projectName
       );
@@ -67,17 +67,16 @@ export default {
 
 >>> .theme--light.v-list {
   background-color: #2e3136;
+  padding: 0px;
 }
 
 .project-nav {
   background-color: #2e3136;
   height: 100vh !important;
-  width: 13% !important;
-  float: left !important;
-  margin-left: calc(4% - 1px) !important;
+  width: 250px;
 }
 .project-header {
-  font-size: 35px;
+  font-size: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
 }
