@@ -77,7 +77,7 @@ export default {
   width: 250px;
 }
 .project-header {
-  font-size: 25px;
+  font-size: 20px;
   padding-top: 20px;
   padding-bottom: 20px;
 }
