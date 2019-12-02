@@ -35,8 +35,6 @@ export default {
       .then(response => {
         this.projectData = response.data;
         this.isLoaded = true;
-        // eslint-disable-next-line no-console
-        console.log(response.request.response)
       })
       // eslint-disable-next-line no-console
       .catch(error => console.log("There was an error: " + error.response));

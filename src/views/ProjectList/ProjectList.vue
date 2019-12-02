@@ -5,14 +5,15 @@
         :floating="primaryDrawer.floating"
         :mini-variant="primaryDrawer.mini"
         :permanent="primaryDrawer.permanent"
+        color="#23272A"
         app
-        id="vnav"
     >
         <v-layout column fill-height>
             <ProjectListItem
                 v-for="data in this.$parent.$parent.projectData.projects"
                 v-bind:key="data.projectid"
                 v-bind:project-name="data.projectname"
+                style="margin-bottom: 5px;"
             />
 
             <v-spacer />
@@ -59,12 +60,6 @@
 </script>
 
 <style scoped>
-    #vnav {
-        display: flex;
-        flex-direction: column;
-        background-color: #23272A;
-    }
-
     #add-button {
         margin: auto;
         margin-bottom: 10px;
