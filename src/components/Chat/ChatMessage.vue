@@ -1,10 +1,14 @@
 <template>
-    <v-card color="rgb(46, 49, 54)" class="message">
-        <v-card-title>
-            {{messageContent}}
-        </v-card-title>
-        <div class="time"> {{sendDate.substring(11, 19)}}</div>
-    </v-card>
+    <v-row class="message-box">
+        <v-spacer v-if="sender"></v-spacer>
+        <v-card color="rgb(46, 49, 54)" class="message" cols="12">
+            <v-card-title>
+                {{messageContent}}
+            </v-card-title>
+            <div class="time"> {{sendDate.substring(11, 19)}}</div>
+        </v-card>
+        <v-spacer v-if="!sender"></v-spacer>
+    </v-row>
 </template>
 
 <script>
@@ -15,23 +19,25 @@
             channelId: Number,
             userId: Number,
             messageContent: String,
-            sendDate: String
+            sendDate: String,
+            sender: Boolean
         }
     }
 </script>
 
 <style scoped>
-    >>>.v-card__title {
+    >>> .v-card__title {
         color: white;
     }
 
-.message {
-    width: 60%;
-    float: right;
-    margin-top: 1%;
-    margin-bottom: 1%;
-    margin-right: 2%;
-}
+    .message-box {
+        margin: 1% 2%;
+    }
+
+    .message {
+        width: 60%;
+        margin: 1% 2%;
+    }
 
     .time {
         font-size: 13px;
