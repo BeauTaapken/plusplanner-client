@@ -2,8 +2,6 @@
   <div v-if="isLoaded">
     <ProjectList></ProjectList>
     <router-view :key="this.$route.fullPath"></router-view>
-    <router-view name="board"  :key="this.$route.params.contentName" />
-    <router-view name="chat" :key="this.$route.params.contentName" />
     <portal-target name="destination">
     </portal-target>
   </div>
