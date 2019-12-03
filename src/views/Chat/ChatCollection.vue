@@ -23,7 +23,7 @@
         components: {MessageContent, ChatParticipants},
         data: function () {
             return {
-                contentName: this.$route.params.contentName,
+                contentName: this.$route.params.chat,
             }
         },
     }
