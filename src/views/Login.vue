@@ -29,6 +29,10 @@
     >>>.v-card__title{
         color: white;
         text-align: center;
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        user-select: none; /* Standard */
     }
 .auth-button {
     margin: auto auto 2%;
