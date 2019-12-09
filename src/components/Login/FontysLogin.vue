@@ -1,11 +1,30 @@
 <template>
-    <button class="loginBtn loginBtn--fontys">
-        Login with Fontys
-    </button>
+    <di>
+        <button class="loginBtn loginBtn--fontys">
+            Login with Fontys
+        </button>
+        <v-btn v-on:click="signin()">
+            test
+        </v-btn>
+    </di>
 </template>
 <script>
+    import TokenService from "../../services/TokenService";
+    import ProjectService from "../../services/ProjectService";
+
     export default {
-        name: "FontysLogin"
+        name: "FontysLogin",
+        methods: {
+            signin: function () {
+                var token = null;
+                TokenService.getToken("xxxx", function (resp) {
+                    token = resp;
+                    ProjectService.getProjects(token).then(response => {
+                        window.console.log(response.data);
+                    })
+                })
+            }
+        }
     }
 </script>
 
@@ -27,6 +46,7 @@
         -ms-user-select: none; /* IE10+/Edge */
         user-select: none; /* Standard */
     }
+
     .loginBtn:before {
         content: "";
         box-sizing: border-box;
@@ -36,11 +56,13 @@
         width: 34px;
         height: 100%;
     }
+
     .loginBtn:focus {
         outline: none;
     }
+
     .loginBtn:active {
-        box-shadow: inset 0 0 0 32px rgba(0,0,0,0.1);
+        box-shadow: inset 0 0 0 32px rgba(0, 0, 0, 0.1);
     }
 
     .loginBtn--fontys {
@@ -48,10 +70,12 @@
         background-image: linear-gradient(#673366, #5c2d5b);
         text-shadow: 0 -1px 0 #354C8C;
     }
+
     .loginBtn--fontys:before {
         border-right: #4d254c 1px solid;
         background: url('../../assets/fontys-logo.png') 6px 6px no-repeat;
     }
+
     .loginBtn--fontys:hover,
     .loginBtn--fontys:focus {
         background-color: #673366;
