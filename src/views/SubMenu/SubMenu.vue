@@ -14,7 +14,7 @@
             </v-btn>
           </template>
           <v-list>
-            <v-list-item @click="addChannel">
+            <v-list-item @click="addComponent">
               <v-list-item-title>Add component</v-list-item-title>
               <v-list-item-action>
                 <v-icon color="grey lighten-1">mdi-note-plus</v-icon>
@@ -25,6 +25,8 @@
       </v-list-item-action>
 
     </v-list-item>
+
+    <CreateComponent ref="createComponent" />
   
     <SubMenuHeader
       v-for="data in this.usedData.components"
@@ -44,10 +46,11 @@
 <script>
 import SubMenuHeader from "./SubMenuHeader";
 import SubMenuChatHeader from "./SubMenuChatHeader";
+import CreateComponent from "@/components/Component/CreateComponent";
 
 export default {
   name: "SubMenu",
-  components: { SubMenuChatHeader, SubMenuHeader },
+  components: { SubMenuChatHeader, SubMenuHeader, CreateComponent },
   data: function() {
     return {
       usedData: null,
@@ -68,8 +71,8 @@ export default {
       );
       this.usedData = res[0];
     },
-    addChannel: function() {
-
+    addComponent: function() {
+      this.$refs.createComponent.overlay = true;
     }
   }
 };

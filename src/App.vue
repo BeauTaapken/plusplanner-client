@@ -8,8 +8,8 @@
       <router-view :key="this.$route.params.contentName" name="chat" />
     </v-content>
 
-    <portal-target name="destination">
-    </portal-target>
+    <portal-target name="createProjectOverlayDest" />
+    <portal-target name="createComponentOverlayDest" />
   </v-app>
 </template>
 
