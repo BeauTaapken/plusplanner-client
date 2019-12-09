@@ -1,22 +1,25 @@
 import axios from 'axios'
 import EurekaService from "./EurekaService";
 
-var projectService = null;
-EurekaService.getInstance("plus-planner-project-service").then((url) => {
-    projectService = axios.create({
-        baseURL: url.data,
-        withCredentials: false,
+let projectService = null;
+
+onload = async () => await load();
+
+async function load() {
+    await EurekaService.getInstance("plus-planner-project-service").then((response) => {
+        projectService = axios.create({
+            baseURL: response.data,
+            withCredentials: false,
+        });
     });
-});
+}
+
 
 export default {
-    getProjects(token) {
-        let service = this;
-        // eslint-disable-next-line no-console
-        if (projectService == null) {
-            return setTimeout(function () {
-                service.getProjects(token);
-            }, 10);
+    async getProjects(token) {
+        if(projectService == null)
+        {
+            await load();
         }
         return projectService.get('project/read', {
             headers: {

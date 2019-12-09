@@ -17,13 +17,13 @@ export default new Router({
             name: 'project',
             component: ProjectRoot,
             beforeEnter(to, from, next) {
-                if(from.$session.exists() && from.$session.get("plusplannerToken") != null)
+                if(Vue.prototype.$session.exists() && Vue.prototype.$session.get("plusplannerToken") != null)
                 {
                     next();
                 }
                 else
                 {
-                    from.$router.push("/login")
+                    Router.app.$router.push("/login")
                 }
             },
             children: [
