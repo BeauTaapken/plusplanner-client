@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+// var tokenService = null;
+
 const projectAPIClient = axios.create({
     baseURL: 'http://localhost:8083',
     withCredentials: false,
@@ -8,6 +10,18 @@ const projectAPIClient = axios.create({
         'Content-Type':  'application/json'
     }
 });
+
+// const eurekaServer = axios.create({
+//     baseURL: 'http://localhost:8101/server-instances/',
+//     withCredentials: false
+// });
+//
+// this.getInstance("token-service").then((url) => {
+//     tokenService = axios.create({
+//         baseURL: url.data,
+//         withCredentials: false
+//     });
+// });
 
 const subpartAPIClient = axios.create({
     baseURL: 'http://localhost:8081',
@@ -23,9 +37,23 @@ export default {
         return projectAPIClient.get('/project/read/1')
     },
 
-    createProject(project) {
-        return projectAPIClient.post('/project/create/' + encodeURI(JSON.stringify(project)));
+    fontysLogin() {
+        return null;
     },
+
+    // getInstance(instanceName) {
+    //     return eurekaServer.get("getinstance/" + instanceName);
+    // },
+    //
+    // getToken(GToken, setToken) {
+    //     if(tokenService == null){
+    //         setTimeout(this.getToken(GToken, setToken), 10)
+    //     }
+    //     tokenService.get('token/token/' + GToken).then(response => {
+    //         setToken(response.data)
+    //     });
+    // },
+
 
     updateSubPart(object) {
         return subpartAPIClient.post('/subpart/update/' + encodeURI(JSON.stringify(object)));
