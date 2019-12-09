@@ -16,6 +16,16 @@ export default new Router({
             path: '/project',
             name: 'project',
             component: ProjectRoot,
+            beforeEnter(to, from, next) {
+                if(from.$session.exists() && from.$session.get("plusplannerToken") != null)
+                {
+                    next();
+                }
+                else
+                {
+                    from.$router.push("/login")
+                }
+            },
             children: [
                 {
                     path: ':projectName',
