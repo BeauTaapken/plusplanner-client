@@ -1,28 +1,29 @@
 <template>
-    <di>
-        <button class="loginBtn loginBtn--fontys">
+        <button v-on:click="signin" class="loginBtn loginBtn--fontys">
             Login with Fontys
         </button>
-        <v-btn v-on:click="signin()">
-            test
-        </v-btn>
-    </di>
 </template>
 <script>
     import TokenService from "../../services/TokenService";
-    import ProjectService from "../../services/ProjectService";
 
     export default {
         name: "FontysLogin",
         methods: {
             signin: function () {
-                var token = null;
+                let session = this.$session;
+                let router = this.$router;
+                session.start();
+                session.set("fontysToken", "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImhPWFBYUmtteU5kc1ViMFMtN2Vlc2xOUEI0OCIsImtpZCI6ImhPWFBYUmtteU5kc1ViMFMtN2Vlc2xOUEI0OCJ9.eyJpc3MiOiJodHRwczovL2lkZW50aXR5LmZoaWN0Lm5sIiwiYXVkIjoiaHR0cHM6Ly9pZGVudGl0eS5maGljdC5ubC9yZXNvdXJjZXMiLCJleHAiOjE1NzU5MDM3NjIsIm5iZiI6MTU3NTg5NjU2MiwiY2xpZW50X2lkIjoiYXBpLWNsaWVudCIsInVybjpubC5maGljdDp0cnVzdGVkX2NsaWVudCI6InRydWUiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiZW1haWwiLCJmaGljdCIsImZoaWN0X3BlcnNvbmFsIiwiZmhpY3RfbG9jYXRpb24iXSwic3ViIjoiYzFlMTBhYjktMjQ0NS00ZjBhLWFkZDUtNzU1OWFkODc3ODE1IiwiYXV0aF90aW1lIjoxNTc1ODk2NTYyLCJpZHAiOiJmaGljdC1zc28iLCJyb2xlIjpbInVzZXIiLCJzdHVkZW50Il0sInVwbiI6Ikk0MTE5NDZAZmhpY3QubmwiLCJuYW1lIjoiTXVpanRqZW5zLFZpbmNlbnQgVi4iLCJlbWFpbCI6InYubXVpanRqZW5zQHN0dWRlbnQuZm9udHlzLm5sIiwidXJuOm5sLmZoaWN0OnNjaGVkdWxlIjoiY2xhc3N8SUNTMzcgLyBTMzYiLCJmb250eXNfdXBuIjoiNDExOTQ2QHN0dWRlbnQuZm9udHlzLm5sIiwiYW1yIjpbImV4dGVybmFsIl19.Do_A7bYD3iVLkUuPdmtomJXlDve9u4iH_DYJnrf4KC2dpSPEFYKBt_yaKxbJnDvrONkldCSEvXYIyVk4FvOFcm9nxD_yELGzOrcrqqjWGLNt1-gP4SJryzhZnOKmywYUypHBKm4xFfOgBHglcnuWo_d-PJRLN7k7s9ys1WHAdpJNPLh__xBzEj7AQBWQRVIe1VteJYYkXLeQaqCL_wDa1gipS6VXZdLBrBhlN1fUGJiyZzlcw58jOyY9Wpmk1xq6aHUCZROiU8dCDEJBRxWEGboCxTd4EWxSjwug3lpdXg_QqUI5Npe5cM2owZYjXgH2QtxXneH78aEGeIZSwjTKow");
                 TokenService.getToken("xxxx", function (resp) {
-                    token = resp;
-                    ProjectService.getProjects(token).then(response => {
-                        window.console.log(response.data);
-                    })
-                })
+                    session.set("plusplannerToken", resp);
+                    router.push("/project");
+                });
+            }
+        },
+        beforeCreate() {
+            if(this.$session.exists())
+            {
+                this.$router.push("/project");
             }
         }
     }

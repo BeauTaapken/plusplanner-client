@@ -11,9 +11,11 @@ EurekaService.getInstance("plus-planner-project-service").then((url) => {
 
 export default {
     getProjects(token) {
+        let service = this;
+        // eslint-disable-next-line no-console
         if (projectService == null) {
             return setTimeout(function () {
-                this.getProjects(token);
+                service.getProjects(token);
             }, 10);
         }
         return projectService.get('project/read', {

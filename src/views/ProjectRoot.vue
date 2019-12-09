@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import apiService from "../services/APIService";
+  import apiService from "../services/ProjectService";
   import { PortalTarget } from 'portal-vue'
   import ProjectList from "./ProjectList/ProjectList";
 
@@ -24,9 +24,11 @@
         isLoaded: false
       };
     },
-    created() {
+    async created() {
+      let session = this.$session;
+
       apiService
-              .getProjects()
+              .getProjects(session.get("plusplannerToken"))
               .then(response => {
                 this.projectData = response.data;
                 this.isLoaded = true;

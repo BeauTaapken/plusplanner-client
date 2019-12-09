@@ -19,7 +19,7 @@
 
 <script>
     import BoardTable from "../../components/Board/BoardTable.vue";
-    import apiService from "../../services/APIService";
+    import apiService from "../../services/ProjectService";
 
     export default {
         name: "BoardCollection",
@@ -57,7 +57,8 @@
             }
         },
         beforeDestroy() {
-            apiService.getProjects()
+            let session = this.$session;
+            apiService.getProjects(session.get("plusplannerToken"))
                 .then(response => {
                     this.$parent.$parent.projectData = response.data;
                 })

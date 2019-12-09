@@ -2,8 +2,15 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import vuetify from './plugins/vuetify';
+import VueSession from 'vue-session'
 
-Vue.config.productionTip = false
+// Session config
+let options = {
+  persist: true
+};
+Vue.use(VueSession, options);
+
+Vue.config.productionTip = false;
 
 new Vue({
   router,

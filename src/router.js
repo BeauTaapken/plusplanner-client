@@ -5,6 +5,7 @@ import ChatCollection from "./views/Chat/ChatCollection";
 import ProjectRoot from "./views/ProjectRoot";
 import Login from "./views/Login";
 import BoardCollection from "./views/Board/BoardCollection";
+import Logout from "./views/Logout";
 
 Vue.use(Router);
 
@@ -45,7 +46,11 @@ export default new Router({
             path: '/login',
             name: 'login',
             component: Login
+        },
+        {
+            path: '/logout',
+            name: 'logout',
+            component: Logout
         }
-
     ]
 })
