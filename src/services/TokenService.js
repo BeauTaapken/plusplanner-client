@@ -11,10 +11,14 @@ EurekaService.getInstance("plus-planner-token-service").then((url) => {
 
 export default {
     getToken(FToken, setToken) {
-        if(tokenService == null){
+        if (tokenService == null) {
             setTimeout(this.getToken(FToken, setToken), 10)
         }
-        tokenService.get('token/gettoken/' + FToken).then(response => {
+        tokenService.get('token/gettoken', {
+            headers: {
+                FToken: FToken
+            }
+        }).then(response => {
             setToken(response.data)
         });
     }
