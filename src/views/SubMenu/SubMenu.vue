@@ -1,14 +1,33 @@
 <template>
-  <v-navigation-drawer fixed class="project-nav">
-    <v-list>
-      <v-list-group>
-        <template v-slot:activator>
-          <v-list-item-title class="project-header">{{
-            projectName
-          }}</v-list-item-title>
-        </template>
-      </v-list-group>
-    </v-list>
+  <div fixed class="project-nav">
+    <v-list-item>
+      <v-list-item-content>
+        <div class="project-header">
+          {{ projectName }}
+        </div>
+      </v-list-item-content>
+      <v-list-item-action>
+        <v-menu offset-y :dark="true" :min-width="220" bottom left>
+          <template v-slot:activator="{ on }">
+            <v-btn icon v-on="on">
+              <v-icon color="grey lighten-1">mdi-plus</v-icon>
+            </v-btn>
+          </template>
+          <v-list>
+            <v-list-item @click="addComponent">
+              <v-list-item-title>Add component</v-list-item-title>
+              <v-list-item-action>
+                <v-icon color="grey lighten-1">mdi-note-plus</v-icon>
+              </v-list-item-action>
+            </v-list-item>
+        </v-list>
+        </v-menu>
+      </v-list-item-action>
+
+    </v-list-item>
+
+    <CreateComponent ref="createComponent" />
+  
     <SubMenuHeader
       v-for="data in this.usedData.components"
       v-bind:key="data.componentname"
@@ -21,16 +40,17 @@
       v-bind:component-name="data.name"
       v-bind:component-item="data.channels"
     />
-  </v-navigation-drawer>
+  </div>
 </template>
 
 <script>
 import SubMenuHeader from "./SubMenuHeader";
 import SubMenuChatHeader from "./SubMenuChatHeader";
+import CreateComponent from "@/components/Component/CreateComponent";
 
 export default {
   name: "SubMenu",
-  components: { SubMenuChatHeader, SubMenuHeader },
+  components: { SubMenuChatHeader, SubMenuHeader, CreateComponent },
   data: function() {
     return {
       usedData: null,
@@ -45,39 +65,46 @@ export default {
   },
   methods: {
     load: function() {
-      let json = this.$parent.$parent.projectData;
+      let json = this.$parent.$parent.$parent.projectData;
       let res = json.projects.filter(
         d => d.projectname === this.$route.params.projectName
       );
       this.usedData = res[0];
+    },
+    addComponent: function() {
+      this.$refs.createComponent.overlay = true;
     }
   }
 };
 </script>
 
 <style scoped>
->>> .v-list-group .v-list-item__title {
+>>>.v-list-group .v-list-item__title {
   color: white;
   height: auto;
 }
 
->>> .v-list-group .v-icon {
+>>>.v-list-group .v-icon {
   color: white;
 }
 
->>> .theme--light.v-list {
+>>>.theme--light.v-list {
   background-color: #2e3136;
+}
+
+>>>.v-list-item__content {
+  color: white;
+  padding: 0px;
 }
 
 .project-nav {
   background-color: #2e3136;
   height: 100vh !important;
-  width: 13% !important;
   float: left !important;
-  margin-left: calc(4% - 1px) !important;
+  width: 250px;
 }
 .project-header {
-  font-size: 35px;
+  font-size: 23px;
   padding-top: 20px;
   padding-bottom: 20px;
 }

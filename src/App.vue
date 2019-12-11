@@ -1,18 +1,28 @@
 <template>
   <v-app v-if="isLoaded">
     <ProjectList></ProjectList>
-    <router-view :key="this.$route.fullPath"></router-view>
-    <router-view :key="this.$route.params.contentName" name="content" />
-    <router-view :key="this.$route.params.contentName" name="chat" />
+
+    <v-content>
+      <router-view :key="this.$route.fullPath"></router-view>
+      <router-view :key="this.$route.params.contentName" name="content" />
+      <router-view :key="this.$route.params.contentName" name="chat" />
+    </v-content>
+
+    <portal-target name="createProjectOverlayDest" />
+    <portal-target name="createComponentOverlayDest" />
   </v-app>
 </template>
 
 <script>
 import ProjectList from "./views/ProjectList/ProjectList";
 import apiService from "./services/APIService";
+import { PortalTarget } from 'portal-vue'
 
 export default {
-  components: { ProjectList },
+  components: { 
+    ProjectList,
+    PortalTarget
+  },
   data() {
     return {
       projectData: null,

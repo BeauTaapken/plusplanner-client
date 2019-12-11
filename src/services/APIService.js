@@ -18,18 +18,35 @@ const subpartAPIClient = axios.create({
     }
 });
 
+const containerAPIClient = axios.create({
+    baseURL: 'http://localhost:8082/containerservice',
+    withCredentials: false,
+    headers: {
+        Accept: 'application/json',
+        'Content-Type':  'application/json'
+    }
+});
+
 export default {
-    getProjects(){
+    getProjects() {
         return projectAPIClient.get('/project/read/1')
     },
 
-    updateSubPart(object)
-    {
+    createProject(project) {
+        // eslint-disable-next-line no-console
+        console.log(encodeURI(JSON.stringify(project)));
+        return projectAPIClient.post('/project/create/' + encodeURI(JSON.stringify(project)));
+    },
+
+    updateSubPart(object) {
         return subpartAPIClient.post('/subpart/update/' + encodeURI(JSON.stringify(object)));
     },
 
-    createSubPart(object)
-    {
+    createSubPart(object) {
         return subpartAPIClient.post('/subpart/create/' + encodeURI(JSON.stringify(object)));
+    },
+
+    createComponent(component) {
+        return containerAPIClient.post('/component/create/' + encodeURI(JSON.stringify(component)));
     }
 }

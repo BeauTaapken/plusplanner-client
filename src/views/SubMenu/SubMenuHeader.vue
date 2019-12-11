@@ -33,10 +33,19 @@ export default {
 </script>
 
 <style scoped>
->>> .v-list-group__header {
-  border-bottom: #1e2124 1px solid;
-  border-top: #1e2124 1px solid;
-}
+    >>>.v-list-group__header {
+        border-bottom: #1E2124 1px solid;
+        border-top: #1E2124 1px solid;
+    }
+
+    >>>.v-list-item {
+        margin: 0;
+        padding: 20px;
+    }
+    >>>.v-list-group .v-list-item__title {
+        color: white;
+        font-size: 18px;
+    }
 
 >>> .v-list-item {
   margin: 0;

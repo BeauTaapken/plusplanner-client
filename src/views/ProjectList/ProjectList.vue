@@ -1,42 +1,67 @@
 <template>
-  <v-navigation-drawer
-    v-model="primaryDrawer.model"
-    :clipped="primaryDrawer.clipped"
-    :floating="primaryDrawer.floating"
-    :mini-variant="primaryDrawer.mini"
-    :permanent="primaryDrawer.permanent"
-    app
-    id="vnav"
-  >
-    <ProjectListItem
-      v-for="data in this.$parent.$parent.projectData.projects"
-      v-bind:key="data.projectid"
-      v-bind:project-name="data.projectname"
-    />
-  </v-navigation-drawer>
-  <!-- <v-navigation-drawer fixed height="100vh" width="4%" color="#1E2124" class="project-list">
+    <v-navigation-drawer
+        v-model="primaryDrawer.model"
+        :clipped="primaryDrawer.clipped"
+        :floating="primaryDrawer.floating"
+        :mini-variant="primaryDrawer.mini"
+        :permanent="primaryDrawer.permanent"
+        color="#23272A"
+        app
+    >
+        <v-layout column fill-height>
+            <ProjectListItem
+                v-for="data in this.$parent.$parent.projectData.projects"
+                v-bind:key="data.projectid"
+                v-bind:project-name="data.projectname"
+                style="margin-bottom: 5px;"
+            />
 
-  </v-navigation-drawer>-->
+            <v-spacer />
+
+            <CreateProject ref="createProject"/>
+            <div id="add-button" @click="createProject">
+                <v-btn class="mx-2" fab dark color="#7289DA">
+                <v-icon dark>mdi-plus</v-icon>
+                </v-btn>
+            </div>
+        </v-layout>
+
+  </v-navigation-drawer>
 </template>
 
 <script>
-import ProjectListItem from "./ProjectListItem";
-export default {
-  name: "ProjectList",
-  components: { ProjectListItem },
+    import ProjectListItem from "./ProjectListItem";
+    import CreateProject from "@/components/Project/CreateProject";
 
-  props: {
-    primaryDrawer: Array,
-    drawer: null,
-    drawerRight: null,
-    right: Boolean,
-    left: Boolean
-  }
-};
+    export default {
+        name: "ProjectList",
+        components: { 
+            ProjectListItem,
+            CreateProject
+        },
+        data() {
+            return {
+                primaryDrawer: {
+                    model: null,
+                    type: "default (no property)",
+                    clipped: false,
+                    floating: true,
+                    mini: true,
+                    permanent: true
+                }
+            };
+        },
+        methods: {
+            createProject: function() {
+                this.$refs.createProject.overlay = true;
+            }
+        }
+    }
 </script>
 
-<style>
-#vnav {
-  background-color: #23272a;
-}
+<style scoped>
+    #add-button {
+        margin: auto;
+        margin-bottom: 10px;
+    }
 </style>
