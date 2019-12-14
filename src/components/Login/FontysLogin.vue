@@ -13,7 +13,7 @@
                 let session = this.$session;
                 let router = this.$router;
                 session.start();
-                session.set("fontysToken", "");
+                session.set("fontysToken", "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImhPWFBYUmtteU5kc1ViMFMtN2Vlc2xOUEI0OCIsImtpZCI6ImhPWFBYUmtteU5kc1ViMFMtN2Vlc2xOUEI0OCJ9.eyJpc3MiOiJodHRwczovL2lkZW50aXR5LmZoaWN0Lm5sIiwiYXVkIjoiaHR0cHM6Ly9pZGVudGl0eS5maGljdC5ubC9yZXNvdXJjZXMiLCJleHAiOjE1NzYzMzk1MjEsIm5iZiI6MTU3NjMzMjMyMSwiY2xpZW50X2lkIjoiYXBpLWNsaWVudCIsInVybjpubC5maGljdDp0cnVzdGVkX2NsaWVudCI6InRydWUiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiZW1haWwiLCJmaGljdCIsImZoaWN0X3BlcnNvbmFsIiwiZmhpY3RfbG9jYXRpb24iXSwic3ViIjoiYzFlMTBhYjktMjQ0NS00ZjBhLWFkZDUtNzU1OWFkODc3ODE1IiwiYXV0aF90aW1lIjoxNTc2MzI3MzAzLCJpZHAiOiJmaGljdC1zc28iLCJyb2xlIjpbInVzZXIiLCJzdHVkZW50Il0sInVwbiI6Ikk0MTE5NDZAZmhpY3QubmwiLCJuYW1lIjoiTXVpanRqZW5zLFZpbmNlbnQgVi4iLCJlbWFpbCI6InYubXVpanRqZW5zQHN0dWRlbnQuZm9udHlzLm5sIiwidXJuOm5sLmZoaWN0OnNjaGVkdWxlIjoiY2xhc3N8SUNTMzcgLyBTMzYiLCJmb250eXNfdXBuIjoiNDExOTQ2QHN0dWRlbnQuZm9udHlzLm5sIiwiYW1yIjpbImV4dGVybmFsIl19.EAEqTSSyRrHpoDwkOGOHmlZB_81OQdlnXwUINT9qXA-y6Oldc_r_InQQgFYaw4T-ZiG4viVQqqey_Uc8RDtAqQDHSq7Zu0ZTODha4P4v8UC6uzD5PyhZnNDqJJbYmMWZTHIBj3Ti4j-N6EwMubqOGGmt0Yc_A5IoR2Au_MXlrOO6uzYD5-RYHaW5gXOF7EZEV6PK4IS-oroVKWPuPuH6pkNS1KFFxopLkouKzkKBbje2Sl48c1NlrCt_BeiJ7D5Jm-ktmNsFhPALqMnBTIoKN6D5gcEGw6kGKRImx1zyHOaYykJMo6ylEWk1U3WxhILvplWxTk7XbldeqBqcip69sQ");
                 TokenService.getToken(session.get("fontysToken"))
                     .then(response => {
                         session.set("plusplannerToken", response.data);
