@@ -46,9 +46,6 @@
         created() {
             this.load();
         },
-        updated() {
-            this.load();
-        },
         methods: {
             load: function () {
                 let json = this.$parent.projectData;

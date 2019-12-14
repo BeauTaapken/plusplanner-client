@@ -37,10 +37,10 @@
             let url = webSocketService.getWSAddress();
             url = url.replace("http", "ws");
             this.Websocket = new WebSocket(url + "/messages");
-            let ws = this.Websocket
+            let ws = this.Websocket;
             setTimeout(function() {
-                ws.send("test");
-            }, 2000);
+                ws.send('{"action": "create", "type": "Task", "element": {}}');
+            }, 5000);
         },
         created() {
             this.load();
