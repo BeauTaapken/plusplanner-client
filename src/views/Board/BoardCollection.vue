@@ -30,20 +30,22 @@
                 usedData: null,
                 tableNames: ['Backlog', 'This Sprint', 'Working on', 'Review', 'Done', 'On Hold'],
                 partId: null,
-                Websocket: null
+                Websocket: null,
+                projectid: null
             }
-        },
-        beforeCreate() {
-            let url = webSocketService.getWSAddress();
-            url = url.replace("http", "ws");
-            this.Websocket = new WebSocket(url + "/messages");
-            let ws = this.Websocket;
-            setTimeout(function() {
-                ws.send('{"action": "create", "type": "Task", "element": {}}');
-            }, 5000);
         },
         created() {
             this.load();
+            let url = webSocketService.getWSAddress();
+            url = url.replace("http", "ws");
+            this.Websocket = new WebSocket(url + "/messages");
+
+            let comp = this;
+
+            comp.Websocket.onopen = function() {
+                comp.Websocket.send(comp.projectid + "\n" + comp.$session.get("plusplannerToken"))
+            };
+
         },
         updated() {
             this.load();
@@ -52,6 +54,7 @@
             load: function () {
                 let json = this.$parent.$parent.projectData;
                 let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
+                this.projectid = res[0].projectid;
                 let t = res[0]["components"].filter(d => d.componentname === this.$route.params.componentName);
                 this.usedData = t[0]['parts'].filter(i => i.partname === this.$route.params.contentName);
                 this.partId = this.usedData[0]['partid'];
