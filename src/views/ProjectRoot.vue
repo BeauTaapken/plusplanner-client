@@ -32,8 +32,7 @@
                 this.projectData = response.data;
                 this.isLoaded = true;
               })
-              // eslint-disable-next-line no-console
-              .catch(error => console.log("There was an error: " + error.response));
+              .catch(error => window.console.log("There was an error: " + error.response));
     }
   };
 </script>
