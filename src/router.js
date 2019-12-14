@@ -23,7 +23,7 @@ export default new Router({
                 }
                 else
                 {
-                    Router.app.$router.push("/login")
+                    window.location = "/login";
                 }
             },
             children: [
