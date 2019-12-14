@@ -3,11 +3,11 @@
         <div class="component-content">
             <div class="text-header" v-text="this.$route.params.contentName"></div>
             <v-row class="board-content">
-                <BoardTable
-                        v-for="table in tableNames"
-                        v-bind:key="table"
-                        v-bind:table-name="table"
-                        v-bind:items="findTableData(table)"
+                <BoardTable ref="child"
+                            v-for="table in tableNames"
+                            v-bind:key="table"
+                            v-bind:table-name="table"
+                            v-bind:items="findTableData(table)"
                 />
             </v-row>
         </div>
@@ -39,18 +39,62 @@
             let url = webSocketService.getWSAddress();
             url = url.replace("http", "ws");
             this.Websocket = new WebSocket(url + "/messages");
-
             let comp = this;
-
-            comp.Websocket.onopen = function() {
+            comp.Websocket.onopen = function () {
                 comp.Websocket.send(comp.projectid + "\n" + comp.$session.get("plusplannerToken"))
             };
 
+            comp.Websocket.onmessage = function (message) {
+                let json = JSON.parse(message.data);
+                switch (json.type) {
+                    case "task":
+                        switch (json.action) {
+                            case "create":
+                                // eslint-disable-next-line no-case-declarations
+                                let table = comp.getChildTable(json.element.state);
+                                table.itemArray.push(json.element);
+                                break;
+                            case "update":
+                                // eslint-disable-next-line no-case-declarations
+                                let oldTable = comp.getOldChildTable(json.element.subpartid);
+                                // eslint-disable-next-line no-case-declarations
+                                let index = oldTable.itemArray.findIndex(
+                                    x => (x.subpartid === json.element.subpartid));
+                                window.console.log(index);
+                                oldTable.itemArray.splice(index, 1);
+                                // eslint-disable-next-line no-case-declarations
+                                let newTable = comp.getChildTable(json.element.state);
+                                newTable.itemArray.push(json.element);
+                                break;
+                        }
+                        break;
+                }
+            };
         },
         updated() {
             this.load();
         },
         methods: {
+            getChildTable: function (name) {
+                let tables = this.$refs.child;
+                for (let i = 0; i < tables.length; i++) {
+                    if (tables[i].tableName === name) {
+                        return tables[i];
+                    }
+                }
+            },
+            getOldChildTable: function (subpartid) {
+                let tables = this.$refs.child;
+
+                for (let i = 0; i < tables.length; i++) {
+                    for (let j = 0; j < tables[i].itemArray.length; j++) {
+                        let json = tables[i].itemArray[j];
+                        if (json.subpartid === subpartid) {
+                            return tables[i];
+                        }
+                    }
+                }
+            },
             load: function () {
                 let json = this.$parent.$parent.projectData;
                 let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
@@ -68,6 +112,10 @@
                     }
                 }
                 return dataArray;
+            },
+            createUUID: function () {
+                const uuidv1 = require('uuid/v1');
+                return uuidv1();
             }
         },
         beforeDestroy() {
