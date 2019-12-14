@@ -1,7 +1,7 @@
 <template>
-        <button v-on:click="signin" class="loginBtn loginBtn--fontys">
-            Login with Fontys
-        </button>
+    <button v-on:click="signin" class="loginBtn loginBtn--fontys">
+        Login with Fontys
+    </button>
 </template>
 <script>
     import TokenService from "../../services/TokenService";
@@ -13,18 +13,21 @@
                 let session = this.$session;
                 let router = this.$router;
                 session.start();
-                session.set("fontysToken", "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImhPWFBYUmtteU5kc1ViMFMtN2Vlc2xOUEI0OCIsImtpZCI6ImhPWFBYUmtteU5kc1ViMFMtN2Vlc2xOUEI0OCJ9.eyJpc3MiOiJodHRwczovL2lkZW50aXR5LmZoaWN0Lm5sIiwiYXVkIjoiaHR0cHM6Ly9pZGVudGl0eS5maGljdC5ubC9yZXNvdXJjZXMiLCJleHAiOjE1NzU5Mjk3MjgsIm5iZiI6MTU3NTkyMjUyOCwiY2xpZW50X2lkIjoiYXBpLWNsaWVudCIsInVybjpubC5maGljdDp0cnVzdGVkX2NsaWVudCI6InRydWUiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiZW1haWwiLCJmaGljdCIsImZoaWN0X3BlcnNvbmFsIiwiZmhpY3RfbG9jYXRpb24iXSwic3ViIjoiYzFlMTBhYjktMjQ0NS00ZjBhLWFkZDUtNzU1OWFkODc3ODE1IiwiYXV0aF90aW1lIjoxNTc1OTE1NTE2LCJpZHAiOiJmaGljdC1zc28iLCJyb2xlIjpbInVzZXIiLCJzdHVkZW50Il0sInVwbiI6Ikk0MTE5NDZAZmhpY3QubmwiLCJuYW1lIjoiTXVpanRqZW5zLFZpbmNlbnQgVi4iLCJlbWFpbCI6InYubXVpanRqZW5zQHN0dWRlbnQuZm9udHlzLm5sIiwidXJuOm5sLmZoaWN0OnNjaGVkdWxlIjoiY2xhc3N8SUNTMzcgLyBTMzYiLCJmb250eXNfdXBuIjoiNDExOTQ2QHN0dWRlbnQuZm9udHlzLm5sIiwiYW1yIjpbImV4dGVybmFsIl19.IlZSBGRcdd1jhwfKdUOyq4NethgbrZDuj7c0mC6HMco92IHah3gGJ0L2kzKBTv6Z8w9i6HFqdJ8xQebV55xHpkWybV8TxF0z2791SP7oxT7FpfwgfTshk4fl94YawQpeijOwkBrT9ZDB8sbOofpMlPxfSXIl6Gpm_lXc-btvpKjJTMRuqpVzHGBRdccrPw27bj6moJzbo1uzsSgbJI5wwtIL-Goi9ErrED2Q5_fkL6EZqNYDMS56f-C6GioB6JPWgWM7nN1694M9w2ysNo-9QdxChe3alBr9yzzAakizZcJuDycvDIMuDZuBzMDyn40vBehzDRNBXjMb2IbClry-Pw");
-                TokenService.getToken(session.get("fontysToken"), function (resp) {
-                    session.set("plusplannerToken", resp);
-                    router.push("/project");
-                });
+                session.set("fontysToken", "");
+                TokenService.getToken(session.get("fontysToken"))
+                    .then(response => {
+                        session.set("plusplannerToken", response.data);
+                        router.push("/project");
+                    }).catch(error => {
+                        alert("We couldn't validate you with Fontys.");
+                        window.console.log(error);
+                    }
+                );
             }
         },
         beforeCreate() {
-            if(this.$session.exists())
-            {
-                if(this.$session.get("plusplannerToken") != null)
-                {
+            if (this.$session.exists()) {
+                if (this.$session.get("plusplannerToken") != null) {
                     this.$router.push("/project");
                 }
             }
