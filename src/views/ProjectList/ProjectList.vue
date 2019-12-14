@@ -20,7 +20,7 @@
 
             <CreateProject ref="createProject"/>
             <div id="add-button" @click="createProject">
-                <v-btn class="mx-2" fab dark color="indigo">
+                <v-btn class="mx-2" fab dark color="#7289DA">
                 <v-icon dark>mdi-plus</v-icon>
                 </v-btn>
             </div>
