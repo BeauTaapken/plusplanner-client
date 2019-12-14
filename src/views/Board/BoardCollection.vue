@@ -20,6 +20,7 @@
 <script>
     import BoardTable from "../../components/Board/BoardTable.vue";
     import apiService from "../../services/ProjectService";
+    import webSocketService from "../../services/WebsocketService";
 
     export default {
         name: "BoardCollection",
@@ -28,8 +29,18 @@
             return {
                 usedData: null,
                 tableNames: ['Backlog', 'This Sprint', 'Working on', 'Review', 'Done', 'On Hold'],
-                partId: null
+                partId: null,
+                Websocket: null
             }
+        },
+        beforeCreate() {
+            let url = webSocketService.getWSAddress();
+            url = url.replace("http", "ws");
+            this.Websocket = new WebSocket(url + "/messages");
+            let ws = this.Websocket
+            setTimeout(function() {
+                ws.send("test");
+            }, 2000);
         },
         created() {
             this.load();
