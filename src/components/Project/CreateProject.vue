@@ -80,7 +80,7 @@
                     .then(() => {
                         this.overlay = !this.overlay;
                     })
-                    .catch(error => window.console.log("There was an error: " + error.response));
+                    .catch(error => window.console.log(error.response));
 
                 TokenService.getToken(session.get("fontysToken"))
                     .then(response => {
