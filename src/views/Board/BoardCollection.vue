@@ -119,6 +119,7 @@
             }
         },
         beforeDestroy() {
+            this.Websocket.close();
             let session = this.$session;
             apiService.getProjects(session.get("plusplannerToken"))
                 .then(response => {
