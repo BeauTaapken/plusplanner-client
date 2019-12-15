@@ -1,16 +1,34 @@
 <template>
     <div>
         <v-navigation-drawer fixed class="project-nav" color="#2e3136">
-            <v-list>
-                <v-list-group>
-                    <template v-slot:activator>
-                        <v-list-item-title class="project-header">{{
-                            projectName
-                            }}
-                        </v-list-item-title>
+            <v-list-item>
+                <v-list-item-content>
+                    <v-list-item-title class="project-header">{{
+                        projectName
+                        }}
+                    </v-list-item-title>
+                </v-list-item-content>
+                <v-list-item-action>
+                    <v-menu offset-y :dark="true" :min-width="220" bottom left>
+                    <template v-slot:activator="{ on }">
+                        <v-btn icon v-on="on">
+                        <v-icon color="grey lighten-1">mdi-plus</v-icon>
+                        </v-btn>
                     </template>
-                </v-list-group>
-            </v-list>
+                    <v-list>
+                        <v-list-item @click="addComponent">
+                        <v-list-item-title>Add component</v-list-item-title>
+                        <v-list-item-action>
+                            <v-icon color="grey lighten-1">mdi-note-plus</v-icon>
+                        </v-list-item-action>
+                        </v-list-item>
+                    </v-list>
+                    </v-menu>
+                </v-list-item-action>
+            </v-list-item>
+
+            <CreateComponent ref="createComponent" />
+
             <SubMenuHeader
                     v-for="data in this.usedData.components"
                     v-bind:key="data.componentname"
@@ -33,10 +51,11 @@
 <script>
     import SubMenuHeader from "./SubMenuHeader";
     import SubMenuChatHeader from "./SubMenuChatHeader";
+    import CreateComponent from "@/components/Component/CreateComponent";
 
     export default {
         name: "SubMenu",
-        components: {SubMenuChatHeader, SubMenuHeader},
+        components: {SubMenuChatHeader, SubMenuHeader, CreateComponent},
         data: function () {
             return {
                 usedData: null,
@@ -53,6 +72,9 @@
                     d => d.projectname === this.$route.params.projectName
                 );
                 this.usedData = res[0];
+            },
+            addComponent: function() {
+                this.$refs.createComponent.overlay = true;
             }
         }
     };
@@ -84,5 +106,6 @@
         font-size: 35px;
         padding-top: 20px;
         padding-bottom: 20px;
+        color: white;
     }
 </style>

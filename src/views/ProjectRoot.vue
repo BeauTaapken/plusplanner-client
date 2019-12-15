@@ -2,8 +2,11 @@
   <div v-if="isLoaded">
     <ProjectList></ProjectList>
     <router-view :key="this.$route.fullPath"></router-view>
-    <portal-target name="destination">
-    </portal-target>
+
+    <portal-target name="createProjectOverlayDest" />
+    <portal-target name="createComponentOverlayDest" />
+    <!-- <portal-target name="destination">
+    </portal-target> -->
   </div>
 </template>
 
