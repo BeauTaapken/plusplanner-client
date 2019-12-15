@@ -41,10 +41,8 @@ export default {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
                 Authorization: 'Bearer ' + token,
-                data: {
-                    body: JSON.stringify(project)
-                }
-            }
+            },
+            body: JSON.stringify(project)
         });
     }
 }
