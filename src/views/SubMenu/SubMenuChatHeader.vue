@@ -24,8 +24,7 @@
         components: {SubMenuChatItem},
         props: {
             componentName: String,
-            componentItem: Array,
-            componentType: String
+            componentItem: Array
         },
         mounted() {
 

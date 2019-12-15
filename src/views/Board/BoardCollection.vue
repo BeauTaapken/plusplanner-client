@@ -99,7 +99,7 @@
                 let json = this.$parent.$parent.projectData;
                 let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
                 this.projectid = res[0].projectid;
-                let t = res[0]["components"].filter(d => d.componentname === this.$route.params.componentName);
+                let t = res[0]["components"].filter(d => d.componentname === "Documentation");
                 this.usedData = t[0]['parts'].filter(i => i.partname === this.$route.params.contentName);
                 this.partId = this.usedData[0]['partid'];
             },

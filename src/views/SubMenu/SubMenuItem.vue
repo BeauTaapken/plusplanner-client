@@ -1,5 +1,5 @@
 <template>
-        <router-link style="color: white; text-decoration: none; display: block" :key="itemName" :to="{ name: 'board', params: { componentName: componentName, contentName: itemName } }">
+        <router-link style="color: white; text-decoration: none; display: block" :key="itemName" :to="{ name: 'board', params: { contentName: itemName } }">
             <v-list-item>
                 {{ itemName }}
             </v-list-item>
@@ -12,7 +12,6 @@
         props: {
             componentName: String,
             itemName: String,
-            componentType: String
         },
     }
 </script>
@@ -20,9 +19,10 @@
 <style scoped>
     >>>.v-list-item {
         margin: 0;
-        padding: 0;
-        display: block;
+        padding: 5% 0 5% 6%;
         width: 100%;
+        border-top: #1E2124 1px solid;
+        font-size: 20px;
     }
 
     >>>.theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled){

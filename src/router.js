@@ -33,7 +33,7 @@ export default new Router({
                     component: SubMenu,
                     children: [
                         {
-                            path: ':componentName/:contentName',
+                            path: ':contentName',
                             name: 'board',
                             components: {
                                 default: SubMenu,

@@ -29,12 +29,12 @@
 
             <CreateComponent ref="createComponent" />
 
-            <SubMenuHeader
-                    v-for="data in this.usedData.components"
-                    v-bind:key="data.componentname"
-                    v-bind:component-name="data.componentname"
-                    v-bind:component-item="data.parts"
+            <SubMenuItem v-for="data in this.usedData.components[0].parts"
+                         v-bind:key="data.partname"
+                         v-bind:component-name="data.partname"
+                         v-bind:item-name="data.partname"
             />
+
             <SubMenuChatHeader
                     v-for="data in this.usedData.chats"
                     v-bind:key="data.chatid"
@@ -49,13 +49,13 @@
 </template>
 
 <script>
-    import SubMenuHeader from "./SubMenuHeader";
     import SubMenuChatHeader from "./SubMenuChatHeader";
     import CreateComponent from "@/components/Component/CreateComponent";
+    import SubMenuItem from "./SubMenuItem";
 
     export default {
         name: "SubMenu",
-        components: {SubMenuChatHeader, SubMenuHeader, CreateComponent},
+        components: {SubMenuItem, SubMenuChatHeader, CreateComponent},
         data: function () {
             return {
                 usedData: null,
