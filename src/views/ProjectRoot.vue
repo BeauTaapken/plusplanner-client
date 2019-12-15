@@ -5,8 +5,6 @@
 
     <portal-target name="createProjectOverlayDest" />
     <portal-target name="createComponentOverlayDest" />
-    <!-- <portal-target name="destination">
-    </portal-target> -->
   </div>
 </template>
 

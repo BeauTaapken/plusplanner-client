@@ -44,7 +44,7 @@
 
 <script>
 import { Portal } from 'portal-vue'
-import APIService from '@/services/APIService'
+import APIService from '@/services/ProjectService'
 
 export default {
   name: "CreateProject",
@@ -71,14 +71,15 @@ export default {
         description: project_description,
         enddate: project_enddate
       }
-      
-      APIService.createProject(project)
+
+      let session = this.$session;
+
+      APIService
+        .createProject(session.get("plusplannerToken"), project)
         .then(() => {
-          this.overlay = !this.overlay;
+            this.overlay = !this.overlay;
         })
-        .catch(error => {
-          window.console.log('There was an error creating the project:', error.response)
-        });
+        .catch(error => window.console.log("There was an error: " + error.response));
     },
     cancel: function() {
       this.overlay = !this.overlay;

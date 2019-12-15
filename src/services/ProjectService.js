@@ -28,5 +28,20 @@ export default {
                 Authorization: 'Bearer ' + token
             }
         });
+    },
+
+    async createProject(token, project) {
+        if(projectService == null)
+        {
+            await load();
+        }
+
+        return projectService.post('project/create/' + encodeURI(JSON.stringify(project)), {
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                Authorization: 'Bearer ' + token
+            }
+        });
     }
 }
