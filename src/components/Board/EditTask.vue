@@ -63,15 +63,14 @@
                 this.overlay = !this.overlay;
             },
             save: function () {
-                let oldJson = `{ "subpartid": ${this.subpartId}, "subpartname": "${this.name}", "description": "${this.description}", "state": "${this.tableName}", "enddate": "${this.date}", "partid": ${this.partId} }`;
                 let newName = document.getElementById("taskname").value;
                 let newDescription = document.getElementById("taskdescription").value;
-                let newItem = `{ "subpartid": ${this.subpartId}, "subpartname": "${newName}", "description": "${newDescription}", "state": "${this.tableName}", "enddate": "${this.date}", "partid": ${this.partId} }`;
-                let index = this.$parent.$parent.$parent.$parent.$parent.itemArray.findIndex(
-                    x => (x.subpartid = JSON.parse(oldJson).subpartid)
-                );
-                this.$parent.$parent.$parent.$parent.$parent.itemArray.splice(index, 1);
-                this.$parent.$parent.$parent.$parent.$parent.itemArray.push(JSON.parse(newItem));
+                let newItem = `{"element": { "subpartid": ${this.subpartId}, "subpartname": "${newName}", "description": "${newDescription}", "state": "${this.tableName}", "enddate": "${this.date}", "partid": ${this.partId} }}`;
+                let json = JSON.parse(newItem);
+                json['type'] = 'task';
+                json['action'] = 'update';
+
+                this.$parent.$parent.$parent.$parent.$parent.$parent.Websocket.send(JSON.stringify(json));
                 this.overlay = !this.overlay;
             }
         }
