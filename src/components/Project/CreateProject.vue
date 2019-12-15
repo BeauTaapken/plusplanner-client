@@ -70,7 +70,7 @@ export default {
         projectname: project_name,
         description: project_description,
         enddate: project_enddate
-      }
+      };
 
       let session = this.$session;
 
@@ -83,7 +83,7 @@ export default {
               })
               .catch(error => {
                 window.console.log("There was an error: " + error.response);
-              })
+              });
             this.overlay = !this.overlay;
         })
         .catch(error => window.console.log("There was an error: " + error.response));
