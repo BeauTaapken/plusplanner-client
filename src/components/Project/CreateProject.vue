@@ -77,6 +77,13 @@ export default {
       APIService
         .createProject(session.get("plusplannerToken"), project)
         .then(() => {
+            APIService.getProjects(session.get("plusplannerToken"))
+              .then(response => {
+                this.$parent.$parent.$parent.projectData = response.data
+              })
+              .catch(error => {
+                window.console.log("There was an error: " + error.response);
+              })
             this.overlay = !this.overlay;
         })
         .catch(error => window.console.log("There was an error: " + error.response));
