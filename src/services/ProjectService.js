@@ -36,11 +36,14 @@ export default {
             await load();
         }
 
-        return projectService.post('project/create/' + encodeURI(JSON.stringify(project)), {
+        return projectService.post('project/create/', {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
-                Authorization: 'Bearer ' + token
+                Authorization: 'Bearer ' + token,
+                data: {
+                    body: JSON.stringify(project)
+                }
             }
         });
     }
