@@ -44,7 +44,7 @@
             name: String,
             tableName: String,
             description: String,
-            subpartId: Number,
+            subpartId: String,
             partId: Number,
             endDate: String
         },
@@ -65,7 +65,7 @@
             save: function () {
                 let newName = document.getElementById("taskname").value;
                 let newDescription = document.getElementById("taskdescription").value;
-                let newItem = `{"element": { "subpartid": ${this.subpartId}, "subpartname": "${newName}", "description": "${newDescription}", "state": "${this.tableName}", "enddate": "${this.date}", "partid": ${this.partId} }}`;
+                let newItem = `{"element": { "subpartid": "${this.subpartId}", "subpartname": "${newName}", "description": "${newDescription}", "state": "${this.tableName}", "enddate": "${this.date}", "partid": ${this.partId} }}`;
                 let json = JSON.parse(newItem);
                 json['type'] = 'task';
                 json['action'] = 'update';

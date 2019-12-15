@@ -71,9 +71,9 @@
             if(this.queueArray.length !== 0)
             {
               for (let i = 0; i < this.queueArray.length; i++) {
-                let element = `{"subpartid":${
+                let element = `{"subpartid": "${
                         this.queueArray[i]["subpartid"]
-                },"description":"${this.queueArray[i]["description"]}","subpartname":"${
+                }","description":"${this.queueArray[i]["description"]}","subpartname":"${
                         this.queueArray[i]["subpartname"]
                 }","enddate":"${this.queueArray[i]["enddate"]}","state":"${
                         this.tableName

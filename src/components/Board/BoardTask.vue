@@ -37,7 +37,7 @@
             endDate: String,
             name: String,
             description: String,
-            subpartId: Number,
+            subpartId: String,
             partId: Number,
             tableName: String
         },
