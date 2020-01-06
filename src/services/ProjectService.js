@@ -31,6 +31,8 @@ export default {
     },
 
     async createProject(token, project) {
+        // eslint-disable-next-line no-console
+        console.log(JSON.stringify(project))
         if(projectService == null)
         {
             await load();
