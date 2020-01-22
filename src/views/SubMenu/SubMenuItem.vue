@@ -1,7 +1,7 @@
 <template>
-        <router-link style="color: white; text-decoration: none; display: block" :key="itemName" :to="{ name: 'board', params: { componentName: componentName, contentName: itemName } }">
+        <router-link style="color: white; text-decoration: none; display: block" :key="partName" :to="{ name: 'board', params: { partName: partName } }">
             <v-list-item>
-                {{ itemName }}
+                {{ partName }}
             </v-list-item>
         </router-link>
 </template>
@@ -10,9 +10,7 @@
     export default {
         name: "SubMenuItem",
         props: {
-            componentName: String,
-            itemName: String,
-            componentType: String
+            partName: String
         },
     }
 </script>
@@ -23,10 +21,12 @@
         padding: 0;
         display: block;
         width: 100%;
+        border-top: #1E2124 solid 1px;
     }
 
     >>>.theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled){
         color: white !important;
+        font-size: 20px;
     }
     .v-list-item:hover {
         background-color: #282b2f !important;
@@ -35,6 +35,10 @@
         list-style-type: none;
         text-align: left;
         display: block;
+    }
+
+    >>>.v-list-item {
+        padding: 20px;
     }
 
     .nav-item{
