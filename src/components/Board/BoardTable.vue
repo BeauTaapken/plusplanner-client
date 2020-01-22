@@ -7,7 +7,7 @@
                 </v-card-actions>
             </v-layout>
 
-            <draggable :group="{ name: 'tables' }" v-model="itemArray" @change="addToQeueu">
+            <draggable :group="{ name: 'tables' }" v-model="itemArray" @change="addToQeueu" class="task">
                 <BoardTask
                         v-for="item in itemArray"
                         v-bind:key="item.subpartid"
@@ -20,7 +20,7 @@
                 />
             </draggable>
 
-            <CreateTask
+            <CreateTask class="task"
                 v-bind:table-name="enumTableName"
             />
             <div ref="editTask"></div>
@@ -120,5 +120,11 @@
 
     .plus-table:hover {
         background-color: #5e5e5e !important;
+    }
+
+    .task {
+        padding-left: 2%;
+        padding-right: 2%;
+        padding-bottom: 2%;
     }
 </style>
