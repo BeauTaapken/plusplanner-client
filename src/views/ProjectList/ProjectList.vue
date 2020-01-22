@@ -10,13 +10,11 @@
         id="vnav"
     >
         <v-layout column fill-height>
-            <div v-if="project.projects.length > 0"> 
                 <ProjectListItem
                     v-for="data in project.projects"
                     v-bind:key="data.projectid"
                     v-bind:projectname="data.projectname"
                 />
-            </div>
 
             <v-spacer />
 
