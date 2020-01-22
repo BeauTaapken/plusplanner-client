@@ -21,10 +21,7 @@
             </draggable>
 
             <CreateTask
-                    class="plus-table"
-                    v-bind:key="'Plus'"
-                    v-bind:name="'+'"
-                    v-bind:table-name="enumTableName"
+                v-bind:table-name="enumTableName"
             />
             <div ref="editTask"></div>
         </v-card>
@@ -114,11 +111,6 @@
     }
 
     .board-column {
-        text-align: center;
-    }
-
-    .table {
-        padding: 20px;
         text-align: center;
     }
 
