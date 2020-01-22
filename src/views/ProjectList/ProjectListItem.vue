@@ -1,10 +1,10 @@
 <template>
     <li>
         <div @click="setActive" class="box">
-            <router-link :key="projectName" :to="{ name: 'submenu', params: {projectName: projectName } }"
+            <router-link :key="projectname" :to="{ name: 'submenu', params: { projectName: projectname } }"
                          style="color: white; text-decoration: none">
                 <div class="content">
-                    <div @click="setActive" class="contentText">{{ projectName }}</div>
+                    <div @click="setActive" class="contentText">{{ projectname }}</div>
                 </div>
             </router-link>
         </div>
@@ -14,9 +14,9 @@
 <script>
     export default {
         name: "ProjectList",
-        props: {
-            projectName: String
-        },
+        props: [
+            'projectname',
+        ],
         mounted() {
             this.checkActive();
         },

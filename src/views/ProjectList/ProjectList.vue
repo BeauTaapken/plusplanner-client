@@ -10,11 +10,13 @@
         id="vnav"
     >
         <v-layout column fill-height>
-            <ProjectListItem
-                v-for="data in this.$parent.projectData"
-                v-bind:key="data.projectid"
-                v-bind:project-name="data.projectname"
-            />
+            <div v-if="project.projects.length > 0"> 
+                <ProjectListItem
+                    v-for="data in project.projects"
+                    v-bind:key="data.projectid"
+                    v-bind:projectname="data.projectname"
+                />
+            </div>
 
             <v-spacer />
 
@@ -32,7 +34,8 @@
 <script>
     import ProjectListItem from "./ProjectListItem";
     import CreateProject from "@/components/Project/CreateProject";
-
+    import { mapState } from "vuex"
+    
     export default {
         name: "ProjectList",
         components: { 
@@ -48,6 +51,9 @@
                 }
             };
         },
+        computed: mapState({
+            project: state => state.project
+        }),
         methods: {
             createProject: function() {
                 this.$refs.createProject.overlay = true;
