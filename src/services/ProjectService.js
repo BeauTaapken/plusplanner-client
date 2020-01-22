@@ -8,7 +8,7 @@ onload = async () => await load();
 async function load() {
     await EurekaService.getInstance("plus-planner-project-service").then((response) => {
         projectService = axios.create({
-            baseURL: response.data,
+            baseURL: 'https://' + response.data,
             withCredentials: false,
         });
     });
