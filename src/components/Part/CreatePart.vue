@@ -9,8 +9,8 @@
       <v-card class="createComponent">
         <v-form>
           <v-container>
-            <v-card-title class="justify-center">New component</v-card-title>
-            <v-text-field id="component-name" label="Component name" filled shaped></v-text-field>
+            <v-card-title class="justify-center">New part</v-card-title>
+            <v-text-field id="part-name" label="Part name" filled shaped></v-text-field>
 
             <v-menu>
               <template v-slot:activator="{ on }">
@@ -43,9 +43,9 @@
 
 <script>
 import { Portal } from 'portal-vue'
-import APIService from '@/services/APIService'
+
 export default {
-  name: "CreateProject",
+  name: "CreatePart",
   data() {
     return {
       overlay: false,
@@ -60,25 +60,24 @@ export default {
   },
   methods: {
     save: function() {
-      let component_name = document.getElementById("component-name").value;
-      let component_enddate = this.date;
+      let part_name = document.getElementById("part-name").value;
+      let part_enddate = this.date;
+      let comp = this;
+
+      const uuidv1 = require('uuid/v1');
       const component = {
-        componentname: component_name,
-        enddate: component_enddate
-      }
-      
-      APIService.createComponent(component)
-        .then(() => {
-          this.overlay = !this.overlay;
-        })
-        .catch(error => {
-          window.console.log('There was an error creating the component:', error.response)
-        });
+        partid: uuidv1(),
+        projectid: comp.$parent.$parent.usedData.projectid,
+        partname: part_name,
+        enddate: part_enddate
+      };
+      window.console.log(component);
+      this.overlay = !this.overlay;
     },
     cancel: function() {
       this.overlay = !this.overlay;
     }
-  }
+  },
 };
 </script>
 
