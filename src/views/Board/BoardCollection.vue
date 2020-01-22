@@ -41,7 +41,7 @@
                 partId: null,
                 Websocket: null,
                 projectid: null,
-                connected: false
+                connected: null
             }
         },
         created() {
@@ -64,6 +64,7 @@
                             token: comp.$session.get("plusplannerToken")
                         };
                         comp.Websocket.send(JSON.stringify(pay));
+                        comp.connected = true;
                     };
 
                     comp.Websocket.onmessage = function (message) {

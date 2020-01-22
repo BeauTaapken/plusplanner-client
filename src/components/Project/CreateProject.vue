@@ -81,17 +81,16 @@
                     .createProject(session.get("plusplannerToken"), project)
                     .then(() => {
                         this.overlay = !this.overlay;
+                        TokenService.getToken(session.get("fontysToken"))
+                            .then(response => {
+                                session.set("plusplannerToken", response.data);
+                                window.location.reload();
+                            }).catch(error => {
+                                window.console.log(error);
+                            }
+                        );
                     })
                     .catch(error => window.console.log(error.response));
-
-                TokenService.getToken(session.get("fontysToken"))
-                    .then(response => {
-                        session.set("plusplannerToken", response.data);
-                    }).catch(error => {
-                        window.console.log(error);
-                    }
-                );
-                window.location.reload();
             },
             cancel: function () {
                 this.overlay = !this.overlay;
