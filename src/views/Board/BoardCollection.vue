@@ -59,8 +59,11 @@
                     this.Websocket = new WebSocket(url + "/messages");
                     let comp = this;
                     comp.Websocket.onopen = function () {
-                        comp.Websocket.send(comp.projectid + "\n" + comp.$session.get("plusplannerToken"));
-                        comp.connected = true;
+                        const pay = {
+                            interest: comp.projectid,
+                            token: comp.$session.get("plusplannerToken")
+                        };
+                        comp.Websocket.send(JSON.stringify(pay));
                     };
 
                     comp.Websocket.onmessage = function (message) {
@@ -127,7 +130,7 @@
             },
             load: function () {
                 let json = this.$parent.$parent.projectData;
-                let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
+                let res = json.filter(d => d.projectname === this.$route.params.projectName);
                 this.projectid = res[0].projectid;
                 let t = res[0]["parts"].filter(d => d.partname === this.$route.params.partName);
                 this.usedData = t[0];

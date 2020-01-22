@@ -11,7 +11,7 @@
     >
         <v-layout column fill-height>
             <ProjectListItem
-                v-for="data in this.$parent.projectData.projects"
+                v-for="data in this.$parent.projectData"
                 v-bind:key="data.projectid"
                 v-bind:project-name="data.projectname"
             />
