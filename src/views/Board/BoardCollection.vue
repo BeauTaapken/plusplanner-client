@@ -1,5 +1,5 @@
 <template>
-    <div v-if="this.$parent.$parent.isLoaded">
+    <div v-if="!this.project.loading">
         <div class="component-content">
             <div class="text-header" v-text="this.$route.params.partName"></div>
             <v-row class="board-content">
@@ -12,18 +12,15 @@
                 />
             </v-row>
         </div>
-        <div ref="editTask">
-
-        </div>
         <ReconnectingIcon v-if="!connected"/>
     </div>
 </template>
 
 <script>
     import BoardTable from "../../components/Board/BoardTable.vue";
-    import apiService from "../../services/ProjectService";
     import webSocketService from "../../services/WebsocketService";
     import ReconnectingIcon from "./ReconnectingIcon";
+    import { mapState } from "vuex"
 
     export default {
         name: "BoardCollection",
@@ -129,12 +126,12 @@
                 }
             },
             load: function () {
-                let json = this.$parent.$parent.projectData;
+                let json = this.project.projects;
                 let res = json.filter(d => d.projectname === this.$route.params.projectName);
                 this.projectid = res[0].projectid;
                 let t = res[0]["parts"].filter(d => d.partname === this.$route.params.partName);
                 this.usedData = t[0];
-                this.partId = this.usedData['partid'];
+                this.partId = this.usedData.partid;
             },
             findTableData: function (tablename) {
                 let selectedPartData = this.usedData;
@@ -149,13 +146,10 @@
         },
         beforeDestroy() {
             this.Websocket.close();
-            let session = this.$session;
-            apiService.getProjects(session.get("plusplannerToken"))
-                .then(response => {
-                    this.$parent.$parent.projectData = response.data;
-                })
-                .catch(error => window.console.log("There was an error: " + error.response));
         },
+        computed: mapState({
+            project: state => state.project
+        }),
     }
 </script>
 
