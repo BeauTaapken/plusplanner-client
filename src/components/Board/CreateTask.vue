@@ -1,12 +1,8 @@
 <template>
   <div>
-    <v-card @click="addTask" color="grey">
-      <v-layout justify-center="true" class="v-card-item">
-        <v-card-actions>
-          <v-card-title>{{ name }}</v-card-title>
-        </v-card-actions>
-      </v-layout>
-    </v-card>
+    <v-btn @click="addTask" small class="my-2" dark color="#7289DA" block depressed>
+      <v-icon dark>mdi-plus</v-icon>
+    </v-btn>
 
     <v-overlay :value="overlay">
       <v-card class="createTask">
