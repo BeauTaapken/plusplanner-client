@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="!isLoaded">
+        <div v-if="project.loading">
             <v-layout justify-center id="loading">
                 <div>
                     <center><i id="loading-icon" :style="{color: iconColor}" :class="icon"></i></center>
@@ -8,7 +8,7 @@
                 </div>
             </v-layout>
         </div>
-        <div v-if="isLoaded">
+        <div v-if="!project.loading">
             <ProjectList style="position: relative; float: left"></ProjectList>
             <router-view  :key="this.$route.fullPath"></router-view>
 
@@ -19,9 +19,9 @@
 </template>
 
 <script>
-    import apiService from "../services/ProjectService";
-    import {PortalTarget} from 'portal-vue'
+    import { PortalTarget } from "portal-vue";
     import ProjectList from "./ProjectList/ProjectList";
+    import { mapState, mapActions } from "vuex";
 
     export default {
         name: "ProjectRoot",
@@ -31,29 +31,28 @@
         },
         data() {
             return {
-                projectData: null,
-                isLoaded: false,
                 icon: "fas fa-spinner fa-spin",
                 text: "Please wait while we are loading in your projects...",
                 iconColor: "white"
             };
         },
+        computed: mapState({
+            project: state => state.project
+        }),
         created() {
             let session = this.$session;
             let component = this;
-            apiService
-                .getProjects(session.get("plusplannerToken"))
-                .then(response => {
-                    component.projectData = response.data;
-                    component.isLoaded = true;
-                })
-                .catch(error => {
-                    window.console.log("There was an error: " + error);
+            this.fetchProjects(session.get("plusplannerToken"))
+                .then(() => {
+                    window.console.log("fetched the data")
+                }, error => {
+                    window.console.log(error);
                     component.icon = "fas fa-exclamation-triangle";
                     component.iconColor = "#8b0000";
                     component.text = "An error occured. Please try again. If this problem keeps occuring, contact us."
-                });
-        }
+                })
+        },
+        methods: mapActions('project', ['fetchProjects'])
     };
 </script>
 
