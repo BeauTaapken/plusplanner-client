@@ -46,7 +46,6 @@
     import {Portal} from 'portal-vue'
     import APIService from '@/services/ProjectService'
     import TokenService from "../../services/TokenService";
-    const uuidv1 = require('uuid/v1');
       
     export default {
         name: "CreateProject",
@@ -64,7 +63,6 @@
         },
         methods: {
             save: function () {
-                let project_id = uuidv1();
                 let project_name = document.getElementById("project-name").value;
                 let project_description = document.getElementById("project-description").value;
                 let project_enddate = this.date;
