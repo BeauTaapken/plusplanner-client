@@ -38,7 +38,7 @@
             name: String,
             description: String,
             subpartId: String,
-            partId: Number,
+            partId: String,
             tableName: String
         },
         methods: {

@@ -69,8 +69,9 @@
                 let project_description = document.getElementById("project-description").value;
                 let project_enddate = this.date;
 
+                const uuidv1 = require('uuid/v1');
                 const project = {
-                    projectid: project_id,
+                    projectid: uuidv1(),
                     projectname: project_name,
                     description: project_description,
                     enddate: project_enddate
@@ -92,6 +93,7 @@
                         window.console.log(error);
                     }
                 );
+                window.location.reload();
             },
             cancel: function () {
                 this.overlay = !this.overlay;

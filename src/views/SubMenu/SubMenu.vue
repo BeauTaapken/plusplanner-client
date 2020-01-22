@@ -17,7 +17,7 @@
                     </template>
                     <v-list>
                         <v-list-item @click="addComponent">
-                        <v-list-item-title>Add component</v-list-item-title>
+                        <v-list-item-title>Add Part</v-list-item-title>
                         <v-list-item-action>
                             <v-icon color="grey lighten-1">mdi-note-plus</v-icon>
                         </v-list-item-action>
@@ -27,13 +27,12 @@
                 </v-list-item-action>
             </v-list-item>
 
-            <CreateComponent ref="createComponent" />
+            <CreatePart ref="createComponent" />
 
-            <SubMenuHeader
-                    v-for="data in this.usedData.components"
-                    v-bind:key="data.componentname"
-                    v-bind:component-name="data.componentname"
-                    v-bind:component-item="data.parts"
+            <SubMenuItem
+                    v-for="data in this.usedData.parts"
+                    v-bind:key="data.partid"
+                    v-bind:part-name="data.partname"
             />
             <SubMenuChatHeader
                     v-for="data in this.usedData.chats"
@@ -49,13 +48,13 @@
 </template>
 
 <script>
-    import SubMenuHeader from "./SubMenuHeader";
     import SubMenuChatHeader from "./SubMenuChatHeader";
-    import CreateComponent from "@/components/Component/CreateComponent";
+    import CreatePart from "../../components/Part/CreatePart";
+    import SubMenuItem from "./SubMenuItem";
 
     export default {
         name: "SubMenu",
-        components: {SubMenuChatHeader, SubMenuHeader, CreateComponent},
+        components: {SubMenuItem, CreatePart, SubMenuChatHeader},
         data: function () {
             return {
                 usedData: null,

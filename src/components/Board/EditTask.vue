@@ -45,7 +45,7 @@
             tableName: String,
             description: String,
             subpartId: String,
-            partId: Number,
+            partId: String,
             endDate: String
         },
         data() {

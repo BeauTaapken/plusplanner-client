@@ -1,13 +1,13 @@
 <template>
     <div v-if="this.$parent.$parent.isLoaded">
         <div class="component-content">
-            <div class="text-header" v-text="this.$route.params.contentName"></div>
+            <div class="text-header" v-text="this.$route.params.partName"></div>
             <v-row class="board-content">
                 <BoardTable ref="child"
                             v-for="table in tableNames"
-                            v-bind:key="table"
-                            v-bind:table-name="table"
-                            v-bind:items="findTableData(table)"
+                            v-bind:key="table.tableName"
+                            v-bind:table-name="table.tableName"
+                            v-bind:items="findTableData(table.enumName)"
                 />
             </v-row>
         </div>
@@ -28,7 +28,7 @@
         data: function () {
             return {
                 usedData: null,
-                tableNames: ['Backlog', 'This Sprint', 'Working on', 'Review', 'Done', 'On Hold'],
+                tableNames: [{tableName: "Backlog", enumName: "BACKLOG"}, {tableName: "This Sprint", enumName: "THIS_SPRINT"}, {tableName: "Working On", enumName: "WORKING_ON"}, {tableName: "Review", enumName: "REVIEW"}, {tableName: "Done", enumName: "DONE"}, {tableName: "On Hold", enumName: "ON_HOLD"}],
                 partId: null,
                 Websocket: null,
                 projectid: null
@@ -37,8 +37,7 @@
         created() {
             this.load();
             let url = webSocketService.getWSAddress();
-            url = url.replace("http", "ws");
-            this.Websocket = new WebSocket(url + "/messages");
+            this.Websocket = new WebSocket("ws://" + url + "/messages");
             let comp = this;
             comp.Websocket.onopen = function () {
                 comp.Websocket.send(comp.projectid + "\n" + comp.$session.get("plusplannerToken"))
@@ -99,16 +98,16 @@
                 let json = this.$parent.$parent.projectData;
                 let res = json.projects.filter(d => d.projectname === this.$route.params.projectName);
                 this.projectid = res[0].projectid;
-                let t = res[0]["components"].filter(d => d.componentname === this.$route.params.componentName);
-                this.usedData = t[0]['parts'].filter(i => i.partname === this.$route.params.contentName);
-                this.partId = this.usedData[0]['partid'];
+                let t = res[0]["parts"].filter(d => d.partname === this.$route.params.partName);
+                this.usedData = t[0];
+                this.partId = this.usedData['partid'];
             },
             findTableData: function (tablename) {
                 let selectedPartData = this.usedData;
                 let dataArray = [];
-                for (let i = 0; i < selectedPartData[0]['subparts'].length; i++) {
-                    if (selectedPartData[0]['subparts'][i]['state'] === tablename) {
-                        dataArray.push(selectedPartData[0]['subparts'][i]);
+                for (let i = 0; i < selectedPartData.subparts.length; i++) {
+                    if (selectedPartData.subparts[i].state === tablename) {
+                        dataArray.push(selectedPartData.subparts[i]);
                     }
                 }
                 return dataArray;

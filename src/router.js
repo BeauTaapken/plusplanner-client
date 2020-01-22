@@ -6,6 +6,7 @@ import ProjectRoot from "./views/ProjectRoot";
 import Login from "./views/Login";
 import BoardCollection from "./views/Board/BoardCollection";
 import Logout from "./views/Logout";
+import TokenAuthorization from "./components/Login/TokenAuthorization";
 
 Vue.use(Router);
 
@@ -33,7 +34,7 @@ export default new Router({
                     component: SubMenu,
                     children: [
                         {
-                            path: ':componentName/:contentName',
+                            path: ':partName',
                             name: 'board',
                             components: {
                                 default: SubMenu,
@@ -61,6 +62,11 @@ export default new Router({
             path: '/logout',
             name: 'logout',
             component: Logout
+        },
+        {
+            path: '/',
+            name: 'root',
+            component: TokenAuthorization
         }
     ]
 })

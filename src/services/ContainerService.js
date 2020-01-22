@@ -16,13 +16,13 @@ async function load() {
 
 
 export default {
-    async createComponent(token, component) {
+    async createPart(token, part) {
         if(containerService == null)
         {
             await load();
         }
 
-        containerService.post('containerservice/component/create/' + encodeURI(JSON.stringify(component)), {
+        containerService.post('containerservice/component/create/' + encodeURI(JSON.stringify(part)), {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',

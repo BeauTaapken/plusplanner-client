@@ -4,25 +4,16 @@
     </button>
 </template>
 <script>
-    import TokenService from "../../services/TokenService";
+    /*import TokenService from "../../services/TokenService";*/
 
     export default {
         name: "FontysLogin",
         methods: {
             signin: function () {
                 let session = this.$session;
-                let router = this.$router;
                 session.start();
-                session.set("fontysToken", "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImhPWFBYUmtteU5kc1ViMFMtN2Vlc2xOUEI0OCIsImtpZCI6ImhPWFBYUmtteU5kc1ViMFMtN2Vlc2xOUEI0OCJ9.eyJpc3MiOiJodHRwczovL2lkZW50aXR5LmZoaWN0Lm5sIiwiYXVkIjoiaHR0cHM6Ly9pZGVudGl0eS5maGljdC5ubC9yZXNvdXJjZXMiLCJleHAiOjE1NzgzMTgyODEsIm5iZiI6MTU3ODMxMTA4MSwiY2xpZW50X2lkIjoiYXBpLWNsaWVudCIsInVybjpubC5maGljdDp0cnVzdGVkX2NsaWVudCI6InRydWUiLCJzY29wZSI6WyJvcGVuaWQiLCJwcm9maWxlIiwiZW1haWwiLCJmaGljdCIsImZoaWN0X3BlcnNvbmFsIiwiZmhpY3RfbG9jYXRpb24iXSwic3ViIjoiNGUwMDE2ZWItMWVkZC00NGExLWJlODktODk4YTA0YTlkMWRhIiwiYXV0aF90aW1lIjoxNTc4MzExMDgwLCJpZHAiOiJmaGljdC1zc28iLCJyb2xlIjpbInVzZXIiLCJzdHVkZW50Il0sInVwbiI6Ikk0MTMxNDNAZmhpY3QubmwiLCJuYW1lIjoiQXBwZWxkb29ybixSb3kgUi5QLiIsImVtYWlsIjoicm95LmFwcGVsZG9vcm5Ac3R1ZGVudC5mb250eXMubmwiLCJ1cm46bmwuZmhpY3Q6c2NoZWR1bGUiOiJjbGFzc3xBRFMzMSAvIFMzNiIsImZvbnR5c191cG4iOiI0MTMxNDNAc3R1ZGVudC5mb250eXMubmwiLCJhbXIiOlsiZXh0ZXJuYWwiXX0.MFbV64udrDzjj0PzRREDlh4FKK9KDaFDzFHag2YvfZx0efInp8hJP0bMd5ZMBy9UZIYs2RRabZ_oSRg82_PVWmKEq1cr_0nJpuz3uO1_CcS1bLbbXWJhNZkY474-0Grpmf6PDKI12JIaYzIc6eK7WuyZWFEJ-A8Hq-gs4ivCZYLobSB9Nj1Valww1udBUi3wDtpFwDpjzB0MywxVPKmz3aptil8QGHzLnXIUFLLKV5uW3itIiEaXShBC8Am15sPFiaWRmElNHBEKuRxamDKfIlNArX8sUg7Yz25u94IWjVLb46FMUZThxVJrFDqCbHkX9CJmLGvgkMr9MvwmARmZqg");
-                TokenService.getToken(session.get("fontysToken"))
-                    .then(response => {
-                        session.set("plusplannerToken", response.data);
-                        router.push("/project");
-                    }).catch(error => {
-                        alert("We couldn't validate you with Fontys.");
-                        window.console.log(error);
-                    }
-                );
+
+                window.location.replace("https://identity.fhict.nl/connect/authorize?client_id=i411946-plusplanne&scope=fhict fhict_personal openid profile email roles&redirect_uri=http://localhost:8080&response_type=code");
             }
         },
         beforeCreate() {
