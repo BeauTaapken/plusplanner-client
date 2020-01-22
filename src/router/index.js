@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import SubMenu from "./views/SubMenu/SubMenu";
-import ChatCollection from "./views/Chat/ChatCollection";
-import ProjectRoot from "./views/ProjectRoot";
-import Login from "./views/Login";
-import BoardCollection from "./views/Board/BoardCollection";
-import Logout from "./views/Logout";
-import TokenAuthorization from "./components/Login/TokenAuthorization";
+import SubMenu from "@/views/SubMenu/SubMenu";
+import ChatCollection from "@/views/Chat/ChatCollection";
+import ProjectRoot from "@/views/ProjectRoot";
+import Login from "@/views/Login";
+import BoardCollection from "@/views/Board/BoardCollection";
+import Logout from "@/views/Logout";
+import TokenAuthorization from "@/components/Login/TokenAuthorization";
 
 Vue.use(Router);
 
