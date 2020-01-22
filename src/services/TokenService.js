@@ -4,7 +4,7 @@ import EurekaService from "./EurekaService";
 var tokenService = null;
 EurekaService.getInstance("plus-planner-token-service").then((url) => {
     tokenService = axios.create({
-        baseURL: url.data,
+        baseURL: 'https://' + url.data,
         withCredentials: false
     });
 });
