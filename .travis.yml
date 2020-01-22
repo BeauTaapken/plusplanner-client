@@ -2,10 +2,12 @@ language: node_js
 node_js:
 - "13"
 
+dist: trusty
+
 addons:
   sonarcloud:
     organization: "beautaapken"
 
 script:
   # other script steps might be done before running the actual analysis
-  - npm install sonar-scanner -X -Dsonar.projectKey=plusplanner-client
+  - sonar-scanner
