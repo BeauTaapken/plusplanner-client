@@ -8,4 +8,4 @@ addons:
 
 script:
   # other script steps might be done before running the actual analysis
-  - npm install sonar-scanner -X
+  - npm install sonar-scanner -X -Dsonar.projectKey=plusplanner-client
