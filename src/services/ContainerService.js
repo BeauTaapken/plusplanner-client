@@ -8,7 +8,7 @@ onload = async () => await load();
 async function load() {
     await EurekaService.getInstance("plus-planner-container-service").then((response) => {
         containerService = axios.create({
-            baseURL: 'https://' + response.data,
+            baseURL: "https://" + response.data,
             withCredentials: false,
         });
     });

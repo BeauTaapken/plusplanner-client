@@ -2,7 +2,7 @@ import EurekaService from "./EurekaService";
 
 var websocketService = null;
 EurekaService.getInstance("plus-planner-socket-server").then((url) => {
-    websocketService = url.data;
+    websocketService = "https://" + url.data;
 });
 
 export default {
