@@ -1,13 +1,12 @@
 <template>
     <v-navigation-drawer
         v-model="primaryDrawer.model"
-        :clipped="primaryDrawer.clipped"
-        :floating="primaryDrawer.floating"
         :mini-variant="primaryDrawer.mini"
         :permanent="primaryDrawer.permanent"
+        mini-variant-width="80"
         app
+        color="#23272A"
         id="vnav"
-        style="width: 4%"
     >
         <v-layout column fill-height>
             <ProjectListItem
@@ -43,9 +42,6 @@
             return {
                 primaryDrawer: {
                     model: null,
-                    type: "default (no property)",
-                    clipped: false,
-                    floating: true,
                     mini: true,
                     permanent: true
                 }
@@ -60,12 +56,6 @@
 </script>
 
 <style scoped>
-    #vnav {
-        display: flex;
-        flex-direction: column;
-        background-color: #23272A;
-    }
-
     #add-button {
         margin: auto;
         margin-bottom: 10px;

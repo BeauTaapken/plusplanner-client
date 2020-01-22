@@ -1,6 +1,11 @@
 <template>
     <div>
-        <v-navigation-drawer fixed class="project-nav" color="#2e3136">
+        <v-navigation-drawer 
+            absolute
+            permanent
+            class="project-nav" 
+            color="#2e3136"
+            >
             <v-list-item>
                 <v-list-item-content>
                     <v-list-item-title class="project-header">{{
@@ -58,7 +63,8 @@
         data: function () {
             return {
                 usedData: null,
-                projectName: this.$route.params.projectName
+                projectName: this.$route.params.projectName,
+                mini: true
             };
         },
         created() {
@@ -94,11 +100,11 @@
     }
 
     .project-nav {
+        position: relative;
         background-color: #2e3136;
         height: 100vh !important;
-        width: 13% !important;
-        float: left !important;
-        margin-left: calc(4% - 1px) !important;
+        width: 250px !important;
+        margin-left: 80px;
     }
 
     .project-header {
