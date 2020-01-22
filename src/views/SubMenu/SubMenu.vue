@@ -1,7 +1,7 @@
 <template>
     <div >
         <v-navigation-drawer style="position: relative; width: calc(100% - 80px); height: 100vh; max-height: 100vh"
-                id="nav-drawer"
+            id="nav-drawer"
             permanent
             class="project-nav" 
             color="#2e3136"
@@ -56,6 +56,7 @@
     import SubMenuChatHeader from "./SubMenuChatHeader";
     import CreatePart from "../../components/Part/CreatePart";
     import SubMenuItem from "./SubMenuItem";
+    import { mapState } from "vuex"
 
     export default {
         name: "SubMenu",
@@ -70,9 +71,12 @@
         created() {
             this.load();
         },
+        computed: mapState({
+            project: state => state.project
+        }),
         methods: {
             load: function () {
-                let json = this.$parent.projectData;
+                let json = this.project.projects;
                 let res = json.filter(
                     d => d.projectname === this.$route.params.projectName
                 );
