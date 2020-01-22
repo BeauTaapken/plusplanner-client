@@ -7,6 +7,7 @@
                             v-for="table in tableNames"
                             v-bind:key="table.tableName"
                             v-bind:table-name="table.tableName"
+                            v-bind:enum-table-name="table.enumName"
                             v-bind:items="findTableData(table.enumName)"
                 />
             </v-row>
@@ -14,6 +15,7 @@
         <div ref="editTask">
 
         </div>
+        <ReconnectingIcon v-if="!connected"/>
     </div>
 </template>
 
@@ -21,63 +23,92 @@
     import BoardTable from "../../components/Board/BoardTable.vue";
     import apiService from "../../services/ProjectService";
     import webSocketService from "../../services/WebsocketService";
+    import ReconnectingIcon from "./ReconnectingIcon";
 
     export default {
         name: "BoardCollection",
-        components: {BoardTable},
+        components: {ReconnectingIcon, BoardTable},
         data: function () {
             return {
                 usedData: null,
-                tableNames: [{tableName: "Backlog", enumName: "BACKLOG"}, {tableName: "This Sprint", enumName: "THIS_SPRINT"}, {tableName: "Working On", enumName: "WORKING_ON"}, {tableName: "Review", enumName: "REVIEW"}, {tableName: "Done", enumName: "DONE"}, {tableName: "On Hold", enumName: "ON_HOLD"}],
+                tableNames: [{tableName: "Backlog", enumName: "BACKLOG"}, {
+                    tableName: "This Sprint",
+                    enumName: "THIS_SPRINT"
+                }, {tableName: "Working On", enumName: "WORKING_ON"}, {
+                    tableName: "Review",
+                    enumName: "REVIEW"
+                }, {tableName: "Done", enumName: "DONE"}, {tableName: "On Hold", enumName: "ON_HOLD"}],
                 partId: null,
                 Websocket: null,
-                projectid: null
+                projectid: null,
+                connected: false
             }
         },
         created() {
             this.load();
-            let url = webSocketService.getWSAddress();
-            this.Websocket = new WebSocket("ws://" + url + "/messages");
-            let comp = this;
-            comp.Websocket.onopen = function () {
-                comp.Websocket.send(comp.projectid + "\n" + comp.$session.get("plusplannerToken"))
-            };
-
-            comp.Websocket.onmessage = function (message) {
-                let json = JSON.parse(message.data);
-                switch (json.type) {
-                    case "task":
-                        switch (json.action) {
-                            case "create":
-                                // eslint-disable-next-line no-case-declarations
-                                let table = comp.getChildTable(json.element.state);
-                                table.itemArray.push(json.element);
-                                break;
-                            case "update":
-                                // eslint-disable-next-line no-case-declarations
-                                let oldTable = comp.getOldChildTable(json.element.subpartid);
-                                // eslint-disable-next-line no-case-declarations
-                                let index = oldTable.itemArray.findIndex(
-                                    x => (x.subpartid === json.element.subpartid));
-                                window.console.log(index);
-                                oldTable.itemArray.splice(index, 1);
-                                // eslint-disable-next-line no-case-declarations
-                                let newTable = comp.getChildTable(json.element.state);
-                                newTable.itemArray.push(json.element);
-                                break;
-                        }
-                        break;
-                }
-            };
+            this.connect();
         },
         updated() {
             this.load();
         },
         methods: {
-            getChildTable: function (name) {
+            connect: function () {
+                if (this.$router.currentRoute.name === "board") {
+                    let url = webSocketService.getWSAddress();
+                    url = url.replace("https", "ws");
+                    this.Websocket = new WebSocket(url + "/messages");
+                    let comp = this;
+                    comp.Websocket.onopen = function () {
+                        comp.Websocket.send(comp.projectid + "\n" + comp.$session.get("plusplannerToken"));
+                        comp.connected = true;
+                    };
+
+                    comp.Websocket.onmessage = function (message) {
+                        let json = JSON.parse(message.data);
+                        switch (json.type) {
+                            case "task":
+                                switch (json.action) {
+                                    case "create":
+                                        // eslint-disable-next-line no-case-declarations
+                                        let table = comp.getChildTable(json.element.state);
+                                        table.itemArray.push(json.element);
+                                        break;
+                                    case "update":
+                                        // eslint-disable-next-line no-case-declarations
+                                        let oldTable = comp.getOldChildTable(json.element.subpartid);
+                                        // eslint-disable-next-line no-case-declarations
+                                        let index = oldTable.itemArray.findIndex(
+                                            x => (x.subpartid === json.element.subpartid));
+                                        window.console.log(index);
+                                        oldTable.itemArray.splice(index, 1);
+                                        // eslint-disable-next-line no-case-declarations
+                                        let newTable = comp.getChildTable(json.element.state);
+                                        newTable.itemArray.push(json.element);
+                                        break;
+                                }
+                                break;
+                        }
+                    };
+
+                    comp.Websocket.onerror = function (error) {
+                        window.console.log(error);
+                    };
+
+                    comp.Websocket.onclose = function () {
+                        comp.connected = false;
+                        if (comp.Websocket.readyState === 3) {
+                            setTimeout(function () {
+                                window.console.log("Reconnecting");
+                                comp.connect();
+                            }, 10000);
+                        }
+                    }
+                }
+            },
+            getChildTable: function (state) {
                 let tables = this.$refs.child;
                 for (let i = 0; i < tables.length; i++) {
-                    if (tables[i].tableName === name) {
+                    if (tables[i].enumTableName === state) {
                         return tables[i];
                     }
                 }
@@ -120,18 +151,18 @@
                 .then(response => {
                     this.$parent.$parent.projectData = response.data;
                 })
-                // eslint-disable-next-line no-console
-                .catch(error => console.log("There was an error: " + error.response));
+                .catch(error => window.console.log("There was an error: " + error.response));
         },
     }
 </script>
 
 <style scoped>
     .component-content {
-        float: left;
+        position: absolute;
+        right: 0;
+        top: 0;
         height: 100vh;
-        width: calc(83% + 2px);
-        margin-left: calc(17% - 2px);
+        width: calc(100% - 330px);
         background-color: #36393E;
         overflow-x: scroll;
         white-space: nowrap;

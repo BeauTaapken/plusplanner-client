@@ -42,7 +42,7 @@
         name: "EditTask",
         props: {
             name: String,
-            tableName: String,
+            enumTableName: String,
             description: String,
             subpartId: String,
             partId: String,
@@ -65,12 +65,21 @@
             save: function () {
                 let newName = document.getElementById("taskname").value;
                 let newDescription = document.getElementById("taskdescription").value;
-                let newItem = `{"element": { "subpartid": "${this.subpartId}", "subpartname": "${newName}", "description": "${newDescription}", "state": "${this.tableName}", "enddate": "${this.date}", "partid": ${this.partId} }}`;
-                let json = JSON.parse(newItem);
-                json['type'] = 'task';
-                json['action'] = 'update';
+                let newItem = {
+                    element: {
+                        subpartid: this.subpartId,
+                        subpartname: newName,
+                        description: newDescription,
+                        state: this.enumTableName,
+                        enddate: this.date,
+                        partid: this.partId
+                    },
+                    type: "task",
+                    action: "update"
+                };
 
-                this.$parent.$parent.$parent.$parent.$parent.$parent.Websocket.send(JSON.stringify(json));
+                window.console.log(JSON.stringify(newItem));
+                this.$parent.$parent.$parent.$parent.$parent.$parent.Websocket.send(JSON.stringify(newItem));
                 this.overlay = !this.overlay;
             }
         }

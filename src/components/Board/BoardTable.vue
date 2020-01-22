@@ -16,7 +16,7 @@
                         v-bind:end-date="item.enddate"
                         v-bind:subpart-id="item.subpartid"
                         v-bind:part-id="item.partid"
-                        v-bind:table-name="tableName"
+                        v-bind:enum-table-name="enumTableName"
                 />
             </draggable>
 
@@ -24,7 +24,7 @@
                     class="plus-table"
                     v-bind:key="'Plus'"
                     v-bind:name="'+'"
-                    v-bind:table-name="tableName"
+                    v-bind:table-name="enumTableName"
             />
             <div ref="editTask"></div>
         </v-card>
@@ -45,6 +45,7 @@
         },
         props: {
             tableName: String,
+            enumTableName: String,
             items: Array
         },
         data() {
@@ -71,16 +72,18 @@
             if(this.queueArray.length !== 0)
             {
               for (let i = 0; i < this.queueArray.length; i++) {
-                let element = `{"subpartid": "${
-                        this.queueArray[i]["subpartid"]
-                }","description":"${this.queueArray[i]["description"]}","subpartname":"${
-                        this.queueArray[i]["subpartname"]
-                }","enddate":"${this.queueArray[i]["enddate"]}","state":"${
-                        this.tableName
-                }","partid":${this.$parent.partId} }`;
-                let json = JSON.parse(`{"action": "update", "type": "task"}`);
-                json['element'] = JSON.parse(element);
-                comp.$parent.Websocket.send(JSON.stringify(json));
+                  let element = {
+                      element: {
+                          subpartid: this.queueArray[i].subpartid,
+                          description: this.queueArray[i].description,
+                          subpartname: this.queueArray[i].subpartname,
+                          enddate: this.queueArray[i].enddate,
+                          partid: this.queueArray[i].partid
+                      },
+                      action: "update",
+                      type: "task"
+                  }
+                comp.$parent.Websocket.send(JSON.stringify(element));
               }
               this.queueArray = [];
             }

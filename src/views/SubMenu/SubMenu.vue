@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <v-navigation-drawer 
-            absolute
+    <div >
+        <v-navigation-drawer style="position: relative; width: calc(100% - 80px); height: 100vh; max-height: 100vh"
+                id="nav-drawer"
             permanent
             class="project-nav" 
             color="#2e3136"
@@ -86,6 +86,11 @@
 </script>
 
 <style scoped>
+    #nav-drawer {
+        max-width: 250px;
+        margin: 0;
+    }
+
     >>> .v-list-group .v-list-item__title {
         color: white;
         height: auto;
@@ -100,11 +105,7 @@
     }
 
     .project-nav {
-        position: relative;
         background-color: #2e3136;
-        height: 100vh !important;
-        width: 250px !important;
-        margin-left: 80px;
     }
 
     .project-header {

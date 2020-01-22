@@ -13,7 +13,7 @@
                         ref="editTask"
                         v-bind:name="name"
                         v-bind:end-date="endDate"
-                        v-bind:table-name="tableName"
+                        v-bind:enum-table-name="enumTableName"
                         v-bind:description="description"
                         v-bind:part-id="partId"
                         v-bind:subpart-id="subpartId"
@@ -39,7 +39,7 @@
             description: String,
             subpartId: String,
             partId: String,
-            tableName: String
+            enumTableName: String
         },
         methods: {
             editTask: function () {

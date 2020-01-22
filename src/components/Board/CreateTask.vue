@@ -50,7 +50,7 @@ export default {
   name: "CreateTask",
   props: {
     name: String,
-    tableName: String
+    enumTableName: String
   },
   data() {
     return {
@@ -74,13 +74,20 @@ export default {
       let name = document.getElementById("taskname").value;
       let description = document.getElementById("taskdescription").value;
       let partid = this.$parent.$parent.$parent.partId;
-      let json = `{ "element": { "subpartid": "${this.createUUID()}", "subpartname": "${name}", "description": "${description}", "state": "${this.tableName}", "enddate": "${this.date}", "partid": ${partid} }}`;
-      window.console.log(json);
-      let jsonParsed = JSON.parse(json);
-      jsonParsed['type'] = "task";
-      jsonParsed['action'] = 'create';
+      let json = {
+        element: {
+          subpartid: this.createUUID(),
+          subpartname: name,
+          description: description,
+          state: this.enumTableName,
+          enddate: this.date,
+          partid: partid
+        },
+        type: "task",
+        action: "create"
+      };
 
-      this.$parent.$parent.$parent.Websocket.send(JSON.stringify(jsonParsed));
+      this.$parent.$parent.$parent.Websocket.send(JSON.stringify(json));
       this.overlay = !this.overlay;
     }
   }

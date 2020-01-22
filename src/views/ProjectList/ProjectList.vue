@@ -5,6 +5,7 @@
         :permanent="primaryDrawer.permanent"
         mini-variant-width="80"
         app
+        fixed
         color="#23272A"
         id="vnav"
     >
@@ -57,7 +58,6 @@
 
 <style scoped>
     #add-button {
-        margin: auto;
-        margin-bottom: 10px;
+        margin: auto auto 10px;
     }
 </style>

@@ -3,8 +3,8 @@
     <v-layout justify-center>
         <v-card-actions>
             <div class="loader">
-                <i class="fas fa-spinner fa-spin"></i>
-                <p>Please wait while we are validating you</p>
+                <center><i class="fas fa-spinner fa-spin"></i></center>
+                <p>Please wait while we are validating you...</p>
             </div>
         </v-card-actions>
         <v-overlay :value="overlay">
@@ -87,7 +87,6 @@
     .loader i {
         font-size: 75px;
         text-align: center;
-        margin-left: 38%;
     }
 
     .loader p {

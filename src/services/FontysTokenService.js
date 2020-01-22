@@ -11,7 +11,7 @@ export default {
             redirect_uri: 'http://localhost:8080',
             client_id: 'i411946-plusplanne',
             client_secret: 'h2WDaPrz5kfECP4Me5cMyPVAUmrrgyGD'
-        })
+        });
 
         const headers = {
             baseURL: 'https://identity.fhict.nl',
