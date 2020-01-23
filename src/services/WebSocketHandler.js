@@ -2,15 +2,13 @@ import WebsocketService from "./WebsocketService";
 
 class WebSocketHandler {
     constructor() {
-        this.websocket = new WebSocket(WebsocketService.getWSAddress().replace("https", "ws") + "/messages");
+        this.websocket = new WebSocket("ws://" + WebsocketService.getWSAddress() + "/messages");
     }
 
     openConnection(token) {
         this.websocket.onopen = function () {
-            const pay = {
-                token: token
-            };
-            this.send(JSON.stringify(pay));
+            this.send(token);
+            window.console.log("opened");
         };
 
         this.websocket.onmessage = function (message) {
