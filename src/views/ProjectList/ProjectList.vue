@@ -19,11 +19,16 @@
             <v-spacer />
 
             <CreateProject ref="createProject"/>
-            <div id="add-button" @click="createProject">
-                <v-btn class="mx-2" fab dark color="#7289DA">
-                <v-icon dark>mdi-plus</v-icon>
-                </v-btn>
-            </div>
+            <v-tooltip top>
+                <template v-slot:activator="{ on }">
+                    <div id="add-button" @click="createProject">
+                        <v-btn class="mx-2" fab dark color="#7289DA" v-on="on">
+                        <v-icon dark>mdi-plus</v-icon>
+                        </v-btn>
+                    </div>
+                </template>
+                <span>Add project</span>
+            </v-tooltip>
         </v-layout>
 
   </v-navigation-drawer>
