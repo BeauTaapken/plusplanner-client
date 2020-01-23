@@ -43,6 +43,7 @@
 
 <script>
 import { Portal } from 'portal-vue'
+import { mapGetters } from 'vuex'
 
 export default {
   name: "CreatePart",
@@ -55,6 +56,7 @@ export default {
       date: new Date().toISOString().substr(0, 10),
     };
   },
+  computed: mapGetters("project", ["getProjectByName", "getProjectIdByName"]),
   components: {
     Portal
   },
@@ -62,17 +64,16 @@ export default {
     save: function() {
       let part_name = document.getElementById("part-name").value;
       let part_enddate = this.date;
-      let comp = this;
 
       const uuidv1 = require('uuid/v1');
       const component = {
         element: {
           partid: uuidv1(),
-          projectid: comp.$parent.$parent.usedData.projectid,
+          projectid: this.getProjectIdByName(this.$route.params.projectName),
           partname: part_name,
           enddate: part_enddate
         },
-        projectid: comp.$parent.$parent.usedData.projectid,
+        projectid: this.getProjectIdByName(this.$route.params.projectName),
         type: "part",
         action: "create"
       };

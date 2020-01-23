@@ -22,10 +22,16 @@
                     </template>
                     <v-list>
                         <v-list-item @click="addComponent">
-                        <v-list-item-title>Add Part</v-list-item-title>
-                        <v-list-item-action>
-                            <v-icon color="grey lighten-1">mdi-note-plus</v-icon>
-                        </v-list-item-action>
+                            <v-list-item-title>Add part</v-list-item-title>
+                            <v-list-item-action>
+                                <v-icon color="grey lighten-1">mdi-note-plus</v-icon>
+                            </v-list-item-action>
+                        </v-list-item>
+                                                <v-list-item @click="addComponent">
+                            <v-list-item-title>Add chat</v-list-item-title>
+                            <v-list-item-action>
+                                <v-icon color="grey lighten-1">mdi-chat-processing-outline</v-icon>
+                            </v-list-item-action>
                         </v-list-item>
                     </v-list>
                     </v-menu>

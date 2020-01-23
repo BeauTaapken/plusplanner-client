@@ -59,6 +59,12 @@ export default {
     getters: {
         projects: state => {
             return state.projects;
+        },
+        getProjectByName: (state) => (name) => {
+            return state.projects.find(project => project.projectname === name)
+        },
+        getProjectIdByName: (state) => (name) => {
+            return state.projects.find(project => project.projectname === name).projectid
         }
     }
 };
