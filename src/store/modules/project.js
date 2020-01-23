@@ -25,7 +25,7 @@ export default {
     actions: {
         fetchProjects({ commit }, session) {
             commit("SET_LOADING", true);
-            return ProjectService.getProjects(session)
+            ProjectService.getProjects(session)
                 .then(projects => {
                     window.console.log(projects);
                     commit("SET_PROJECTS", projects.data);
