@@ -44,6 +44,7 @@
 
             },
             sendMessage: function () {
+                window.console.log(this.$root.websocket);
                 if (this.text !== "") {
                     let element = {
                         element: {
@@ -54,7 +55,7 @@
                             content: this.text,
                             senddate: new Date().toDateString(),
                         },
-                        type: "chatMessage",
+                        type: "message",
                         action: "create"
                     };
                     this.$root.websocket.sendJson(element);
