@@ -7,7 +7,7 @@
                 </v-card-actions>
             </v-layout>
 
-            <draggable :group="{ name: 'tables' }" v-model="itemArray" @change="addToQeueu">
+            <draggable :group="{ name: 'tables' }" v-model="itemArray" @change="addToQeueu" class="task">
                 <BoardTask
                         v-for="item in itemArray"
                         v-bind:key="item.subpartid"
@@ -17,10 +17,11 @@
                         v-bind:subpart-id="item.subpartid"
                         v-bind:part-id="item.partid"
                         v-bind:enum-table-name="enumTableName"
+                        v-bind:project-id="projectId"
                 />
             </draggable>
 
-            <CreateTask
+            <CreateTask class="task"
                 v-bind:table-name="enumTableName"
             />
             <div ref="editTask"></div>
@@ -43,7 +44,8 @@
         props: {
             tableName: String,
             enumTableName: String,
-            items: Array
+            items: Array,
+            projectId: String
         },
         data() {
             return {
@@ -79,8 +81,8 @@
                       },
                       action: "update",
                       type: "task"
-                  }
-                comp.$parent.Websocket.send(JSON.stringify(element));
+                  };
+                  comp.$root.webSocket.sendJson(element);
               }
               this.queueArray = [];
             }
@@ -120,5 +122,11 @@
 
     .plus-table:hover {
         background-color: #5e5e5e !important;
+    }
+
+    .task {
+        padding-left: 2%;
+        padding-right: 2%;
+        padding-bottom: 2%;
     }
 </style>
