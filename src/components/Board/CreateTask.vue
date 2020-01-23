@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-btn @click="addTask" small class="my-2" dark color="#7289DA" block depressed>
+    <v-btn @click="addTask" small dark color="#7289DA" block depressed>
       <v-icon dark>mdi-plus</v-icon>
     </v-btn>
 

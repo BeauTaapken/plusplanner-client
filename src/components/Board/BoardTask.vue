@@ -1,31 +1,32 @@
 <template>
-    <v-card color="grey">
-        <v-layout justify-center="true" class="v-card-item">
-            <v-card-actions>
-                <v-list-item three-line>
-                    <v-list-item-content>
-                        <v-list-item-title style="color: white" class="headline mb-1">{{ name }}</v-list-item-title>
-                        <v-list-item-subtitle >{{ endDate }}</v-list-item-subtitle>
-                    </v-list-item-content>
-                </v-list-item>
+    <v-list>
+        <v-list-item dark class="list-item-background">
+            <v-list-item-content>
+                <v-list-item-title v-text="name"></v-list-item-title>
+                <v-list-item-subtitle v-text="endDate"></v-list-item-subtitle>
+            </v-list-item-content>
 
-                <EditTask
-                        ref="editTask"
-                        v-bind:name="name"
-                        v-bind:end-date="endDate"
-                        v-bind:enum-table-name="enumTableName"
-                        v-bind:description="description"
-                        v-bind:part-id="partId"
-                        v-bind:subpart-id="subpartId"
-                        v-bind:project-id="projectId"
-                        draggable="true"
-                        ondragstart="event.preventDefault(); event.stopPropagation();"
-                >
-                </EditTask>
-                <v-icon @click="editTask" class="edit-task">fas fa-edit</v-icon>
-            </v-card-actions>
-        </v-layout>
-    </v-card>
+            <v-list-item-action>
+            <v-btn icon>
+                <v-icon @click="editTask">mdi-circle-edit-outline</v-icon>
+            </v-btn>
+            </v-list-item-action>
+        </v-list-item>
+
+        <EditTask
+                ref="editTask"
+                v-bind:name="name"
+                v-bind:end-date="endDate"
+                v-bind:enum-table-name="enumTableName"
+                v-bind:description="description"
+                v-bind:part-id="partId"
+                v-bind:subpart-id="subpartId"
+                v-bind:project-id="projectId"
+                draggable="true"
+                ondragstart="event.preventDefault(); event.stopPropagation();"
+        >
+        </EditTask>
+    </v-list>
 </template>
 
 <script>
@@ -52,26 +53,8 @@
 </script>
 
 <style scoped>
-    .v-card-item {
-        margin-top: 2%;
-        transition: background-color 1s ease;
-    }
-
-    .v-card-item:hover {
-        cursor: pointer;
-        background-color: #5e5e5e;
-    }
-
-    .edit-task {
-        position: absolute;
-        right: 0;
-        top: 0;
-        margin-right: 10px;
-        margin-top: 10px;
-        font-size: 20px;
-    }
-
-    .edit-task:hover {
-        color: grey;
-    }
+>>> .v-list-item {
+    background-color: #72787d;
+    border-radius: 4px;
+}
 </style>

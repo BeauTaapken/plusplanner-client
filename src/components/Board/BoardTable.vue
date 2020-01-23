@@ -112,10 +112,6 @@
         padding: 1px;
     }
 
-    .board-column {
-        text-align: center;
-    }
-
     .plus-table:hover {
         transition: background-color 1s ease !important;
     }

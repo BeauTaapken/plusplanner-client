@@ -52,6 +52,7 @@ export default {
                 })
         },
         websocketMessageHandler({ commit }, message) {
+            window.console.log(message);
             commit("ADD_MESSAGE", message);
         }
     },
