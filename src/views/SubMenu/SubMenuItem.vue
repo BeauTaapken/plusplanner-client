@@ -26,7 +26,7 @@
 
     >>>.theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled){
         color: white !important;
-        font-size: 20px;
+        font-size: 18px;
     }
     .v-list-item:hover {
         background-color: #282b2f !important;
