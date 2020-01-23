@@ -19,7 +19,7 @@ new Vue({
   store,
   data() {
     return {
-      webSocket: null
+      websocket: null
     }
   },
   render: h => h(App)

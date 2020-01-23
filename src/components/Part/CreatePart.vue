@@ -77,7 +77,7 @@ export default {
         action: "create"
       };
       window.console.log(component);
-      this.$root.webSocket.sendJson(component);
+      this.$root.websocket.sendJson(component);
       this.overlay = !this.overlay;
     },
     cancel: function() {

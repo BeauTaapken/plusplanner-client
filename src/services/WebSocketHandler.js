@@ -2,28 +2,26 @@ import WebsocketService from "./WebsocketService";
 
 class WebSocketHandler {
     constructor() {
-        this.webSocket = new WebSocket(WebsocketService.getWSAddress().replace("https", "ws") + "/messages");
+        this.websocket = new WebSocket("ws://" + WebsocketService.getWSAddress() + "/messages");
     }
 
     openConnection(token) {
-        this.webSocket.onopen = function () {
-            const pay = {
-                token: token
-            };
-            this.send(JSON.stringify(pay));
+        this.websocket.onopen = function () {
+            this.send(token);
+            window.console.log("opened");
         };
 
-        this.webSocket.onmessage = function (message) {
+        this.websocket.onmessage = function (message) {
             window.console.log(message);
         }
     }
 
     sendJson(json){
-        this.webSocket.send(JSON.stringify(json));
+        this.websocket.send(JSON.stringify(json));
     }
 
     closeConnection() {
-        this.webSocket.close();
+        this.websocket.close();
     }
 }
 export default {
