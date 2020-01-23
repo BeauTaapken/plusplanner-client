@@ -43,17 +43,18 @@
         created() {
             let session = this.$session;
             let component = this;
+            // eslint-disable-next-line no-unused-vars
+
             this.fetchProjects(session.get("plusplannerToken"))
                 .then(() => {
-                    window.console.log("fetched the data");
-                    component.$root.webSocket = WebSocketHandler.newWebSocket();
-                    component.$root.webSocket.openConnection(session.get("plusplannerToken"));
-                }, error => {
-                    window.console.log(error);
-                    component.icon = "fas fa-exclamation-triangle";
-                    component.iconColor = "#8b0000";
-                    component.text = "An error occured. Please try again. If this problem keeps occuring, contact us."
-                })
+                    component.$root.websocket = new WebSocketHandler.newWebSocket();
+                    component.$root.websocket.openConnection(session.get("plusplannerToken"));
+            }).catch(error => {
+                window.console.log(error);
+                component.icon = "fas fa-exclamation-triangle";
+                component.iconColor = "#8b0000";
+                component.text = "An error occured. Please try again. If this problem keeps occuring, contact us."
+            })
         },
         methods: mapActions('project', ['fetchProjects'])
     };

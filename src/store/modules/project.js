@@ -27,9 +27,9 @@ export default {
         }
     },
     actions: {
-        fetchProjects({ commit }, session) {
+        fetchProjects({commit}, session) {
             commit("SET_LOADING", true);
-            ProjectService.getProjects(session)
+            return ProjectService.getProjects(session)
                 .then(projects => {
                     window.console.log(projects);
                     commit("SET_PROJECTS", projects.data);
@@ -37,10 +37,11 @@ export default {
                 })
                 .catch(error => {
                     commit("SET_ERROR", "Something went wrong! Please try again later.");
-                    window.console.log("There was an error: " + error);
-                });
+                    window.console.log(error);
+                    throw error;
+            });
         },
-        createProject({ commit }, { token, project }) {
+        createProject({commit}, {token, project}) {
             ProjectService.createProject(token, project)
                 .then(() => {
                     commit("SET_CREATED", true);
@@ -51,7 +52,7 @@ export default {
                     commit("SET_ERROR", error);
                 })
         },
-        websocketMessageHandler({ commit }, message) {
+        websocketMessageHandler({commit}, message) {
             commit("ADD_MESSAGE", message);
         }
     },
