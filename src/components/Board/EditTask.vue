@@ -46,7 +46,8 @@
             description: String,
             subpartId: String,
             partId: String,
-            endDate: String
+            endDate: String,
+            projectId: String
         },
         data() {
             return {
@@ -74,12 +75,12 @@
                         enddate: this.date,
                         partid: this.partId
                     },
+                    projectid: this.projectid,
                     type: "task",
                     action: "update"
                 };
 
-                window.console.log(JSON.stringify(newItem));
-                this.$parent.$parent.$parent.$parent.$parent.$parent.Websocket.send(JSON.stringify(newItem));
+                this.$root.webSocket.sendJson(newItem);
                 this.overlay = !this.overlay;
             }
         }

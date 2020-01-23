@@ -66,12 +66,18 @@ export default {
 
       const uuidv1 = require('uuid/v1');
       const component = {
-        partid: uuidv1(),
+        element: {
+          partid: uuidv1(),
+          projectid: comp.$parent.$parent.usedData.projectid,
+          partname: part_name,
+          enddate: part_enddate
+        },
         projectid: comp.$parent.$parent.usedData.projectid,
-        partname: part_name,
-        enddate: part_enddate
+        type: "part",
+        action: "create"
       };
       window.console.log(component);
+      this.$root.webSocket.sendJson(component);
       this.overlay = !this.overlay;
     },
     cancel: function() {

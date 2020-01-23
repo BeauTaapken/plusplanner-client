@@ -17,6 +17,7 @@
                         v-bind:description="description"
                         v-bind:part-id="partId"
                         v-bind:subpart-id="subpartId"
+                        v-bind:project-id="projectId"
                         draggable="true"
                         ondragstart="event.preventDefault(); event.stopPropagation();"
                 >
@@ -39,7 +40,8 @@
             description: String,
             subpartId: String,
             partId: String,
-            enumTableName: String
+            enumTableName: String,
+            projectId: String
         },
         methods: {
             editTask: function () {

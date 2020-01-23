@@ -22,6 +22,7 @@
     import { PortalTarget } from "portal-vue";
     import ProjectList from "./ProjectList/ProjectList";
     import { mapState, mapActions } from "vuex";
+    import WebSocketHandler from "../services/WebSocketHandler";
 
     export default {
         name: "ProjectRoot",
@@ -44,7 +45,9 @@
             let component = this;
             this.fetchProjects(session.get("plusplannerToken"))
                 .then(() => {
-                    window.console.log("fetched the data")
+                    window.console.log("fetched the data");
+                    component.$root.webSocket = WebSocketHandler.newWebSocket();
+                    component.$root.webSocket.openConnection(session.get("plusplannerToken"));
                 }, error => {
                     window.console.log(error);
                     component.icon = "fas fa-exclamation-triangle";

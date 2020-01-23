@@ -17,5 +17,10 @@ new Vue({
   router,
   vuetify,
   store,
+  data() {
+    return {
+      webSocket: null
+    }
+  },
   render: h => h(App)
 }).$mount('#app')

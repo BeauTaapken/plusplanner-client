@@ -17,6 +17,7 @@
                         v-bind:subpart-id="item.subpartid"
                         v-bind:part-id="item.partid"
                         v-bind:enum-table-name="enumTableName"
+                        v-bind:project-id="projectId"
                 />
             </draggable>
 
@@ -43,7 +44,8 @@
         props: {
             tableName: String,
             enumTableName: String,
-            items: Array
+            items: Array,
+            projectId: String
         },
         data() {
             return {
@@ -79,8 +81,8 @@
                       },
                       action: "update",
                       type: "task"
-                  }
-                comp.$parent.Websocket.send(JSON.stringify(element));
+                  };
+                  comp.$root.webSocket.sendJson(element);
               }
               this.queueArray = [];
             }
