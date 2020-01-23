@@ -1,4 +1,5 @@
 import ProjectService from '@/services/ProjectService.js';
+import Vue from 'vue';
 
 export default {
     namespaced: true,
@@ -22,8 +23,12 @@ export default {
         SET_CREATED(state, payload) {
             state.created = payload;
         },
-        ADD_MESSAGE(state, payload) {
-            state.messages = payload;
+        ADD_PART(state, payload) {
+            state.projects.forEach((project, index) => {
+                if(project.projectid === payload.projectid) {
+                    Vue.set(state.projects, index, payload.part)
+                }
+            })
         }
     },
     actions: {
@@ -51,9 +56,11 @@ export default {
                     commit("SET_ERROR", error);
                 })
         },
-        websocketMessageHandler({ commit }, message) {
-            window.console.log(message);
-            commit("ADD_MESSAGE", message);
+        addPartToProject({ commit }, payload) {
+            commit("ADD_PART", {
+                "projectid": payload.projectid,
+                "part": payload.element
+            });
         }
     },
     getters: {
