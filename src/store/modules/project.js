@@ -5,17 +5,21 @@ export default {
     state: {
         projects: [],
         error: null,
-        loading: null
+        loading: null,
+        created: null
     },
     mutations: {
         SET_PROJECTS(state, payload) {
-            state.projects = payload
+            state.projects = payload;
         },
         SET_ERROR(state, payload) {
-            state.error = payload
+            state.error = payload;
         },
         SET_LOADING(state, payload) {
-            state.loading = payload
+            state.loading = payload;
+        },
+        SET_CREATED(state, payload) {
+            state.created = payload;
         }
     },
     actions: {
@@ -23,7 +27,7 @@ export default {
             commit("SET_LOADING", true);
             return ProjectService.getProjects(session)
                 .then(projects => {
-                    window.console.log(projects)
+                    window.console.log(projects);
                     commit("SET_PROJECTS", projects.data);
                     commit("SET_LOADING", false);
                 })
@@ -31,6 +35,17 @@ export default {
                     commit("SET_ERROR", "Something went wrong! Please try again later.");
                     window.console.log("There was an error: " + error);
                 });
+        },
+        createProject({ commit }, { token, project }) {
+            ProjectService.createProject(token, project)
+                .then(() => {
+                    commit("SET_CREATED", true);
+                })
+                .catch(error => {
+                    window.console.log(error);
+                    commit("SET_CREATED", false);
+                    commit("SET_ERROR", error);
+                })
         }
     },
     getters: {
