@@ -36,7 +36,7 @@
                 const uuidv1 = require('uuid/v1');
                 return uuidv1();
             },
-            getSenderId: function() {
+            getUserId: function() {
                 let token = this.$session.get("plusplannerToken");
                 let parts = token.split('.');
                 let payload = JSON.parse(atob(parts[1]));
@@ -49,7 +49,7 @@
                         element: {
                             messageid: this.createUUID(),
                             channelid: this.$parent.getChannelId,
-                            senderid: this.getSenderId(),
+                            userid: this.getUserId(),
                             content: this.text,
                             senddate: new Date().toDateString(),
                         },
@@ -69,9 +69,6 @@
                     this.sendMessage();
                 }
             }
-        },
-        created() {
-            this.getSenderId();
         }
     }
 </script>
