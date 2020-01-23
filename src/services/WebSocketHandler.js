@@ -12,7 +12,34 @@ class WebSocketHandler {
         };
 
         this.websocket.onmessage = function (message) {
-            window.console.log(message);
+            let json = JSON.parse(message.data);
+            switch (json.type) {
+                case "part":
+                    switch (json.action) {
+                        case "create":
+                            //upload to project in store
+                            window.console.log(json.element);
+                            break;
+                    }
+                    break;
+                case "message":
+                    switch (json.action) {
+                        case "create":
+                            // upload to chat in project in store
+                            window.console.log(json.element);
+                            break;
+                    }
+                    break;
+                case "subpart": {
+                    switch (json.action) {
+                        case "create":
+                            // upload subparts from project
+                            window.console.log(json.element);
+                            break;
+                    }
+                    break;
+                }
+            }
         };
 
         this.websocket.onclose = function () {
@@ -20,7 +47,7 @@ class WebSocketHandler {
         };
     }
 
-    sendJson(json){
+    sendJson(json) {
         this.websocket.send(JSON.stringify(json));
     }
 
@@ -28,6 +55,7 @@ class WebSocketHandler {
         this.websocket.close();
     }
 }
+
 export default {
     newWebSocket() {
         return new WebSocketHandler();

@@ -57,7 +57,6 @@
                         type: "message",
                         action: "create"
                     };
-                    window.console.log(element);
                     this.$root.websocket.sendJson(element);
                     this.text = "";
                     setTimeout(function () {
