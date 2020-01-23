@@ -26,9 +26,9 @@ export default {
         ADD_PART(state, payload) {
             state.projects.forEach((project, index) => {
                 if(project.projectid === payload.projectid) {
-                    var subparts = {};
+                    var subparts = []
+                    payload.part["subparts"] = subparts
                     project.parts.push(payload.part);
-                    project.parts.push(subparts);
                     Vue.set(state.projects, index, project);
                 }
             })
