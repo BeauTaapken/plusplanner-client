@@ -113,7 +113,7 @@
     }
 
     .project-header {
-        font-size: 35px;
+        font-size: 20px;
         padding-top: 20px;
         padding-bottom: 20px;
         color: white;

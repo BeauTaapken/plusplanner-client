@@ -6,7 +6,8 @@ export default {
         projects: [],
         error: null,
         loading: null,
-        created: null
+        created: null,
+        messages: []
     },
     mutations: {
         SET_PROJECTS(state, payload) {
@@ -20,6 +21,9 @@ export default {
         },
         SET_CREATED(state, payload) {
             state.created = payload;
+        },
+        ADD_MESSAGE(state, payload) {
+            state.messages = payload;
         }
     },
     actions: {
@@ -46,6 +50,9 @@ export default {
                     commit("SET_CREATED", false);
                     commit("SET_ERROR", error);
                 })
+        },
+        websocketMessageHandler({ commit }, message) {
+            commit("ADD_MESSAGE", message);
         }
     },
     getters: {
