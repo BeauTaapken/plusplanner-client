@@ -21,7 +21,7 @@ export default {
         {
             await load();
         }
-        projectService.get('project/read', {
+        return projectService.get('project/read', {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',
