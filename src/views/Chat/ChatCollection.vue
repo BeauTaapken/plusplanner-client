@@ -1,6 +1,6 @@
 <template>
     <div class="component-content">
-            <div class="text-header" v-text="this.contentName"></div>
+            <div class="text-header" v-text="this.usedData.name"></div>
             <v-row style="margin-left: 2px">
                 <v-col cols="10" class="col-chat">
                     <MessageContent>
@@ -18,14 +18,29 @@
 
     import ChatParticipants from "../../components/Chat/ChatParticipants";
     import MessageContent from "../../components/Chat/MessageContent";
+    import { mapState } from "vuex"
     export default {
         name: "ChatCollection",
         components: {MessageContent, ChatParticipants},
         data: function () {
             return {
-                contentName: this.$route.params.chat,
+                usedData: null
             }
         },
+        methods: {
+            load: function() {
+                let json = this.project.projects;
+                let res = json.filter(d => d.projectname === this.$route.params.projectName);
+                let t = res[0].chats.filter(d => d.name === this.$route.params.chat);
+                this.usedData = t[0].channels.filter(ch => ch.name === this.$route.params.channel)[0];
+            }
+        },
+        computed: mapState({
+            project: state => state.project
+        }),
+        created() {
+            this.load();
+        }
     }
 </script>
 
@@ -41,9 +56,9 @@
     }
 
     .text-header {
-        min-height: 5vh;
-        padding: 1vh;
+        padding: 1%;
         border-bottom: #1E2124 1px solid;
+        max-height: 5%;
     }
 
     .col-chat {

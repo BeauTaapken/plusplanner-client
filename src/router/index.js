@@ -42,7 +42,7 @@ export default new Router({
                             }
                         },
                         {
-                            path: ':componentName/:chat',
+                            path: ':chat/:channel',
                             name: 'chat',
                             components: {
                                 default: SubMenu,

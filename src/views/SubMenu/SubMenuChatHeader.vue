@@ -3,13 +3,13 @@
 
         <v-list-group >
             <template v-slot:activator>
-                <v-list-item-title>{{ componentName }}</v-list-item-title>
+                <v-list-item-title>{{ chatName }}</v-list-item-title>
             </template>
             <SubMenuChatItem
-                    v-for="item in componentItem"
+                    v-for="item in channels"
                     v-bind:key="item.channelid"
-                    v-bind:item-name="item.name"
-                    v-bind:component-name="componentName"
+                    v-bind:channel-name="item.name"
+                    v-bind:chat-name="chatName"
             />
         </v-list-group>
 
@@ -23,9 +23,8 @@
         name: "SubMenuChatHeader",
         components: {SubMenuChatItem},
         props: {
-            componentName: String,
-            componentItem: Array,
-            componentType: String
+            chatName: String,
+            channels: Array
         },
         mounted() {
 

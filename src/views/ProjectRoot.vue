@@ -10,7 +10,7 @@
         </div>
         <div v-if="!project.loading">
             <ProjectList style="position: relative; float: left"></ProjectList>
-            <router-view  :key="this.$route.fullPath"></router-view>
+            <router-view :key="this.$route.fullPath"></router-view>
 
             <portal-target name="createProjectOverlayDest"/>
             <portal-target name="createComponentOverlayDest"/>
@@ -19,9 +19,9 @@
 </template>
 
 <script>
-    import { PortalTarget } from "portal-vue";
+    import {PortalTarget} from "portal-vue";
     import ProjectList from "./ProjectList/ProjectList";
-    import { mapState, mapActions } from "vuex";
+    import {mapState, mapActions} from "vuex";
     import WebSocketHandler from "../services/WebSocketHandler";
 
     export default {
@@ -47,10 +47,10 @@
 
             this.fetchProjects(session.get("plusplannerToken"))
                 .then(() => {
+                    component.text = "Connecting to server...";
                     component.$root.websocket = new WebSocketHandler.newWebSocket();
                     component.$root.websocket.openConnection(session.get("plusplannerToken"));
-            }).catch(error => {
-                window.console.log(error);
+                }).catch(() => {
                 component.icon = "fas fa-exclamation-triangle";
                 component.iconColor = "#8b0000";
                 component.text = "An error occured. Please try again. If this problem keeps occuring, contact us."

@@ -83,7 +83,7 @@ export default {
         action: "create"
       };
 
-      this.$root.websocket.sendJson(element);
+      this.$root.websocket.sendJson(json);
       this.overlay = !this.overlay;
     }
   }

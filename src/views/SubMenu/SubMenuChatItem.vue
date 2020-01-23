@@ -1,7 +1,7 @@
 <template>
-    <router-link style="color: white; text-decoration: none; display: block" :key="itemName" :to="{ name: 'chat', params: { componentName: componentName, chat: itemName } }">
+    <router-link style="color: white; text-decoration: none; display: block" :key="channelName" :to="{ name: 'chat', params: { chat: chatName, channel: channelName } }">
         <v-list-item>
-            {{ itemName }}
+            {{ channelName }}
         </v-list-item>
     </router-link>
 </template>
@@ -10,9 +10,8 @@
     export default {
         name: "SubMenuChatItem",
         props: {
-            componentName: String,
-            itemName: String,
-            componentType: String
+            chatName: String,
+            channelName: String,
         },
     }
 </script>

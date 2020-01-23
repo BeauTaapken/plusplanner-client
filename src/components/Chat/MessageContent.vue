@@ -1,6 +1,6 @@
 <template>
     <div class="message-content" id="chat">
-        <ChatMessage v-for="data in messages"
+        <ChatMessage v-for="data in getMessages"
                      v-bind:key="data.messageid"
                      v-bind:message-id="data.messageid"
                      v-bind:channel-id="data.channelid"
@@ -22,14 +22,15 @@
         components: {ChatMessageInput, ChatMessage},
         data() {
             return {
-                messages: []
+
             }
         },
-        created() {
-            for(let i = 0; i < 5; i++)
-            {
-                let json = JSON.parse(`{"messageid": ${i},"channelid": 1,"userid": 0,"content": "Testmessage","senddate": "Mon Nov 11 11:32:26 CET 2019"}`);
-                this.messages.push(json);
+        computed: {
+            getMessages() {
+                return this.$parent.usedData.messages;
+            },
+            getChannelId() {
+                return this.$parent.usedData.channelid;
             }
         }
     }

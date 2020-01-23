@@ -32,9 +32,32 @@
             }
         },
         methods: {
+            createUUID: function () {
+                const uuidv1 = require('uuid/v1');
+                return uuidv1();
+            },
+            getSenderId: function() {
+                let token = this.$session.get("plusplannerToken");
+                let parts = token.split('.');
+                let payload = JSON.parse(atob(parts[1]));
+                return payload.uid;
+
+            },
             sendMessage: function () {
                 if (this.text !== "") {
-                    this.$parent.messages.push(JSON.parse(`{"messageid": 2,"channelid": 1,"userid": 0,"content": "${this.text}","senddate": "Mon Nov 11 11:32:26 CET 2019"}`));
+                    let element = {
+                        element: {
+
+                            messageid: this.createUUID(),
+                            channelid: this.$parent.getChannelId,
+                            senderid: this.getSenderId(),
+                            content: this.text,
+                            senddate: new Date().toDateString(),
+                        },
+                        type: "chatMessage",
+                        action: "create"
+                    };
+                    this.$root.websocket.sendJson(element);
                     this.text = "";
                     setTimeout(function () {
                         document.getElementById('chat').scrollTop = 99999999;
@@ -48,7 +71,7 @@
             }
         },
         created() {
-
+            this.getSenderId();
         }
     }
 </script>

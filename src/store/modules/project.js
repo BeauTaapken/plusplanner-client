@@ -37,7 +37,6 @@ export default {
                 })
                 .catch(error => {
                     commit("SET_ERROR", "Something went wrong! Please try again later.");
-                    window.console.log(error);
                     throw error;
             });
         },

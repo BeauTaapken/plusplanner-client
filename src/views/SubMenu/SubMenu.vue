@@ -42,13 +42,13 @@
             <SubMenuChatHeader
                     v-for="data in this.usedData.chats"
                     v-bind:key="data.chatid"
-                    v-bind:component-name="data.name"
-                    v-bind:component-item="data.channels"
+                    v-bind:chat-name="data.name"
+                    v-bind:channels="data.channels"
             />
         </v-navigation-drawer>
 
-        <router-view name="board" :key="this.$route.params.contentName"/>
-        <router-view name="chat" :key="this.$route.params.contentName"/>
+        <router-view name="board" :key="this.$route.fullPath"/>
+        <router-view name="chat" :key="this.$route.fullPath"/>
     </div>
 </template>
 

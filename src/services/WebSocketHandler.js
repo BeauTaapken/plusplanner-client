@@ -13,7 +13,11 @@ class WebSocketHandler {
 
         this.websocket.onmessage = function (message) {
             window.console.log(message);
-        }
+        };
+
+        this.websocket.onclose = function () {
+            window.console.log("closed");
+        };
     }
 
     sendJson(json){
