@@ -1,5 +1,5 @@
 import WebsocketService from "./WebsocketService";
-
+import Store from '../store/index.js'
 class WebSocketHandler {
     constructor() {
         this.websocket = new WebSocket("ws://" + WebsocketService.getWSAddress() + "/messages");
@@ -18,7 +18,7 @@ class WebSocketHandler {
                     switch (json.action) {
                         case "create":
                             //upload to project in store
-                            window.console.log(json.element);
+                            Store.dispatch("project/addPartToProject", json);
                             break;
                     }
                     break;
