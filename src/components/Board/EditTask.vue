@@ -80,7 +80,7 @@
                     action: "update"
                 };
 
-                this.$root.webSocket.sendJson(newItem);
+                this.$root.websocket.sendJson(newItem);
                 this.overlay = !this.overlay;
             }
         }
