@@ -31,6 +31,9 @@
             },
             getChannelId() {
                 return this.$parent.usedData.channelid;
+            },
+            getProjectId() {
+                return this.$parent.projectId;
             }
         }
     }

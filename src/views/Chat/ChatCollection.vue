@@ -24,13 +24,15 @@
         components: {MessageContent, ChatParticipants},
         data: function () {
             return {
-                usedData: null
+                usedData: null,
+                projectId: null
             }
         },
         methods: {
             load: function() {
                 let json = this.project.projects;
                 let res = json.filter(d => d.projectname === this.$route.params.projectName);
+                this.projectId = res[0].projectid;
                 let t = res[0].chats.filter(d => d.name === this.$route.params.chat);
                 this.usedData = t[0].channels.filter(ch => ch.name === this.$route.params.channel)[0];
             }

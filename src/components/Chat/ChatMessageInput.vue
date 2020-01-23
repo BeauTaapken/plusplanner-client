@@ -44,17 +44,16 @@
 
             },
             sendMessage: function () {
-                window.console.log(this.$root.websocket);
                 if (this.text !== "") {
                     let element = {
                         element: {
-
                             messageid: this.createUUID(),
                             channelid: this.$parent.getChannelId,
                             senderid: this.getSenderId(),
                             content: this.text,
                             senddate: new Date().toDateString(),
                         },
+                        projectid: this.$parent.getProjectId,
                         type: "message",
                         action: "create"
                     };
