@@ -52,6 +52,7 @@
         right: 0;
         top: 0;
         height: 100vh;
+        max-height: 100vh;
         width: calc(100% - 330px);
         background-color: #36393E;
         white-space: nowrap;

@@ -14,7 +14,7 @@
     export default {
         name: "Participant",
         props: {
-            id: Number,
+            id: String,
             name: String,
             image: String
         }

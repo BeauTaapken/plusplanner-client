@@ -1,6 +1,6 @@
 <template>
-    <div >
-        <v-navigation-drawer style="position: relative; width: calc(100% - 80px); height: 100vh; max-height: 100vh"
+    <div style="height: 100vh; max-height: 100vh">
+        <v-navigation-drawer
             id="nav-drawer"
             permanent
             class="project-nav" 
@@ -31,6 +31,7 @@
                     </v-menu>
                 </v-list-item-action>
             </v-list-item>
+            <UserSettingsHolder/>
 
             <CreatePart ref="createComponent" />
 
@@ -57,10 +58,11 @@
     import CreatePart from "../../components/Part/CreatePart";
     import SubMenuItem from "./SubMenuItem";
     import { mapState } from "vuex"
+    import UserSettingsHolder from "../../components/UserSettings/UserSettingsHolder";
 
     export default {
         name: "SubMenu",
-        components: {SubMenuItem, CreatePart, SubMenuChatHeader},
+        components: {UserSettingsHolder, SubMenuItem, CreatePart, SubMenuChatHeader},
         data: function () {
             return {
                 usedData: null,
@@ -93,6 +95,10 @@
     #nav-drawer {
         max-width: 250px;
         margin: 0;
+        position: relative;
+        width: calc(100% - 80px);
+        overflow-y: hidden;
+
     }
 
     >>> .v-list-group .v-list-item__title {

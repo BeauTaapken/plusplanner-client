@@ -15,9 +15,9 @@
     export default {
         name: "ChatMessage",
         props: {
-            messageId: Number,
-            channelId: Number,
-            userId: Number,
+            messageId: String,
+            channelId: String,
+            userId: String,
             messageContent: String,
             sendDate: String,
             sender: Boolean

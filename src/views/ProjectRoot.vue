@@ -14,6 +14,7 @@
 
             <portal-target name="createProjectOverlayDest"/>
             <portal-target name="createComponentOverlayDest"/>
+            <LogoutButton/>
         </div>
     </div>
 </template>
@@ -23,10 +24,12 @@
     import ProjectList from "./ProjectList/ProjectList";
     import {mapState, mapActions} from "vuex";
     import WebSocketHandler from "../services/WebSocketHandler";
+    import LogoutButton from "../components/Login/LogoutButton";
 
     export default {
         name: "ProjectRoot",
         components: {
+            LogoutButton,
             ProjectList,
             PortalTarget
         },
