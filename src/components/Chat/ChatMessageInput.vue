@@ -51,7 +51,7 @@
                             channelid: this.$parent.getChannelId,
                             userid: this.getUserId(),
                             content: this.text,
-                            senddate: new Date().toDateString(),
+                            senddate: new Date(),
                         },
                         projectid: this.$parent.getProjectId,
                         type: "message",
