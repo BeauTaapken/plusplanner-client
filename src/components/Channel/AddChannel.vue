@@ -27,6 +27,10 @@
        font-size: 15px;
     }
 
+   #new-channel:hover  {
+       cursor: pointer;
+   }
+
     .v-list-item:hover {
         background-color: #282b2f !important;
     }
