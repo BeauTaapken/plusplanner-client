@@ -14,6 +14,7 @@
 
             <portal-target name="createProjectOverlayDest"/>
             <portal-target name="createComponentOverlayDest"/>
+            <portal-target name="createChatOverlayDest"/>
             <LogoutButton/>
         </div>
     </div>
