@@ -10,19 +10,23 @@
                     v-bind:channel-name="item.name"
                     v-bind:chat-name="chatName"
             />
-            <AddChannel/>
+
+            <v-list-item id="new-channel" v-on:click="addChannel">
+                <i style="color: grey" class="fas fa-plus mr-2"></i> New channel
+            </v-list-item>
         </v-list-group>
 
-
+        <CreateChannel ref="createChannel" v-bind:chatId="chatId"/>
     </div>
 </template>
 
 <script>
     import SubMenuChatItem from "./SubMenuChatItem";
-    import AddChannel from "../../components/Channel/AddChannel";
+    import CreateChannel from '@/components/Chat/Channel/CreateChannel.vue';
+
     export default {
         name: "SubMenuChatHeader",
-        components: {AddChannel, SubMenuChatItem},
+        components: {SubMenuChatItem, CreateChannel},
         props: {
             chatName: String,
             channels: Array,
@@ -37,7 +41,9 @@
 
         },
         methods: {
-
+            addChannel: function() {
+                this.$refs.createChannel.overlay = true;
+            }
         }
     }
 </script>
@@ -103,4 +109,9 @@
         float: left;
     }
 
+    #new-channel {
+        color: white !important;
+        text-align: center;
+        font-size: 15px;
+    }
 </style>

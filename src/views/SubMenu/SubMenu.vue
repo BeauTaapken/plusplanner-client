@@ -50,7 +50,7 @@
                     v-for="data in this.usedData.chats"
                     :ref="data.name"
                     v-bind:key="data.chatid"
-                    v-bind:chat-id="data.chatid"
+                    v-bind:chatId="data.chatid"
                     v-bind:chat-name="data.name"
                     v-bind:channels="data.channels"
             />
