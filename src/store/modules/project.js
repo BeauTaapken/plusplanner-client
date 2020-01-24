@@ -50,6 +50,11 @@ export default {
                 if(project.projectid === payload.projectid) {
                     project.parts.forEach((part) => {
                         if(part.partid === payload.subpart.partid) {
+                            if(part.subparts.filter(subpart => subpart.subpartid === payload.subpart.subpartid).length > 0)
+                            {
+                                let indexOf = part.subparts.map(function(e) { return e.subpartid; }).indexOf(payload.subpart.subpartid);
+                                part.subparts.splice(indexOf, 1);
+                            }
                             part.subparts.filter(subpart => subpart.subpartid !== payload.subpart.subpartid)
                             part.subparts.push(payload.subpart)
                             Vue.set(state.projects, index, project)
@@ -133,7 +138,7 @@ export default {
         updateSubpart({ commit }, payload) {
             commit("UPDATE_SUBPART", {
                 "projectid": payload.projectid,
-                "channel": payload.element
+                "subpart": payload.element
             });
         },
     },
