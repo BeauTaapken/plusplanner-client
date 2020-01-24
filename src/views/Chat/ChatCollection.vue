@@ -1,6 +1,6 @@
 <template>
     <div class="component-content">
-            <div class="text-header" v-text="this.usedData.name"></div>
+            <div class="text-header"><i class="fas fa-hashtag mr-2"></i> {{this.usedData.name}}</div>
             <v-row style="margin-left: 2px">
                 <v-col cols="10" class="col-chat">
                     <MessageContent>
@@ -42,6 +42,10 @@
         }),
         created() {
             this.load();
+            let chatHeader = this.$parent.$refs[this.$route.params.chat][0];
+            setTimeout(function () {
+                chatHeader.open = true;
+            }, 20);
         }
     }
 </script>

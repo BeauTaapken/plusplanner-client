@@ -1,7 +1,7 @@
 <template>
         <router-link style="color: white; text-decoration: none; display: block" :key="partName" :to="{ name: 'board', params: { partName: partName } }">
             <v-list-item>
-                {{ partName }}
+                <i style="color: grey" class="fab fa-trello mr-2"></i>{{ partName }}
             </v-list-item>
         </router-link>
 </template>

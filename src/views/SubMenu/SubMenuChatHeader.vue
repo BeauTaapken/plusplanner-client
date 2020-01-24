@@ -1,7 +1,6 @@
 <template>
     <div>
-
-        <v-list-group >
+        <v-list-group :value="open">
             <template v-slot:activator>
                 <v-list-item-title>{{ chatName }}</v-list-item-title>
             </template>
@@ -11,6 +10,7 @@
                     v-bind:channel-name="item.name"
                     v-bind:chat-name="chatName"
             />
+            <AddChannel/>
         </v-list-group>
 
 
@@ -19,12 +19,18 @@
 
 <script>
     import SubMenuChatItem from "./SubMenuChatItem";
+    import AddChannel from "../../components/Channel/AddChannel";
     export default {
         name: "SubMenuChatHeader",
-        components: {SubMenuChatItem},
+        components: {AddChannel, SubMenuChatItem},
         props: {
             chatName: String,
             channels: Array
+        },
+        data() {
+            return {
+                open: false
+            }
         },
         mounted() {
 

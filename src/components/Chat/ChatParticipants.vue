@@ -23,8 +23,6 @@
             }
         },
         created() {
-            let json = JSON.parse('{"userid": 0, "name": "Testuser", "image": ""}');
-            this.participants.push(json);
         }
     }
 </script>

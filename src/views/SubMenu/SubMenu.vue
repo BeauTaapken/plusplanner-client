@@ -1,13 +1,13 @@
 <template>
-    <div style="height: 100vh; max-height: 100vh">
+    <div style="height: 100vh; min-height: 100vh; max-height: 100vh; position: relative" >
         <v-navigation-drawer
             id="nav-drawer"
             permanent
             class="project-nav" 
             color="#2e3136"
             >
-            <v-list-item>
-                <v-list-item-content>
+            <v-list-item style="position: sticky; top: 0; background-color: #2e3136; z-index: 100">
+                <v-list-item-content >
                     <v-list-item-title class="project-header">{{
                         projectName
                         }}
@@ -37,7 +37,6 @@
                     </v-menu>
                 </v-list-item-action>
             </v-list-item>
-            <UserSettingsHolder/>
 
             <CreatePart ref="createComponent" />
 
@@ -48,10 +47,12 @@
             />
             <SubMenuChatHeader
                     v-for="data in this.usedData.chats"
+                    :ref="data.name"
                     v-bind:key="data.chatid"
                     v-bind:chat-name="data.name"
                     v-bind:channels="data.channels"
             />
+            <UserSettingsHolder/>
         </v-navigation-drawer>
 
         <router-view name="board" :key="this.$route.fullPath"/>
@@ -105,6 +106,10 @@
         width: calc(100% - 80px);
         overflow-y: hidden;
 
+    }
+
+    >>>.v-navigation-drawer__content {
+        height: 75%;
     }
 
     >>> .v-list-group .v-list-item__title {

@@ -1,17 +1,14 @@
 <template>
-    <router-link style="color: white; text-decoration: none; display: block" :key="channelName" :to="{ name: 'chat', params: { chat: chatName, channel: channelName } }">
-        <v-list-item>
-            <i style="color: grey" class="fas fa-hashtag"></i> {{ channelName }}
+        <v-list-item id="new-channel">
+            <i style="color: grey" class="fas fa-plus mr-2"></i> New channel
         </v-list-item>
-    </router-link>
 </template>
 
 <script>
     export default {
-        name: "SubMenuChatItem",
+        name: "AddChannel",
         props: {
-            chatName: String,
-            channelName: String,
+
         },
     }
 </script>
@@ -24,9 +21,12 @@
         width: 100%;
     }
 
-    >>>.theme--light.v-list-item:not(.v-list-item--active):not(.v-list-item--disabled){
+   #new-channel {
         color: white !important;
+       text-align: center;
+       font-size: 15px;
     }
+
     .v-list-item:hover {
         background-color: #282b2f !important;
     }

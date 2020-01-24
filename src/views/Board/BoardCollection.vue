@@ -1,7 +1,7 @@
 <template>
     <div v-if="!this.project.loading">
         <div class="component-content">
-            <div class="text-header" v-text="this.$route.params.partName"></div>
+            <div class="text-header"><i class="fab fa-trello mr-2"></i> {{this.$route.params.partName}}</div>
             <v-row class="board-content">
                 <BoardTable ref="child"
                             v-for="table in tableNames"

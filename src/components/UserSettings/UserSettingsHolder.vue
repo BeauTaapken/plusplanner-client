@@ -1,55 +1,38 @@
 <template>
     <div id="holder">
         <p>{{username}}</p>
-        <img id="image"/>
+        <img :src="picture" id="image"/>
+        <LogoutButton/>
     </div>
 </template>
 
 <script>
 
+    import PictureHolder from "../../services/PictureHolder";
+    import LogoutButton from "../Login/LogoutButton";
+
     export default {
         name: "UserSettingsHolder",
+        components: {LogoutButton},
         data() {
             return {
-                username: null
+                username: null,
+                picture: null
             }
         },
         created() {
-            this.getProfilePicture();
+            this.picture = PictureHolder.getPicture(this.$session);
             let token = this.$session.get("plusplannerToken");
             let parts = token.split('.');
             let payload = JSON.parse(atob(parts[1]));
             this.username = payload.unm;
-        },
-        methods: {
-            getImage: function () {
-                let token = this.$session.get("plusplannerToken");
-                let parts = token.split('.');
-                let payload = JSON.parse(atob(parts[1]));
-                return payload.pfp;
-            },
-            getProfilePicture: function () {
-                let comp = this;
-                let data;
-                fetch(comp.getImage() + "?width=150px&height=150px", {
-                    method: 'GET',
-                    headers: {
-                        Authorization: 'Bearer ' + comp.$session.get("fontysToken")
-                    }
-                }).then(response => {
-                    response.blob().then(blobResponse => {
-                        data = blobResponse;
-                        const urlCreator = window.URL || window.webkitURL;
-                        document.getElementById('image').src = urlCreator.createObjectURL(data);
-                    })
-                });
-            }
         }
     }
 </script>
 
 <style scoped>
     #holder {
+        background-color: #2e3136;
         position: absolute;
         bottom: 0;
         width: 100%;
@@ -57,6 +40,11 @@
         height: 10vh;
         min-height: 10vh;
         z-index: 100;
+
+        -webkit-user-select: none; /* Safari */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* IE10+/Edge */
+        user-select: none; /* Standard */
     }
 
     #holder p{
@@ -71,5 +59,6 @@
         width: 150px;
         height: 150px;
         left: 50px;
+
     }
 </style>
