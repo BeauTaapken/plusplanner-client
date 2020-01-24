@@ -45,6 +45,20 @@ export default {
                 }
             })
         },
+        UPDATE_SUBPART(state, payload) {
+            state.projects.forEach((project, index) => {
+                if(project.projectid === payload.projectid) {
+                    project.parts.forEach((part) => {
+                        if(part.partid === payload.subpart.partid) {
+                            part.subparts.filter(subpart => subpart.subpartid !== payload.subpart.subpartid)
+                            part.subparts.push(payload.subpart)
+                            Vue.set(state.projects, index, project)
+                        }
+                    })
+
+                }
+            })
+        },
         CREATE_CHAT(state, payload) {
             state.projects.forEach((project, index) => {
                 if(project.projectid === payload.projectid) {
@@ -112,6 +126,12 @@ export default {
         },
         addChannelToChat({ commit }, payload) {
             commit("ADD_CHANNEL", {
+                "projectid": payload.projectid,
+                "channel": payload.element
+            });
+        },
+        updateSubpart({ commit }, payload) {
+            commit("UPDATE_SUBPART", {
                 "projectid": payload.projectid,
                 "channel": payload.element
             });
