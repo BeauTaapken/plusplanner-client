@@ -55,6 +55,12 @@ class WebSocketHandler {
                             // upload subparts from project
                             Store.dispatch("project/addSubpartToPart", json);
                             break;
+                        case "update":
+
+                            window.console.log(json.element);
+                            // upload subparts from project
+                            Store.dispatch("project/updateSubpart", json);
+                            break;
                     }
                     break;
                 }
