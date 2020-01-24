@@ -7,9 +7,9 @@
                 </v-card-actions>
             </v-layout>
 
-            <draggable :group="{ name: 'tables' }" v-model="itemArray" @change="addToQeueu" class="task">
+            <draggable :group="{ name: 'tables' }" v-model="getItemArray" @change="addToQeueu" class="task">
                 <BoardTask
-                        v-for="item in itemArray"
+                        v-for="item in getItemArray"
                         v-bind:key="item.subpartid"
                         v-bind:name="item.subpartname"
                         v-bind:description="item.description"
@@ -22,7 +22,7 @@
             </draggable>
 
             <CreateTask class="task"
-                v-bind:enum-table-name="enumTableName"
+                        v-bind:enum-table-name="enumTableName"
             />
             <div ref="editTask"></div>
         </v-card>
@@ -33,7 +33,7 @@
     import BoardTask from "./BoardTask";
     import draggable from "vuedraggable";
     import CreateTask from "./CreateTask";
-    import { mapGetters } from "vuex"
+    import {mapGetters} from "vuex"
 
     export default {
         name: "BoardTable",
@@ -53,62 +53,65 @@
                 queueArray: []
             };
         },
-        created() {
-          let project = this.getProjectByName(this.$route.params.projectName);
-          let part = project.parts.filter(x => x.partname === this.$route.params.partName)[0];
-          window.console.log(part);
-          for(let i = 0; i < part.subparts.length; i++)
-          {
-              if(part.subparts[i].state === this.enumTableName)
-              {
-                  window.console.log('got here');
-                  this.itemArray.push(part.subparts[i]);
-              }
-          }
-        },
         methods: {
-          addToQeueu: function (value) {
-              if(value.added){
-                if(value.added.element)
-                {
-                  this.queueArray.push(value.added.element);
-                  while(this.queueArray.length !== 0)
-                  {
-                    this.updateWatch();
-                  }
+            addToQeueu: function (value) {
+                if (value.added) {
+                    if (value.added.element) {
+                        this.queueArray.push(value.added.element);
+                        while (this.queueArray.length !== 0) {
+                            this.updateWatch();
+                        }
+                    }
                 }
-              }
-          },
-          updateWatch: function () {
-            let comp = this;
-            if(this.queueArray.length !== 0)
-            {
-              for (let i = 0; i < this.queueArray.length; i++) {
-                  let element = {
-                      element: {
-                          subpartid: this.queueArray[i].subpartid,
-                          description: this.queueArray[i].description,
-                          subpartname: this.queueArray[i].subpartname,
-                          enddate: this.queueArray[i].enddate,
-                          partid: this.queueArray[i].partid,
-                          state: this.enumTableName
-                      },
-                      projectid: this.projectId,
-                      action: "update",
-                      type: "subpart"
-                  };
-                  comp.$root.websocket.sendJson(element);
-              }
-              this.queueArray = [];
+            },
+            updateWatch: function () {
+                let comp = this;
+                if (this.queueArray.length !== 0) {
+                    for (let i = 0; i < this.queueArray.length; i++) {
+                        let element = {
+                            element: {
+                                subpartid: this.queueArray[i].subpartid,
+                                description: this.queueArray[i].description,
+                                subpartname: this.queueArray[i].subpartname,
+                                enddate: this.queueArray[i].enddate,
+                                partid: this.queueArray[i].partid,
+                                state: this.enumTableName
+                            },
+                            projectid: this.projectId,
+                            action: "update",
+                            type: "subpart"
+                        };
+                        comp.$root.websocket.sendJson(element);
+                    }
+                    this.queueArray = [];
+                }
             }
-          }
         },
         watch: {
             queueArray: function () {
                 this.updateWatch();
             }
         },
-        computed: mapGetters("project", ['getProjectByName']),
+        computed: {
+            getItemArray: {
+                get: function () {
+                    let returnArray = [];
+                    let project = this.getProjectByName(this.$route.params.projectName);
+                    let part = project.parts.filter(x => x.partname === this.$route.params.partName)[0];
+                    for (let i = 0; i < part.subparts.length; i++) {
+                        if (part.subparts[i].state === this.enumTableName) {
+                            returnArray.push(part.subparts[i]);
+                        }
+                    }
+                    return returnArray;
+                },
+                // eslint-disable-next-line no-unused-vars
+                set: function(newValue){
+                    window.console.log('adjusted');
+                }
+            },
+            ...mapGetters("project", ['getProjectByName'])
+        }
     };
 </script>
 
