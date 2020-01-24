@@ -42,6 +42,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+
 export default {
   name: "CreateTask",
   props: {
@@ -79,14 +81,16 @@ export default {
           enddate: this.date,
           partid: partid
         },
-        type: "task",
+        projectid: this.getProjectIdByName(this.$route.params.projectName),
+        type: "subpart",
         action: "create"
       };
-
+      window.console.log(json);
       this.$root.websocket.sendJson(json);
       this.overlay = !this.overlay;
     }
-  }
+  },
+  computed: mapGetters("project", ['getProjectIdByName']),
 };
 </script>
 
