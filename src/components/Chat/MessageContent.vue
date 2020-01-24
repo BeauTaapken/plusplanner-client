@@ -7,7 +7,7 @@
                      v-bind:message-content="data.content"
                      v-bind:send-date="data.senddate"
                      v-bind:user-id="data.userid"
-                     v-bind:sender="0 === data.userid"
+                     v-bind:sender="getUserId === data.userid"
         ></ChatMessage>
         <ChatMessageInput></ChatMessageInput>
     </div>
@@ -21,27 +21,40 @@
         name: "MessageContent",
         components: {ChatMessageInput, ChatMessage},
         data() {
-            return {
-
-            }
+            return {}
         },
         computed: {
             getMessages() {
-                return this.$parent.usedData.messages;
+                let comp = this;
+                return comp.$parent.usedData.messages.sort(function(a, b) {
+                    // convert date object into number to resolve issue in typescript
+                    return  +new Date(a.senddate) - +new Date(b.senddate);
+                });
             },
             getChannelId() {
                 return this.$parent.usedData.channelid;
             },
             getProjectId() {
                 return this.$parent.projectId;
+            },
+            getUserId() {
+                let token = this.$session.get("plusplannerToken");
+                let parts = token.split('.');
+                let payload = JSON.parse(atob(parts[1]));
+                return payload.uid;
             }
+        },
+        mounted() {
+            setTimeout(function () {
+                document.getElementById('chat').scrollTop = 99999999;
+            }, 50);
         }
     }
 </script>
 
 <style scoped>
-.message-content {
-    max-height: 85vh;
-    overflow-y:scroll;
-}
+    .message-content {
+        max-height: 85vh;
+        overflow-y: scroll;
+    }
 </style>

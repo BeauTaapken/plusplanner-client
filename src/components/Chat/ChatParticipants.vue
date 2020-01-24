@@ -4,8 +4,8 @@
         <Participant v-for="participant in participants"
                      v-bind:key="participant.userid"
                      v-bind:id="participant.userid"
-                     v-bind:name="participant.name"
-                     v-bind:image="participant.image"
+                     v-bind:name="participant.username"
+                     v-bind:image="participant.photo"
 
         />
     </v-container>
@@ -13,6 +13,7 @@
 
 <script>
     import Participant from "./Participant";
+    import { mapGetters } from "vuex"
 
     export default {
         name: "ChatParticipants",
@@ -23,7 +24,15 @@
             }
         },
         created() {
-        }
+            let data = this.getProjectByName(this.$route.params.projectName);
+            let comp = this;
+            for(let i = 0; i < data.users.length; i++)
+            {
+                comp.participants.push(data.users[i].user);
+            }
+
+        },
+        computed: mapGetters("project", ['getProjectByName']),
     }
 </script>
 

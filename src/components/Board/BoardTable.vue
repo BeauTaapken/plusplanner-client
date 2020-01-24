@@ -22,7 +22,7 @@
             </draggable>
 
             <CreateTask class="task"
-                v-bind:table-name="enumTableName"
+                v-bind:enum-table-name="enumTableName"
             />
             <div ref="editTask"></div>
         </v-card>
@@ -33,6 +33,7 @@
     import BoardTask from "./BoardTask";
     import draggable from "vuedraggable";
     import CreateTask from "./CreateTask";
+    import { mapGetters } from "vuex"
 
     export default {
         name: "BoardTable",
@@ -44,14 +45,26 @@
         props: {
             tableName: String,
             enumTableName: String,
-            items: Array,
             projectId: String
         },
         data() {
             return {
-                itemArray: this.items,
+                itemArray: [],
                 queueArray: []
             };
+        },
+        created() {
+          let project = this.getProjectByName(this.$route.params.projectName);
+          let part = project.parts.filter(x => x.partname === this.$route.params.partName)[0];
+          window.console.log(part);
+          for(let i = 0; i < part.subparts.length; i++)
+          {
+              if(part.subparts[i].state === this.enumTableName)
+              {
+                  window.console.log('got here');
+                  this.itemArray.push(part.subparts[i]);
+              }
+          }
         },
         methods: {
           addToQeueu: function (value) {
@@ -77,12 +90,14 @@
                           description: this.queueArray[i].description,
                           subpartname: this.queueArray[i].subpartname,
                           enddate: this.queueArray[i].enddate,
-                          partid: this.queueArray[i].partid
+                          partid: this.queueArray[i].partid,
+                          state: this.enumTableName
                       },
+                      projectid: this.projectId,
                       action: "update",
-                      type: "task"
+                      type: "subpart"
                   };
-                  comp.$root.webSocket.sendJson(element);
+                  comp.$root.websocket.sendJson(element);
               }
               this.queueArray = [];
             }
@@ -93,9 +108,7 @@
                 this.updateWatch();
             }
         },
-        mounted() {
-            this.itemArray = this.items;
-        }
+        computed: mapGetters("project", ['getProjectByName']),
     };
 </script>
 

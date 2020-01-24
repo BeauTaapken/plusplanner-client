@@ -2,13 +2,11 @@ export default class PictureHolder {
     static picture = null;
 
     static getPicture(session) {
-        if(this.picture === null)
-        {
+        if (this.picture === null) {
             let token = session.get("plusplannerToken");
             let parts = token.split('.');
             let payload = JSON.parse(atob(parts[1]));
             let data;
-
             fetch(payload.pfp + "?width=150px&height=150px", {
                 method: 'GET',
                 headers: {
@@ -22,6 +20,6 @@ export default class PictureHolder {
                 })
             });
         }
-        return this.picture;
+        return this.picture
     }
 }

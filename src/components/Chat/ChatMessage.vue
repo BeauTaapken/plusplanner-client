@@ -5,7 +5,7 @@
             <v-card-title>
                 {{messageContent}}
             </v-card-title>
-            <div class="time"> {{sendDate.substring(11, 19)}}</div>
+            <div class="time"> {{ getDate }}</div>
         </v-card>
         <v-spacer v-if="!sender"></v-spacer>
     </v-row>
@@ -21,6 +21,12 @@
             messageContent: String,
             sendDate: String,
             sender: Boolean
+        },
+        computed: {
+            getDate: function() {
+                let date = new Date(this.sendDate);
+                return date.toLocaleTimeString() + " " + date.toLocaleDateString();
+            }
         }
     }
 </script>

@@ -1,7 +1,7 @@
 <template>
     <v-row class="participant">
         <v-col cols="2">
-            <img class="img" src="https://cdn1.imggmi.com/uploads/2019/11/26/e3f2004d2c56466235564fe937b22be7-full.png"
+            <img class="img" src="" id="chat-profile-pic"
                  width="50" height="50"/>
         </v-col>
         <v-col cols="10" class="user">
@@ -17,6 +17,28 @@
             id: String,
             name: String,
             image: String
+        },
+        methods: {
+            getProfilePicture: function() {
+                let comp = this;
+                let session = this.$session;
+                let data;
+                fetch(comp.image + "?width=50px&height=50px", {
+                    method: 'GET',
+                    headers: {
+                        Authorization: 'Bearer ' + session.get("fontysToken")
+                    }
+                }).then(response => {
+                    response.blob().then(blobResponse => {
+                        data = blobResponse;
+                        const urlCreator = window.URL || window.webkitURL;
+                        document.getElementById("chat-profile-pic").src = urlCreator.createObjectURL(data);
+                    })
+                });
+            }
+        },
+        created() {
+            this.getProfilePicture();
         }
     }
 </script>

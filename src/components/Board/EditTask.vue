@@ -76,7 +76,7 @@
                         partid: this.partId
                     },
                     projectid: this.projectid,
-                    type: "task",
+                    type: "subpart",
                     action: "update"
                 };
 
