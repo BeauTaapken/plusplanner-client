@@ -111,7 +111,7 @@ export default {
         addChannelToChat({ commit }, payload) {
             commit("ADD_CHANNEL", {
                 "projectid": payload.projectid,
-                "chat": payload.element
+                "channel": payload.element
             });
         },
     },

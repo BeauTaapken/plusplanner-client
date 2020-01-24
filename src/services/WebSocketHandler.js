@@ -44,7 +44,7 @@ class WebSocketHandler {
                         case "create":
                             window.console.log(json);
                             //upload to project in store
-                            Store.dispatch("project/createChannel", json);
+                            Store.dispatch("project/addChannelToChat", json);
                             break;
                     }
                     break;
@@ -67,6 +67,7 @@ class WebSocketHandler {
     }
 
     sendJson(json) {
+        window.console.log(JSON.stringify(json));
         this.websocket.send(JSON.stringify(json));
     }
 

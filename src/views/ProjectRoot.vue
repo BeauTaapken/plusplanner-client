@@ -14,6 +14,8 @@
 
             <portal-target name="createProjectOverlayDest"/>
             <portal-target name="createComponentOverlayDest"/>
+            <portal-target name="createChannelOverlayDest"/>
+            <portal-target name="createChatOverlayDest"/>
         </div>
     </div>
 </template>

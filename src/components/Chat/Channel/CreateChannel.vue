@@ -10,7 +10,7 @@
                 <v-form>
                     <v-container>
                         <v-card-title class="justify-center">New channel</v-card-title>
-                        <v-text-field id="chat-name" label="Channel name" filled shaped></v-text-field>
+                        <v-text-field id="channel-name" label="Channel name" filled shaped></v-text-field>
                         <v-row>
                             <v-col cols="6">
                                 <v-btn width="100%" color="#3b3b3b" @click="cancel">Cancel</v-btn>
@@ -33,6 +33,9 @@
       
     export default {
         name: "CreateProject",
+        props: {
+            chatId: String
+        },
         data() {
             return {
                 overlay: false,
@@ -47,14 +50,15 @@
         computed: mapGetters("project", ["getProjectIdByName"]),
         methods: {
             save: function () {
-                let chat_name = document.getElementById("channel-name").value;
+                let channel_name = document.getElementById("channel-name").value;
 
                 const uuidv1 = require('uuid/v1');
                 const component = {
                     element: {
+                        chatid: this.chatId,
                         channelid: uuidv1(),
                         projectid: this.getProjectIdByName(this.$route.params.projectName),
-                        name: chat_name
+                        name: channel_name
                     },
                     projectid: this.getProjectIdByName(this.$route.params.projectName),
                     type: "channel",
