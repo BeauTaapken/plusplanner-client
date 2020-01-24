@@ -25,7 +25,8 @@
         components: {AddChannel, SubMenuChatItem},
         props: {
             chatName: String,
-            channels: Array
+            channels: Array,
+            chatId: String
         },
         data() {
             return {
