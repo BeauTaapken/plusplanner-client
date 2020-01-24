@@ -17,16 +17,20 @@
         data() {
             return {
                 username: null,
-                picture: null
+                picture: null,
+                loadingImage: true,
             }
         },
         created() {
-            this.picture = PictureHolder.getPicture(this.$session);
+            if(this.picture === null)
+            {
+                this.picture = PictureHolder.getPicture(this.$session);
+            }
             let token = this.$session.get("plusplannerToken");
             let parts = token.split('.');
             let payload = JSON.parse(atob(parts[1]));
             this.username = payload.unm;
-        }
+        },
     }
 </script>
 
