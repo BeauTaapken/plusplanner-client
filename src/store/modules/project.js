@@ -38,7 +38,8 @@ export default {
                 if(project.projectid === payload.projectid) {
                     project.parts.forEach((part, index) => {
                         if(part.partid === payload.partid) {
-                            Vue.set(state.projects.parts, index, payload.subpart)
+                            part.subparts.push(payload.subpart)
+                            Vue.set(state.projects, index, project)
                         }
                     })
                 }
@@ -100,7 +101,7 @@ export default {
         addSubpartToPart({ commit }, payload) {
             commit("ADD_SUBPART", {
                 "projectid": payload.projectid,
-                "part": payload.element
+                "subpart": payload.element
             });
         },
         createChat({ commit }, payload) {
