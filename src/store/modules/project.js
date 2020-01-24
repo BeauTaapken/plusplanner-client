@@ -34,9 +34,9 @@ export default {
             })
         },
         ADD_SUBPART(state, payload) {
-            state.projects.forEach((project) => {
+            state.projects.forEach((project, index) => {
                 if(project.projectid === payload.projectid) {
-                    project.parts.forEach((part, index) => {
+                    project.parts.forEach((part) => {
                         if(part.partid === payload.subpart.partid) {
                             part.subparts.push(payload.subpart)
                             Vue.set(state.projects, index, project)
