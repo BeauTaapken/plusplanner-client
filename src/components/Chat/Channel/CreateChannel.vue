@@ -57,7 +57,6 @@
                     element: {
                         chatid: this.chatId,
                         channelid: uuidv1(),
-                        projectid: this.getProjectIdByName(this.$route.params.projectName),
                         name: channel_name
                     },
                     projectid: this.getProjectIdByName(this.$route.params.projectName),

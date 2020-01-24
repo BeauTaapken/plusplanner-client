@@ -54,11 +54,13 @@ export default {
             })
         },
         ADD_CHANNEL(state, payload) {
-            state.projects.forEach((project) => {
+            state.projects.forEach((project, index) => {
                 if(project.projectid === payload.projectid) {
-                    project.chats.forEach((chat, index) => {
-                        if(chat.chatid === payload.chatid) {
-                            Vue.set(state.projects.chats, index, payload.channel)
+                    project.chats.forEach((chat) => {
+                        if(chat.chatid === payload.channel.chatid) {
+                            payload.channel["messages"] = []
+                            chat.channels.push(payload.channel)
+                            Vue.set(state.projects, index, project)
                         }
                     })
                 }
@@ -70,7 +72,6 @@ export default {
             commit("SET_LOADING", true);
             return ProjectService.getProjects(session)
                 .then(projects => {
-                    window.console.log(projects);
                     commit("SET_PROJECTS", projects.data);
                     commit("SET_LOADING", false);
                 })
