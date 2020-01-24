@@ -37,7 +37,7 @@ export default {
             state.projects.forEach((project) => {
                 if(project.projectid === payload.projectid) {
                     project.parts.forEach((part, index) => {
-                        if(part.partid === payload.partid) {
+                        if(part.partid === payload.subpart.partid) {
                             part.subparts.push(payload.subpart)
                             Vue.set(state.projects, index, project)
                         }
