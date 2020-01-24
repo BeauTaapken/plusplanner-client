@@ -8,7 +8,6 @@
                             v-bind:key="table.tableName"
                             v-bind:table-name="table.tableName"
                             v-bind:enum-table-name="table.enumName"
-                            v-bind:items="findTableData(table.enumName)"
                             v-bind:project-id="projectid"
                 />
             </v-row>
@@ -52,16 +51,6 @@
                 this.usedData = t[0];
                 this.partId = this.usedData.partid;
             },
-            findTableData: function (tablename) {
-                let selectedPartData = this.usedData;
-                let dataArray = [];
-                for (let i = 0; i < selectedPartData.subparts.length; i++) {
-                    if (selectedPartData.subparts[i].state === tablename) {
-                        dataArray.push(selectedPartData.subparts[i]);
-                    }
-                }
-                return dataArray;
-            }
         },
         computed: mapState({
             project: state => state.project
