@@ -32,6 +32,37 @@ export default {
                     Vue.set(state.projects, index, project);
                 }
             })
+        },
+        ADD_SUBPART(state, payload) {
+            state.projects.forEach((project) => {
+                if(project.projectid === payload.projectid) {
+                    project.parts.forEach((part, index) => {
+                        if(part.partid === payload.partid) {
+                            Vue.set(state.projects.parts, index, payload.subpart)
+                        }
+                    })
+                }
+            })
+        },
+        CREATE_CHAT(state, payload) {
+            state.projects.forEach((project, index) => {
+                if(project.projectid === payload.projectid) {
+                    payload.chat["channels"] = []
+                    project.chats.push(payload.chat)
+                    Vue.set(state.projects, index, project);
+                }
+            })
+        },
+        ADD_CHANNEL(state, payload) {
+            state.projects.forEach((project) => {
+                if(project.projectid === payload.projectid) {
+                    project.chats.forEach((chat, index) => {
+                        if(chat.chatid === payload.chatid) {
+                            Vue.set(state.projects.chats, index, payload.channel)
+                        }
+                    })
+                }
+            })
         }
     },
     actions: {
@@ -64,7 +95,25 @@ export default {
                 "projectid": payload.projectid,
                 "part": payload.element
             });
-        }
+        },
+        addSubpartToPart({ commit }, payload) {
+            commit("ADD_SUBPART", {
+                "projectid": payload.projectid,
+                "part": payload.element
+            });
+        },
+        createChat({ commit }, payload) {
+            commit("CREATE_CHAT", {
+                "projectid": payload.projectid,
+                "chat": payload.element
+            });
+        },
+        addChannelToChat({ commit }, payload) {
+            commit("ADD_CHANNEL", {
+                "projectid": payload.projectid,
+                "chat": payload.element
+            });
+        },
     },
     getters: {
         projects: state => {

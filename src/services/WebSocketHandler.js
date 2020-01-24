@@ -30,11 +30,30 @@ class WebSocketHandler {
                             break;
                     }
                     break;
+                case "chat":
+                    switch (json.action) {
+                        case "create":
+                            window.console.log(json);
+                            //upload to project in store
+                            Store.dispatch("project/createChat", json);
+                            break;
+                    }
+                    break;
+                case "channel":
+                    switch (json.action) {
+                        case "create":
+                            window.console.log(json);
+                            //upload to project in store
+                            Store.dispatch("project/createChannel", json);
+                            break;
+                    }
+                    break;
                 case "subpart": {
                     switch (json.action) {
                         case "create":
-                            // upload subparts from project
                             window.console.log(json.element);
+                            // upload subparts from project
+                            // Store.dispatch("project/addSubpartToPart", json);
                             break;
                     }
                     break;
