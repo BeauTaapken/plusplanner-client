@@ -5,7 +5,8 @@ export default {
     state: {
         loading: null,
         error: null,
-        users: []
+        users: [],
+        picture: null
     },
     mutations: {
         SET_USERS(state, payload) {
@@ -16,6 +17,9 @@ export default {
         },
         SET_LOADING(state, payload) {
             state.loading = payload;
+        },
+        SET_IMAGE(state, payload) {
+            state.picture = payload;
         },
     },
     actions: {
@@ -32,6 +36,9 @@ export default {
                     window.console.log(error)
                     commit("SET_LOADING", false);
                 })
+        },
+        setImage({ commit }, picture) {
+            commit("SET_IMAGE", picture);
         }
     },
     getters: {}

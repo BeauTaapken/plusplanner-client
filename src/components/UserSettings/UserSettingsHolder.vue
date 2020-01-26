@@ -10,6 +10,7 @@
 
     import PictureHolder from "../../services/PictureHolder";
     import LogoutButton from "../Login/LogoutButton";
+    import { mapState } from "vuex";
 
     export default {
         name: "UserSettingsHolder",
@@ -17,14 +18,14 @@
         data() {
             return {
                 username: null,
-                picture: null,
                 loadingImage: true,
             }
         },
+        computed: mapState("user", ["picture"]),
         created() {
-            if(this.picture === null)
+            if(this.picture == null)
             {
-                this.picture = PictureHolder.getPicture(this.$session);
+                PictureHolder.getPicture(this.$session);
             }
             let token = this.$session.get("plusplannerToken");
             let parts = token.split('.');
