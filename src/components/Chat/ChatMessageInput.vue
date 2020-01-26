@@ -45,6 +45,7 @@
             },
             sendMessage: function () {
                 if (this.text !== "") {
+                    window.console.log(this.$parent.getChatId);
                     let element = {
                         element: {
                             messageid: this.createUUID(),
@@ -52,6 +53,7 @@
                             userid: this.getUserId(),
                             content: this.text,
                             senddate: new Date(),
+                            chatid: this.$parent.getChatId
                         },
                         projectid: this.$parent.getProjectId,
                         type: "message",
