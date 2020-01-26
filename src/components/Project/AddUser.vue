@@ -12,19 +12,19 @@
             <v-card-title class="justify-center">Add a new user</v-card-title>
 
             <v-autocomplete
-            v-model="model"
-            :loading="loading"
-            :items="users"
-            item-text="username"
-            item-value="userid"
-            dense
-            chips
-            outlined
-            small-chips
-            deletable-chips
-            label="Search users"
-            multiple
-          ></v-autocomplete>
+                v-model="model"
+                :loading="loading"
+                :items="filteredUsers"
+                item-text="username"
+                item-value="userid"
+                dense
+                chips
+                outlined
+                small-chips
+                deletable-chips
+                label="Search users"
+                multiple
+            ></v-autocomplete>
 
             <v-row>
               <v-col cols="6">
@@ -63,7 +63,13 @@ export default {
   },
   computed: {
       ...mapGetters("project", ["getProjectIdByName"]),
-      ...mapState("user", ["users", "loading"])
+      ...mapState("user", ["users", "loading"]),
+      filteredUsers() {
+        let token = this.$session.get("plusplannerToken");
+        let parts = token.split('.');
+        let payload = JSON.parse(atob(parts[1]));
+        return this.users.filter(e => e.userid !== payload.uid);
+      }
   },
   components: {
     Portal
