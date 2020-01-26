@@ -1,19 +1,20 @@
 <template>
     <v-overlay :value="overlay">
         <v-card class="createTask">
-            <v-form>
+            <v-form ref="editExistingTask">
                 <v-container>
                     <v-card-title class="justify-center">Edit task</v-card-title>
-                    <v-text-field id="taskname" label="Task name" filled shaped :value="name"></v-text-field>
+                    <v-text-field id="taskname" label="Task name" :rules="[rules.required]" filled shaped :value="name"></v-text-field>
 
-                    <v-text-field id="taskdescription" label="Description" filled shaped
+                    <v-text-field id="taskdescription" label="Description" :rules="[rules.required]"  filled shaped
                                   :value="description"></v-text-field>
                     <v-menu>
                         <template v-slot:activator="{ on }">
-                            <v-text-field v-model="date" label="End Date" readonly v-on="on"
+                            <v-text-field v-model="date"  label="End Date" :rules="rules.required" readonly v-on="on"
                                           :value="endDate"></v-text-field>
                         </template>
                         <v-date-picker
+                                :rules="[rules.required]"
                                 v-model="date"
                                 @input="menu2 = false"
                                 width="426"
@@ -51,6 +52,9 @@
         },
         data() {
             return {
+                rules: {
+                    required: value => !!value || 'Required.',
+                },
                 overlay: false,
                 date: this.endDate,
                 menu2: false
@@ -64,24 +68,27 @@
                 this.overlay = !this.overlay;
             },
             save: function () {
-                let newName = document.getElementById("taskname").value;
-                let newDescription = document.getElementById("taskdescription").value;
-                let newItem = {
-                    element: {
-                        subpartid: this.subpartId,
-                        subpartname: newName,
-                        description: newDescription,
-                        state: this.enumTableName,
-                        enddate: this.date,
-                        partid: this.partId
-                    },
-                    projectid: this.projectid,
-                    type: "subpart",
-                    action: "update"
-                };
+                if(this.$refs.editExistingTask.validate())
+                {
+                    let newName = document.getElementById("taskname").value;
+                    let newDescription = document.getElementById("taskdescription").value;
+                    let newItem = {
+                        element: {
+                            subpartid: this.subpartId,
+                            subpartname: newName,
+                            description: newDescription,
+                            state: this.enumTableName,
+                            enddate: this.date,
+                            partid: this.partId
+                        },
+                        projectid: this.projectId,
+                        type: "subpart",
+                        action: "update"
+                    };
 
-                this.$root.websocket.sendJson(newItem);
-                this.overlay = !this.overlay;
+                    this.$root.websocket.sendJson(newItem);
+                    this.overlay = !this.overlay;
+                }
             }
         }
     };
