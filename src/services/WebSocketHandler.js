@@ -95,5 +95,5 @@ class WebSocketHandler {
 export default {
     newWebSocket() {
         return new WebSocketHandler();
-    }
+    },
 }
