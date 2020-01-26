@@ -22,7 +22,7 @@ export default {
             await load();
         }
 
-        return rolemanagerService.get('user/read/', {
+        return rolemanagerService.get('user/read', {
             headers: {
                 Accept: 'application/json',
                 'Content-Type': 'application/json',

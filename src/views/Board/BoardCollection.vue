@@ -3,7 +3,7 @@
         <div class="component-content">
             <div class="text-header">
                 <div><i class="fab fa-trello mr-2"></i> {{this.$route.params.partName}}
-                    <a v-if="usedData.url" class="url-link" v-bind:href="this.usedData.url">Go to file <i class="fas fa-location-arrow ml-1"></i></a></div>
+                    <a v-if="usedData.url" class="url-link" target="_blank" v-bind:href="this.usedData.url">Go to file <i class="fas fa-location-arrow ml-1"></i></a></div>
             </div>
             <v-row class="board-content">
                 <BoardTable ref="child"
@@ -55,9 +55,12 @@
                 this.partId = this.usedData.partid;
             },
         },
-        computed: mapState({
-            project: state => state.project
-        }),
+        computed:
+            {
+                ...mapState({
+                    project: state => state.project
+                }),
+            }
     }
 </script>
 

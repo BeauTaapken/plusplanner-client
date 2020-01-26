@@ -31,6 +31,10 @@
             let parts = token.split('.');
             let payload = JSON.parse(atob(parts[1]));
             this.username = payload.unm;
+            if(this.picture === null)
+            {
+                this.picture = PictureHolder.getPicture(this.$session.get("fontysToken"), payload.pfp);
+            }
         },
     }
 </script>

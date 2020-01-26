@@ -27,7 +27,6 @@ export default {
             commit("SET_LOADING", true);
             RoleManagementService.fetchUsers(session)
                 .then(users => {
-                    window.console.log(users)
                     commit("SET_USERS", users.data)
                     commit("SET_LOADING", false);
                 })
