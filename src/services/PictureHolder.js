@@ -1,16 +1,13 @@
 export default class PictureHolder {
     static picture = null;
 
-    static getPicture(session) {
+    static getPicture(fToken, pfp) {
         if (this.picture === null) {
-            let token = session.get("plusplannerToken");
-            let parts = token.split('.');
-            let payload = JSON.parse(atob(parts[1]));
             let data;
-            fetch(payload.pfp + "?width=150px&height=150px", {
+            fetch(pfp + "?width=150px&height=150px", {
                 method: 'GET',
                 headers: {
-                    Authorization: 'Bearer ' + session.get("fontysToken")
+                    Authorization: 'Bearer ' + fToken
                 }
             }).then(response => {
                 response.blob().then(blobResponse => {
