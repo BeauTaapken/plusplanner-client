@@ -46,12 +46,13 @@
                     .then(response => {
                         let json = response.data;
                         session.set("fontysToken", json.access_token);
+                        session.set("fontysIDToken", json.id_token);
                     }).catch(error => {
                         window.console.log(error);
                         comp.text = "An error occurred while validating you with Fontys. Please re-authenticate with Fontys and try again. If this problem keeps occurring, please contact the developers.";
                         comp.overlay = true;
                         setTimeout(function () {
-                            router.push("/logout");
+                            router.push("/login");
                         }, 5000)
                     });
                 if (!comp.overlay) {
@@ -75,6 +76,10 @@
             }
         },
         created() {
+            if(this.$route.query.code === undefined)
+            {
+                this.$router.push('login');
+            }
             this.login();
         }
     }
