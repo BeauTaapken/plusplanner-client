@@ -37,6 +37,9 @@
             getProjectId() {
                 return this.$parent.projectId;
             },
+            getChatId() {
+                return this.$parent.usedData.chatid;
+            },
             getUserId() {
                 let token = this.$session.get("plusplannerToken");
                 let parts = token.split('.');

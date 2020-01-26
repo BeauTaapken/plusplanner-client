@@ -85,6 +85,25 @@ export default {
                     })
                 }
             })
+        },
+
+        ADD_MESSAGE(state, payload) {
+            state.projects.forEach((project, index) => {
+                if(project.projectid === payload.projectid) {
+                    project.chats.forEach((chat) => {
+                        if(chat.chatid === payload.message.chatid) {
+                            chat.channels.forEach((channel) => {
+                                if(channel.channelid === payload.message.channelid)
+                                {
+                                    delete payload.message.chatid;
+                                    channel.messages.push(payload.message);
+                                    Vue.set(state.projects, index, project)
+                                }
+                            });
+                        }
+                    })
+                }
+            })
         }
     },
     actions: {
@@ -140,7 +159,13 @@ export default {
                 "projectid": payload.projectid,
                 "subpart": payload.element
             });
-        }
+        },
+        addMessage({ commit }, payload) {
+            commit("ADD_MESSAGE", {
+                "projectid": payload.projectid,
+                "message": payload.element
+            });
+        },
     },
     getters: {
         projects: state => {

@@ -1,7 +1,10 @@
 <template>
     <div v-if="!this.project.loading">
         <div class="component-content">
-            <div class="text-header"><i class="fab fa-trello mr-2"></i> {{this.$route.params.partName}}</div>
+            <div class="text-header">
+                <div><i class="fab fa-trello mr-2"></i> {{this.$route.params.partName}}
+                    <a v-if="usedData.url" class="url-link" v-bind:href="this.usedData.url">Go to file <i class="fas fa-location-arrow ml-1"></i></a></div>
+            </div>
             <v-row class="board-content">
                 <BoardTable ref="child"
                             v-for="table in tableNames"
@@ -17,7 +20,7 @@
 
 <script>
     import BoardTable from "../../components/Board/BoardTable.vue";
-    import { mapState } from "vuex"
+    import {mapState} from "vuex"
 
     export default {
         name: "BoardCollection",
@@ -78,5 +81,15 @@
     .text-header {
         padding: 1%;
         border-bottom: #1E2124 1px solid;
+    }
+
+    .url-link {
+        float: right;
+        color: white;
+        text-decoration: none;
+    }
+
+    .url-link:hover {
+        color: #7289DA;
     }
 </style>

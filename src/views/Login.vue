@@ -21,7 +21,13 @@
     import FontysLogin from "../components/Login/FontysLogin";
     export default {
         name: "Login",
-        components: {FontysLogin}
+        components: {FontysLogin},
+        created() {
+            if(this.$session.exists())
+            {
+                this.$session.destroy();
+            }
+        }
     }
 </script>
 

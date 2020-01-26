@@ -7,10 +7,11 @@
       :z-index="zIndex"
       class="custom-overlay">
       <v-card class="createComponent">
-        <v-form>
+        <v-form ref="createPart">
           <v-container>
             <v-card-title class="justify-center">New part</v-card-title>
-            <v-text-field id="part-name" label="Part name" filled shaped></v-text-field>
+            <v-text-field id="part-name" label="Part name" :rules="[rules.required]" filled shaped></v-text-field>
+            <v-text-field id="part-link" :rules="[rules.url]" label="Link to file (optional)" filled shaped></v-text-field>
 
             <v-menu>
               <template v-slot:activator="{ on }">
@@ -49,6 +50,17 @@ export default {
   name: "CreatePart",
   data() {
     return {
+      rules: {
+        required: value => !!value || 'Required.',
+        url: value => {
+          const pattern = /http(s)?:\/\/.(www\.)?[-a-zA-Z0-9@:%._~#=]{2,256}\.[a-z]{2,6}\b[-a-zA-Z0-9@:%_.~#?&=]*/;
+          if(value === null || value === "" || value === undefined)
+          {
+            return true;
+          }
+          return pattern.test(value) || "Invalid url";
+        }
+      },
       overlay: false,
       absolute: true,
       opacity: 0.46,
@@ -62,23 +74,28 @@ export default {
   },
   methods: {
     save: function() {
-      let part_name = document.getElementById("part-name").value;
-      let part_enddate = this.date;
+      if(this.$refs.createPart.validate())
+      {
+        let part_name = document.getElementById("part-name").value;
+        let part_link = document.getElementById("part-link").value;
+        let part_enddate = this.date;
 
-      const uuidv1 = require('uuid/v1');
-      const component = {
-        element: {
-          partid: uuidv1(),
+        const uuidv1 = require('uuid/v1');
+        const component = {
+          element: {
+            partid: uuidv1(),
+            projectid: this.getProjectIdByName(this.$route.params.projectName),
+            partname: part_name,
+            enddate: part_enddate,
+            url: part_link
+          },
           projectid: this.getProjectIdByName(this.$route.params.projectName),
-          partname: part_name,
-          enddate: part_enddate
-        },
-        projectid: this.getProjectIdByName(this.$route.params.projectName),
-        type: "part",
-        action: "create"
-      };
-      this.$root.websocket.sendJson(component);
-      this.overlay = !this.overlay;
+          type: "part",
+          action: "create"
+        };
+        this.$root.websocket.sendJson(component);
+        this.overlay = !this.overlay;
+      }
     },
     cancel: function() {
       this.overlay = !this.overlay;

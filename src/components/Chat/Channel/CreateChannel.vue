@@ -7,10 +7,10 @@
                 :z-index="zIndex"
                 class="custom-overlay">
             <v-card class="createChannel">
-                <v-form>
+                <v-form ref="createNewChannel">
                     <v-container>
                         <v-card-title class="justify-center">New channel</v-card-title>
-                        <v-text-field id="channel-name" label="Channel name" filled shaped></v-text-field>
+                        <v-text-field id="channel-name" label="Channel name" :rules="[rules.required]" filled shaped></v-text-field>
                         <v-row>
                             <v-col cols="6">
                                 <v-btn width="100%" color="#3b3b3b" @click="cancel">Cancel</v-btn>
@@ -38,6 +38,9 @@
         },
         data() {
             return {
+                rules: {
+                    required: value => !!value || 'Required.',
+                },
                 overlay: false,
                 absolute: true,
                 opacity: 0.46,
@@ -50,21 +53,24 @@
         computed: mapGetters("project", ["getProjectIdByName"]),
         methods: {
             save: function () {
-                let channel_name = document.getElementById("channel-name").value;
+                if(this.$refs.createNewChannel.validate())
+                {
+                    let channel_name = document.getElementById("channel-name").value;
 
-                const uuidv1 = require('uuid/v1');
-                const component = {
-                    element: {
-                        chatid: this.chatId,
-                        channelid: uuidv1(),
-                        name: channel_name
-                    },
-                    projectid: this.getProjectIdByName(this.$route.params.projectName),
-                    type: "channel",
-                    action: "create"
-                };
-                this.$root.websocket.sendJson(component);
-                this.overlay = !this.overlay;
+                    const uuidv1 = require('uuid/v1');
+                    const component = {
+                        element: {
+                            chatid: this.chatId,
+                            channelid: uuidv1(),
+                            name: channel_name
+                        },
+                        projectid: this.getProjectIdByName(this.$route.params.projectName),
+                        type: "channel",
+                        action: "create"
+                    };
+                    this.$root.websocket.sendJson(component);
+                    this.overlay = !this.overlay;
+                }
             },
             cancel: function () {
                 this.overlay = !this.overlay;

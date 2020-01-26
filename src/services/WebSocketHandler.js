@@ -27,6 +27,7 @@ class WebSocketHandler {
                         case "create":
                             // upload to chat in project in store
                             window.console.log(json.element);
+                            Store.dispatch("project/addMessage", json);
                             break;
                     }
                     break;

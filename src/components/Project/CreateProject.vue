@@ -7,12 +7,12 @@
                 :z-index="zIndex"
                 class="custom-overlay">
             <v-card class="createProject">
-                <v-form>
+                <v-form ref="createProject">
                     <v-container>
                         <v-card-title class="justify-center">New project</v-card-title>
-                        <v-text-field id="project-name" label="Project name" filled shaped></v-text-field>
+                        <v-text-field id="project-name" :rules="[rules.required]" label="Project name" required filled shaped></v-text-field>
 
-                        <v-text-field id="project-description" label="Project description" filled shaped></v-text-field>
+                        <v-text-field id="project-description" :rules="[rules.required]"  label="Project description" required filled shaped></v-text-field>
                         <v-menu>
                             <template v-slot:activator="{ on }">
                                 <v-text-field v-model="date" label="End Date" readonly v-on="on"></v-text-field>
@@ -51,6 +51,9 @@
         name: "CreateProject",
         data() {
             return {
+                rules: {
+                    required: value => !!value || 'Required.',
+                },
                 overlay: false,
                 absolute: true,
                 opacity: 0.46,
@@ -63,35 +66,39 @@
         },
         methods: {
             save: function () {
-                let project_name = document.getElementById("project-name").value;
-                let project_description = document.getElementById("project-description").value;
-                let project_enddate = this.date;
+                if(this.$refs.createProject.validate())
+                {
+                    let project_name = document.getElementById("project-name").value;
+                    let project_description = document.getElementById("project-description").value;
+                    let project_enddate = this.date;
 
-                const uuidv1 = require('uuid/v1');
-                const project = {
-                    projectid: uuidv1(),
-                    projectname: project_name,
-                    description: project_description,
-                    enddate: project_enddate
-                };
+                    const uuidv1 = require('uuid/v1');
+                    const project = {
+                        projectid: uuidv1(),
+                        projectname: project_name,
+                        description: project_description,
+                        enddate: project_enddate
+                    };
 
-                let session = this.$session;
+                    let session = this.$session;
 
-                APIService
-                    .createProject(session.get("plusplannerToken"), project)
-                    .then(() => {
-                        this.overlay = !this.overlay;
-                    })
-                    .catch(error => window.console.log(error.response));
+                    APIService
+                        .createProject(session.get("plusplannerToken"), project)
+                        .then(() => {
+                            this.overlay = !this.overlay;
+                        })
+                        .catch(error => window.console.log(error.response));
 
-                TokenService.getToken(session.get("fontysToken"))
-                    .then(response => {
-                        session.set("plusplannerToken", response.data);
-                    }).catch(error => {
-                        window.console.log(error);
-                    }
-                );
-                window.location.reload();
+                    TokenService.getToken(session.get("fontysToken"))
+                        .then(response => {
+                            session.set("plusplannerToken", response.data);
+                        }).catch(error => {
+                            window.console.log(error);
+                        }
+                    );
+                    window.location.reload();
+                }
+
             },
             cancel: function () {
                 this.overlay = !this.overlay;
