@@ -1,15 +1,14 @@
 import Store from '../store/index.js'
 
 export default {
-    getPicture(session) {
-        let token = session.get("plusplannerToken");
-        let parts = token.split('.');
+    getPicture(plusplannerToken, fontysToken) {
+        let parts = plusplannerToken.split('.');
         let payload = JSON.parse(atob(parts[1]));
         let data;
         fetch(payload.pfp + "?width=150px&height=150px", {
             method: 'GET',
             headers: {
-                Authorization: 'Bearer ' + session.get("fontysToken")
+                Authorization: 'Bearer ' + fontysToken
             }
         }).then(response => {
             response.blob().then(blobResponse => {

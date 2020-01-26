@@ -23,18 +23,15 @@
         },
         computed: mapState("user", ["picture"]),
         created() {
+            let plusplannerToken = this.$session.get("plusplannerToken");
+            let fontysToken = this.$session.get("fontysToken");
             if(this.picture == null)
             {
-                PictureHolder.getPicture(this.$session);
+                PictureHolder.getPicture(plusplannerToken, fontysToken);
             }
-            let token = this.$session.get("plusplannerToken");
-            let parts = token.split('.');
+            let parts = plusplannerToken.split('.');
             let payload = JSON.parse(atob(parts[1]));
             this.username = payload.unm;
-            if(this.picture === null)
-            {
-                this.picture = PictureHolder.getPicture(this.$session.get("fontysToken"), payload.pfp);
-            }
         },
     }
 </script>
