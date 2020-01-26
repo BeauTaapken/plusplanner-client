@@ -33,9 +33,5 @@ export default {
                 })
         }
     },
-    getters: {
-        names: (state) => {
-            return state.users.username
-        }
-    }
+    getters: {}
   };
