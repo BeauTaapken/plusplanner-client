@@ -33,6 +33,12 @@
                                 <v-icon color="grey lighten-1">mdi-chat-processing-outline</v-icon>
                             </v-list-item-action>
                         </v-list-item>
+                        <v-list-item @click="addUser">
+                            <v-list-item-title>Add user</v-list-item-title>
+                            <v-list-item-action>
+                                <v-icon color="grey lighten-1">mdi-account-multiple-plus</v-icon>
+                            </v-list-item-action>
+                        </v-list-item>
                     </v-list>
                     </v-menu>
                 </v-list-item-action>
@@ -40,6 +46,7 @@
 
             <CreatePart ref="createComponent" />
             <CreateChat ref="createChat" />
+            <AddUser ref="addUser" />
 
             <SubMenuItem
                     v-for="data in this.usedData.parts"
@@ -66,13 +73,14 @@
     import SubMenuChatHeader from "./SubMenuChatHeader";
     import CreatePart from "../../components/Part/CreatePart";
     import CreateChat from "../../components/Chat/CreateChat";
+    import AddUser from "../../components/Project/AddUser";
     import SubMenuItem from "./SubMenuItem";
     import { mapState } from "vuex"
     import UserSettingsHolder from "../../components/UserSettings/UserSettingsHolder";
 
     export default {
         name: "SubMenu",
-        components: {UserSettingsHolder, SubMenuItem, CreatePart, SubMenuChatHeader, CreateChat},
+        components: {UserSettingsHolder, SubMenuItem, CreatePart, SubMenuChatHeader, CreateChat, AddUser},
         data: function () {
             return {
                 usedData: null,
@@ -99,6 +107,9 @@
             },
             addChat: function() {
                 this.$refs.createChat.overlay = true;
+            },
+            addUser: function() {
+                this.$refs.addUser.overlay = true;
             }
         }
     };

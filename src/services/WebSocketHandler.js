@@ -48,6 +48,15 @@ class WebSocketHandler {
                             break;
                     }
                     break;
+                case "role":
+                    switch (json.action) {
+                        case "create":
+                            window.console.log(json);
+                            //upload to project in store
+                            window.console.log('success')
+                            break;
+                    }
+                    break;
                 case "subpart": {
                     switch (json.action) {
                         case "create":

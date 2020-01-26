@@ -140,7 +140,7 @@ export default {
                 "projectid": payload.projectid,
                 "subpart": payload.element
             });
-        },
+        }
     },
     getters: {
         projects: state => {
