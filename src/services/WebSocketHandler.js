@@ -2,7 +2,7 @@ import WebsocketService from "./WebsocketService";
 import Store from '../store/index.js'
 class WebSocketHandler {
     constructor() {
-        this.websocket = new WebSocket("ws://" + WebsocketService.getWSAddress() + "/messages");
+        this.websocket = new WebSocket("wss://" + WebsocketService.getWSAddress() + "/messages");
     }
 
     openConnection(token) {
